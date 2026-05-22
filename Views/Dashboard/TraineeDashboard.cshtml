@@ -1,0 +1,50 @@
+﻿@{
+    ViewBag.Title = "Trainee Dashboard";
+    var latestModules = ViewBag.LatestModules as List<WAPP_Assignment_Module.Models.OlyModule>;
+}
+
+<h2>Welcome, Trainee! 👋</h2>
+<hr />
+
+<div class="row">
+    <div class="col-md-4">
+        <div class="panel panel-success">
+            <div class="panel-heading">Chapters Completed</div>
+            <div class="panel-body">
+                <h1>@ViewBag.CompletedCount</h1>
+            </div>
+        </div>
+    </div>
+</div>
+
+<h3>Explore New Modules</h3>
+@if (latestModules != null && latestModules.Count > 0)
+{
+    <table class="table">
+        <tr>
+            <th>Title</th>
+            <th>Topic</th>
+            <th>Difficulty</th>
+            <th></th>
+        </tr>
+        @foreach (var m in latestModules)
+        {
+            <tr>
+                <td>@m.Title</td>
+                <td>@m.TopicTag</td>
+                <td>@m.Difficulty</td>
+                <td>
+                    @Html.ActionLink("Start Learning", "Learn", "Module",
+                        new { id = m.ModuleId },
+                        new { @class = "btn btn-primary btn-sm" })
+                </td>
+            </tr>
+        }
+    </table>
+}
+else
+{
+    <p>No modules available yet.</p>
+}
+
+<p>@Html.ActionLink("Browse All Modules", "Catalog", "Module", null, new { @class = "btn btn-default" })</p>

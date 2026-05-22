@@ -1,0 +1,58 @@
+﻿@{
+    ViewBag.Title = "Trainer Dashboard";
+    var myModules = ViewBag.MyModules as List<WAPP_Assignment_Module.Models.OlyModule>;
+}
+
+<h2>Welcome, Trainer! 👋</h2>
+<hr />
+
+<div class="row">
+    <div class="col-md-4">
+        <div class="panel panel-primary">
+            <div class="panel-heading">Total Modules Created</div>
+            <div class="panel-body">
+                <h1>@ViewBag.TotalModules</h1>
+            </div>
+        </div>
+    </div>
+</div>
+
+<h3>Your Recent Modules</h3>
+@if (myModules != null && myModules.Count > 0)
+{
+    <table class="table">
+        <tr>
+            <th>Title</th>
+            <th>Topic</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+        @foreach (var m in myModules)
+        {
+            <tr>
+                <td>@m.Title</td>
+                <td>@m.TopicTag</td>
+                <td>
+                    @if (m.Status == "Published")
+                    {
+                        <span class="label label-success">Published</span>
+                    }
+                    else
+                    {
+                        <span class="label label-warning">Draft</span>
+                    }
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", "Module", new { id = m.ModuleId }, null) |
+                    @Html.ActionLink("Chapters", "Index", "Chapter", new { moduleId = m.ModuleId }, null)
+                </td>
+            </tr>
+        }
+    </table>
+}
+else
+{
+    <p>You haven't created any modules yet.</p>
+}
+
+<p>@Html.ActionLink("Create New Module", "Create", "Module", null, new { @class = "btn btn-primary" })</p>

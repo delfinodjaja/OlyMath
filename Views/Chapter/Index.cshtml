@@ -1,0 +1,33 @@
+﻿@model IEnumerable<WAPP_Assignment_Module.Models.Chapter>
+
+@{
+    ViewBag.Title = "Chapters";
+}
+
+<h2>Chapters for: @ViewBag.ModuleTitle</h2>
+<p>@Html.ActionLink("Add New Chapter", "Create", new { moduleId = ViewBag.ModuleId }, new { @class = "btn btn-primary" })</p>
+<p>@Html.ActionLink("Back to Modules", "Index", "Module", null, new { @class = "btn btn-default" })</p>
+
+<table class="table">
+    <tr>
+        <th>Order</th>
+        <th>Title</th>
+        <th>Has Assessment</th>
+        <th>Created</th>
+        <th>Actions</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.SequenceOrder</td>
+            <td>@item.Title</td>
+            <td>@(item.HasAssessment ? "Yes" : "No")</td>
+            <td>@item.CreatedAt.ToShortDateString()</td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.ChapterId }) |
+                @Html.ActionLink("View", "ViewChapter", new { id = item.ChapterId }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.ChapterId })
+            </td>
+        </tr>
+    }
+</table>

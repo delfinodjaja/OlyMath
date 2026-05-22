@@ -1,0 +1,253 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - OlyMath</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <style>
+        /* ── OlyMath brand variables ── */
+        :root {
+            --om-navy: #0f1f3d;
+            --om-gold: #c9a84c;
+            --om-gold-lt: #e2c47a;
+            --om-white: #f5f4f0;
+            --om-text: #1a1a2e;
+            --om-muted: #6b7280;
+            --om-radius: 6px;
+            --om-shadow: 0 4px 24px rgba(15,31,61,.12);
+        }
+
+        /* ── Reset / base ── */
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            color: var(--om-text);
+            background: #fff;
+            margin: 0;
+            padding-top: 64px; /* fixed navbar height */
+        }
+
+        /* ── Navbar ── */
+        .om-navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 64px;
+            background: var(--om-navy);
+            display: flex;
+            align-items: center;
+            padding: 0 2rem;
+            z-index: 1000;
+            box-shadow: 0 2px 12px rgba(0,0,0,.3);
+        }
+
+            .om-navbar .brand {
+                font-family: 'Playfair Display', serif;
+                font-size: 1.45rem;
+                color: var(--om-gold);
+                text-decoration: none;
+                letter-spacing: .02em;
+                margin-right: 2.5rem;
+                white-space: nowrap;
+                transition: color .2s;
+            }
+
+                .om-navbar .brand:hover {
+                    color: var(--om-gold-lt);
+                }
+
+        .om-nav-links {
+            display: flex;
+            align-items: center;
+            gap: .25rem;
+            flex: 1;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+            .om-nav-links a {
+                color: rgba(255,255,255,.78);
+                text-decoration: none;
+                font-size: .9rem;
+                font-weight: 500;
+                padding: .45rem .85rem;
+                border-radius: var(--om-radius);
+                transition: background .18s, color .18s;
+            }
+
+                .om-nav-links a:hover {
+                    background: rgba(201,168,76,.15);
+                    color: var(--om-gold-lt);
+                }
+
+                .om-nav-links .active > a,
+                .om-nav-links a.active {
+                    color: var(--om-gold);
+                    background: rgba(201,168,76,.12);
+                }
+
+        .om-nav-auth {
+            display: flex;
+            align-items: center;
+            gap: .75rem;
+            margin-left: auto;
+        }
+
+            .om-nav-auth a {
+                color: rgba(255,255,255,.78);
+                text-decoration: none;
+                font-size: .875rem;
+                font-weight: 500;
+                padding: .4rem .9rem;
+                border-radius: var(--om-radius);
+                transition: background .18s, color .18s;
+            }
+
+                .om-nav-auth a:hover {
+                    color: var(--om-white);
+                    background: rgba(255,255,255,.08);
+                }
+
+            .om-nav-auth .btn-register {
+                background: var(--om-gold);
+                color: var(--om-navy) !important;
+                font-weight: 600;
+            }
+
+                .om-nav-auth .btn-register:hover {
+                    background: var(--om-gold-lt);
+                }
+
+        /* ── Body content ── */
+        .container.body-content {
+            max-width: 1140px;
+            margin: 0 auto;
+            padding: 2.5rem 1.5rem 3rem;
+        }
+
+        /* ── Hero (Bootstrap jumbotron override) ── */
+        .jumbotron {
+            background: linear-gradient(135deg, #f0eeea 0%, #e8e4dc 100%);
+            border-radius: 12px;
+            padding: 3.5rem 3rem;
+            border: 1px solid rgba(201,168,76,.2);
+        }
+
+            .jumbotron h1 {
+                font-family: 'Playfair Display', serif;
+                color: var(--om-navy);
+                font-size: 3rem;
+                margin-bottom: 1rem;
+            }
+
+            .jumbotron p {
+                color: #4a4a6a;
+                font-size: 1.1rem;
+                max-width: 600px;
+            }
+
+            .jumbotron .btn-primary {
+                background: var(--om-navy);
+                border-color: var(--om-navy);
+                font-weight: 600;
+                padding: .65rem 1.6rem;
+                border-radius: var(--om-radius);
+                transition: background .2s;
+            }
+
+                .jumbotron .btn-primary:hover {
+                    background: #1a3366;
+                    border-color: #1a3366;
+                }
+
+        /* ── Card panels ── */
+        .panel, .card {
+            border: 1px solid #e4e2dc;
+            border-radius: 10px;
+            box-shadow: var(--om-shadow);
+        }
+
+        .panel-heading, .card-header {
+            background: var(--om-navy);
+            color: #fff;
+            border-radius: 10px 10px 0 0;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.05rem;
+            padding: .85rem 1.25rem;
+        }
+
+        /* ── Section headings ── */
+        h2, h3 {
+            font-family: 'Playfair Display', serif;
+            color: var(--om-navy);
+        }
+
+        /* ── Footer ── */
+        .container.body-content > hr {
+            border: none;
+            border-top: 1px solid #e4e2dc;
+            margin: 2rem 0 1rem;
+        }
+
+        footer p {
+            color: var(--om-muted);
+            font-size: .85rem;
+        }
+
+        /* ── Generic button polish ── */
+        .btn {
+            border-radius: var(--om-radius);
+            font-weight: 500;
+            transition: filter .15s;
+        }
+
+            .btn:hover {
+                filter: brightness(1.08);
+            }
+    </style>
+</head>
+<body>
+    <!-- ── OlyMath Navbar ── -->
+    <nav class="om-navbar">
+        @Html.ActionLink("OlyMath", "Index", "Home", new { area = "" }, new { @class = "brand" })
+
+        <ul class="om-nav-links">
+            <li>@Html.ActionLink("Browse Modules", "Catalog", "Module")</li>
+
+            @if (Request.IsAuthenticated)
+            {
+<li>@Html.ActionLink("Dashboard", "Index", "Dashboard")</li>
+ if (User.IsInRole("Trainer") || User.IsInRole("Admin"))
+{
+<li>@Html.ActionLink("My Modules", "Index", "Module")</li>
+}
+}
+        </ul>
+
+        <div class="om-nav-auth">
+            @Html.Partial("_LoginPartial")
+        </div>
+    </nav>
+
+    <!-- ── Page body ── -->
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year OlyMath &mdash; Olympic Mathematics Platform</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>
