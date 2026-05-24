@@ -21,8 +21,9 @@ namespace OlyMath.Account
         protected global::System.Web.UI.WebControls.Button LoginButton;
         protected void Page_Load(object sender, EventArgs e)
         {
+            // Already logged in — redirect to appropriate dashboard
             if (Request.IsAuthenticated)
-                RedirectByRole(Context.GetOwinContext().GetUserManager<ApplicationUserManager>(), User.Identity.Name);
+                RedirectByRole();
         }
 
         protected void LoginButton_Click(object sender, EventArgs e)
@@ -32,7 +33,7 @@ namespace OlyMath.Account
             var email    = EmailInput.Text.Trim();
             var password = PasswordInput.Text;
 
-            var userManager   = Context.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            var userManager  = Context.GetOwinContext().GetUserManager<ApplicationUserManager>();
             var signInManager = Context.GetOwinContext().Get<ApplicationSignInManager>();
 
             var result = signInManager.PasswordSignIn(email, password, isPersistent: false, shouldLockout: false);
@@ -40,7 +41,7 @@ namespace OlyMath.Account
             switch (result)
             {
                 case SignInStatus.Success:
-                    RedirectByRole(userManager, email);
+                    RedirectByRole();
                     break;
 
                 default:
@@ -49,21 +50,14 @@ namespace OlyMath.Account
             }
         }
 
-        private void RedirectByRole(ApplicationUserManager userManager, string email)
+        private void RedirectByRole()
         {
-            var user = userManager.FindByEmail(email);
-            if (user != null && userManager.IsInRole(user.Id, "Admin"))
-            {
-                Response.Redirect("/TrainerDashboard.aspx");
-            }
-            else if (user != null && userManager.IsInRole(user.Id, "Trainer"))
-            {
-                Response.Redirect("/TrainerDashboard.aspx");
-            }
+            if (User.IsInRole("Admin"))
+                Response.Redirect("/Admin/Index.aspx");
+            else if (User.IsInRole("Trainer"))
+                Response.Redirect("/Trainer/Index.aspx");
             else
-            {
-                Response.Redirect("/AssessmentList.aspx");
-            }
+                Response.Redirect("/Trainee/Index.aspx");
         }
 
         private void ShowError(string message)

@@ -1,4 +1,4 @@
-<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.Master.cs" Inherits="OlyMath.Site" %>
+<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Dashboard.Master.cs" Inherits="OlyMath.Dashboard" %>
 <!DOCTYPE html>
 <html lang="en">
 <head runat="server">
@@ -93,13 +93,7 @@
         }
         .btn-logout:hover { border-color: var(--navy); color: var(--navy); }
 
-        .page-body {
-            padding-top: 64px;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-        }
-
+        /* ===================== BUTTONS ===================== */
         .btn-primary {
             font-family: 'DM Sans', sans-serif;
             font-size: 0.92rem;
@@ -186,88 +180,6 @@
         .cert-divider { width: 60px; height: 2px; background: var(--orange); margin: 0 auto 28px; }
         .cert-footer { display: flex; justify-content: space-between; font-size: 0.75rem; color: var(--slate); border-top: 1px solid var(--border); padding-top: 18px; margin-top: 10px; }
 
-        /* ===================== LANDING ===================== */
-        .landing-hero {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding: 120px 24px 80px;
-            position: relative;
-        }
-        .landing-hero::before {
-            content: 'OLYMATH';
-            position: absolute;
-            top: 50%; left: 50%;
-            transform: translate(-50%, -52%);
-            font-family: 'Syne', sans-serif;
-            font-size: clamp(80px, 20vw, 220px);
-            font-weight: 800;
-            color: transparent;
-            -webkit-text-stroke: 1.5px rgba(13,27,42,0.06);
-            letter-spacing: -4px;
-            pointer-events: none;
-            white-space: nowrap;
-            user-select: none;
-        }
-        .landing-tag { font-size: 0.78rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--orange); margin-bottom: 20px; }
-        .landing-hero h1 {
-            font-family: 'Syne', sans-serif;
-            font-size: clamp(2.6rem, 6vw, 5rem);
-            font-weight: 800;
-            line-height: 1.05;
-            letter-spacing: -2px;
-            color: var(--navy);
-            max-width: 680px;
-            position: relative;
-            z-index: 1;
-        }
-        .landing-hero h1 em { font-style: normal; color: var(--orange); }
-        .landing-sub { margin-top: 22px; font-size: 1.05rem; font-weight: 300; color: var(--slate); max-width: 440px; line-height: 1.7; position: relative; z-index: 1; }
-        .landing-cta { margin-top: 42px; display: flex; gap: 14px; position: relative; z-index: 1; }
-        .landing-features {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1px;
-            background: var(--border);
-            border-top: 1px solid var(--border);
-            border-bottom: 1px solid var(--border);
-            margin-top: 60px;
-        }
-        .feat-card { background: var(--bg); padding: 40px 36px; transition: background 0.2s; }
-        .feat-card:hover { background: var(--white); }
-        .feat-num { font-family: 'Syne', sans-serif; font-size: 2.2rem; font-weight: 800; color: var(--orange); opacity: 0.5; margin-bottom: 12px; }
-        .feat-card h3 { font-family: 'Syne', sans-serif; font-size: 1rem; font-weight: 700; color: var(--navy); margin-bottom: 8px; }
-        .feat-card p { font-size: 0.88rem; color: var(--slate); line-height: 1.65; font-weight: 300; }
-
-        /* ===================== AUTH ===================== */
-        .auth-wrap { display: flex; align-items: center; justify-content: center; min-height: calc(100vh - 64px); }
-        .auth-card {
-            background: var(--white);
-            border: 1px solid var(--border);
-            border-radius: 24px;
-            padding: 52px 48px;
-            width: 100%;
-            max-width: 440px;
-            box-shadow: var(--card-shadow);
-            animation: slideUp 0.35s ease;
-        }
-        @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-        .auth-header { margin-bottom: 36px; }
-        .auth-header h2 { font-family: 'Syne', sans-serif; font-size: 1.9rem; font-weight: 800; letter-spacing: -0.5px; color: var(--navy); }
-        .auth-header p { font-size: 0.88rem; color: var(--slate); margin-top: 6px; font-weight: 300; }
-        .auth-tabs { display: flex; background: var(--bg); border-radius: 100px; padding: 4px; margin-bottom: 28px; }
-        .auth-tab {
-            flex: 1; padding: 9px; border-radius: 100px; border: none;
-            background: transparent; font-family: 'DM Sans', sans-serif; font-size: 0.85rem;
-            font-weight: 500; color: var(--slate); cursor: pointer; transition: all 0.2s;
-            text-align: center; text-decoration: none; display: block;
-        }
-        .auth-tab.active { background: var(--white); color: var(--navy); box-shadow: 0 1px 6px rgba(0,0,0,0.08); }
-        .form-hint { font-size: 0.75rem; color: var(--slate); margin-top: 18px; text-align: center; }
-        .form-hint a { color: var(--orange); cursor: pointer; font-weight: 500; text-decoration: none; }
-
         /* ===================== FORMS ===================== */
         .form-group { margin-bottom: 18px; }
         .form-group label { display: block; font-size: 0.8rem; font-weight: 500; color: var(--navy); margin-bottom: 7px; letter-spacing: 0.02em; }
@@ -286,7 +198,6 @@
 
         /* ===================== RESPONSIVE ===================== */
         @media (max-width: 900px) {
-            .landing-features { grid-template-columns: 1fr; }
             .topnav { padding: 0 20px; }
         }
     </style>
@@ -300,29 +211,86 @@
         <a class="logo" href="/Default.aspx">Oly<span>Math</span></a>
         <div class="nav-right">
             <% if (Request.IsAuthenticated) { %>
-                <a href="/TrainerDashboard.aspx" style="text-decoration:none; color:#0D1B2A; font-weight:500; margin-right:20px;">Dashboard</a>
+                <% if (Context.User.IsInRole("Trainer")) { %>
+                    <span class="nav-badge trainer">Trainer</span>
+                <% } else if (Context.User.IsInRole("Admin")) { %>
+                    <span class="nav-badge admin">Admin</span>
+                <% } else { %>
+                    <span class="nav-badge">Trainee</span>
+                <% } %>
                 <asp:Button ID="LogoutButton" runat="server"
                     Text="Sign Out"
                     CssClass="btn-logout"
                     OnClick="LogoutButton_Click"
                     UseSubmitBehavior="true" />
-            <% } else { %>
-                <a href="/Account/Login.aspx" style="text-decoration:none; color:#0D1B2A; font-weight:500; margin-right:20px;">Sign In</a>
-                <a href="/Account/Register.aspx" class="btn-primary">Get Started</a>
             <% } %>
         </div>
     </nav>
 
-    <div class="page-body">
-        <asp:ContentPlaceHolder ID="MainContent" runat="server" />
+    <div class="dashboard-layout">
+        <aside class="sidebar">
+            <div class="sidebar-section">
+                <div class="sidebar-label">Main</div>
+                <a href="/TrainerDashboard.aspx" class="sidebar-item">
+                    <span class="dot"></span>
+                    Dashboard
+                </a>
+                <a href="/AssessmentList.aspx" class="sidebar-item">
+                    <span class="dot"></span>
+                    Assessment List
+                </a>
+                <a href="/CreateAssessment.aspx" class="sidebar-item">
+                    <span class="dot"></span>
+                    Create Assessment
+                </a>
+            </div>
+            <div class="sidebar-section">
+                <div class="sidebar-label">Learning</div>
+                <a href="/QuestionList.aspx" class="sidebar-item">
+                    <span class="dot"></span>
+                    Question List
+                </a>
+                <a href="/Certificate.aspx" class="sidebar-item">
+                    <span class="dot"></span>
+                    Certificates
+                </a>
+            </div>
+            <asp:ContentPlaceHolder ID="SidebarContent" runat="server" />
+        </aside>
+
+        <main class="main-content">
+            <asp:ContentPlaceHolder ID="MainContent" runat="server" />
+        </main>
     </div>
 
     <script type="text/javascript">
         (function () {
-            var path = window.location.pathname.toLowerCase();
-            var isDefault = path.endsWith('/default.aspx') || path === '/default.aspx';
-            if (isDefault) {
+            var path = window.location.pathname.toLowerCase().replace(/\/+$/, '');
+            if (!path) {
+                path = '/default.aspx';
+            }
+
+            if (path === '/default.aspx') {
                 document.body.classList.add('landing-page');
+            }
+
+            var links = document.querySelectorAll('.sidebar .sidebar-item[href]');
+            for (var i = 0; i < links.length; i++) {
+                var link = links[i];
+                var href = link.getAttribute('href');
+                if (!href || href === '#') {
+                    continue;
+                }
+
+                var resolved = document.createElement('a');
+                resolved.href = href;
+                var linkPath = (resolved.pathname || '').toLowerCase().replace(/\/+$/, '');
+
+                if (linkPath === path || (path === '/trainerdashboard.aspx' && linkPath === '/trainerdashboard.aspx')) {
+                    link.classList.add('active');
+                } else {
+                    link.classList.remove('active');
+                }
             }
         })();
     </script>
