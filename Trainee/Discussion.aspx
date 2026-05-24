@@ -39,11 +39,11 @@
                         
                         <div class="disc-compose-footer">
                             <asp:DropDownList ID="ddlPostTopic" runat="server" CssClass="disc-topic-select">
-                                <option value="nt">Number Theory</option>
-                                <option value="co">Combinatorics</option>
-                                <option value="ge">Geometry</option>
-                                <option value="al">Algebra</option>
-                                <option value="iq">Inequalities</option>
+                                <asp:ListItem Value="nt">Number Theory</asp:ListItem>
+                                <asp:ListItem Value="co">Combinatorics</asp:ListItem>
+                                <asp:ListItem Value="ge">Geometry</asp:ListItem>
+                                <asp:ListItem Value="al">Algebra</asp:ListItem>
+                                <asp:ListItem Value="iq">Inequalities</asp:ListItem>
                             </asp:DropDownList>
                             <asp:Button ID="btnPost" runat="server" Text="Post" CssClass="btn-post" OnClick="btnPost_Click" />
                         </div>

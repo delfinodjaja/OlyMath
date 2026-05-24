@@ -104,6 +104,13 @@ namespace OlyMath.Admin
 
                 try
                 {
+                    // Manually clean up User's DiscussionReplies and DiscussionLikes to bypass SQL Server multiple cascade path restrictions
+                    string cleanRepliesSql = "DELETE FROM DiscussionReplies WHERE UserId = @userId";
+                    DbHelper.ExecuteNonQuery(cleanRepliesSql, new SqlParameter("@userId", userId));
+
+                    string cleanLikesSql = "DELETE FROM DiscussionLikes WHERE UserId = @userId";
+                    DbHelper.ExecuteNonQuery(cleanLikesSql, new SqlParameter("@userId", userId));
+
                     string deleteSql = "DELETE FROM Users WHERE Id = @userId";
                     int rows = DbHelper.ExecuteNonQuery(deleteSql, new SqlParameter("@userId", userId));
 
@@ -211,7 +218,7 @@ namespace OlyMath.Admin
 
                     // Check duplicate email
                     string checkSql = "SELECT COUNT(*) FROM Users WHERE Email = @email";
-                    long count = (long)DbHelper.ExecuteScalar(checkSql, new SqlParameter("@email", email));
+                    long count = Convert.ToInt64(DbHelper.ExecuteScalar(checkSql, new SqlParameter("@email", email)));
                     if (count > 0)
                     {
                         lblError.Text = "This email address is already in use.";

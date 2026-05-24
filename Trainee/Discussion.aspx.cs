@@ -268,10 +268,10 @@ namespace OlyMath.Trainee
 
             // 1. Check if user already liked the post
             string checkSql = "SELECT COUNT(*) FROM DiscussionLikes WHERE UserId = @userId AND DiscussionId = @postId";
-            long count = (long)DbHelper.ExecuteScalar(checkSql, 
+            long count = Convert.ToInt64(DbHelper.ExecuteScalar(checkSql, 
                 new SqlParameter("@userId", userId),
                 new SqlParameter("@postId", pId)
-            );
+            ));
 
             if (count > 0)
             {

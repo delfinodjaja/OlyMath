@@ -26,7 +26,7 @@ namespace OlyMath.Trainee
 
             // 1. Active Modules Count
             string sqlActive = "SELECT COUNT(*) FROM UserProgress WHERE UserId = @userId AND ProgressPercentage < 100";
-            long activeCount = (long)DbHelper.ExecuteScalar(sqlActive, new SqlParameter("@userId", userId));
+            long activeCount = Convert.ToInt64(DbHelper.ExecuteScalar(sqlActive, new SqlParameter("@userId", userId)));
             litActiveModulesCount.Text = activeCount.ToString();
 
             // 2. Average Progress
@@ -41,12 +41,12 @@ namespace OlyMath.Trainee
 
             // 3. Certificates Earned
             string sqlCerts = "SELECT COUNT(*) FROM UserAssessments WHERE UserId = @userId AND CertificateId IS NOT NULL";
-            long certsCount = (long)DbHelper.ExecuteScalar(sqlCerts, new SqlParameter("@userId", userId));
+            long certsCount = Convert.ToInt64(DbHelper.ExecuteScalar(sqlCerts, new SqlParameter("@userId", userId)));
             litCertsCount.Text = certsCount.ToString();
 
             // 4. Assessments Done
             string sqlAssess = "SELECT COUNT(*) FROM UserAssessments WHERE UserId = @userId";
-            long assessCount = (long)DbHelper.ExecuteScalar(sqlAssess, new SqlParameter("@userId", userId));
+            long assessCount = Convert.ToInt64(DbHelper.ExecuteScalar(sqlAssess, new SqlParameter("@userId", userId)));
             litAssessmentsCount.Text = assessCount.ToString();
         }
 

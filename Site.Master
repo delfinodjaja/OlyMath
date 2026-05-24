@@ -45,29 +45,29 @@
                 <!-- Trainee Sidebar -->
                 <div id="pnlTraineeSidebar" runat="server" visible="false" class="sidebar-section">
                     <div class="sidebar-label">Trainee</div>
-                    <a href="<%= ResolveUrl("~/Trainee/Dashboard.aspx") %>" id="lnkTraineeDash" runat="server" class="sidebar-item"><span class="dot"></span> Dashboard</a>
-                    <a href="<%= ResolveUrl("~/Trainee/BrowseModules.aspx") %>" id="lnkTraineeBrowse" runat="server" class="sidebar-item"><span class="dot"></span> Browse Modules</a>
-                    <a href="<%= ResolveUrl("~/Trainee/Achievements.aspx") %>" id="lnkTraineeAchievements" runat="server" class="sidebar-item"><span class="dot"></span> Achievements</a>
+                    <a href="~/Trainee/Dashboard.aspx" id="lnkTraineeDash" runat="server" class="sidebar-item"><span class="dot"></span> Dashboard</a>
+                    <a href="~/Trainee/BrowseModules.aspx" id="lnkTraineeBrowse" runat="server" class="sidebar-item"><span class="dot"></span> Browse Modules</a>
+                    <a href="~/Trainee/Achievements.aspx" id="lnkTraineeAchievements" runat="server" class="sidebar-item"><span class="dot"></span> Achievements</a>
                     <div class="sidebar-label" style="margin-top:16px">Community</div>
-                    <a href="<%= ResolveUrl("~/Trainee/Discussion.aspx") %>" id="lnkTraineeDiscussion" runat="server" class="sidebar-item"><span class="dot"></span> Discussion Zone</a>
+                    <a href="~/Trainee/Discussion.aspx" id="lnkTraineeDiscussion" runat="server" class="sidebar-item"><span class="dot"></span> Discussion Zone</a>
                 </div>
 
                 <!-- Trainer Sidebar -->
                 <div id="pnlTrainerSidebar" runat="server" visible="false" class="sidebar-section">
                     <div class="sidebar-label">Trainer</div>
-                    <a href="<%= ResolveUrl("~/Trainer/Dashboard.aspx") %>" id="lnkTrainerDash" runat="server" class="sidebar-item"><span class="dot"></span> Modules Dashboard</a>
-                    <a href="<%= ResolveUrl("~/Trainer/EditModule.aspx") %>" id="lnkTrainerCreate" runat="server" class="sidebar-item"><span class="dot"></span> Create New Module</a>
+                    <a href="~/Trainer/Dashboard.aspx" id="lnkTrainerDash" runat="server" class="sidebar-item"><span class="dot"></span> Modules Dashboard</a>
+                    <a href="~/Trainer/EditModule.aspx" id="lnkTrainerCreate" runat="server" class="sidebar-item"><span class="dot"></span> Create New Module</a>
                     <div class="sidebar-label" style="margin-top:16px">Community</div>
-                    <a href="<%= ResolveUrl("~/Trainee/Discussion.aspx") %>" id="lnkTrainerDiscussion" runat="server" class="sidebar-item"><span class="dot"></span> Discussion Zone</a>
+                    <a href="~/Trainee/Discussion.aspx" id="lnkTrainerDiscussion" runat="server" class="sidebar-item"><span class="dot"></span> Discussion Zone</a>
                 </div>
 
                 <!-- Admin Sidebar -->
                 <div id="pnlAdminSidebar" runat="server" visible="false" class="sidebar-section">
                     <div class="sidebar-label">Admin</div>
-                    <a href="<%= ResolveUrl("~/Admin/Dashboard.aspx") %>" id="lnkAdminDash" runat="server" class="sidebar-item"><span class="dot"></span> System Metrics</a>
-                    <a href="<%= ResolveUrl("~/Admin/ManageUsers.aspx") %>" id="lnkAdminUsers" runat="server" class="sidebar-item"><span class="dot"></span> Manage Users</a>
+                    <a href="~/Admin/Dashboard.aspx" id="lnkAdminDash" runat="server" class="sidebar-item"><span class="dot"></span> System Metrics</a>
+                    <a href="~/Admin/ManageUsers.aspx" id="lnkAdminUsers" runat="server" class="sidebar-item"><span class="dot"></span> Manage Users</a>
                     <div class="sidebar-label" style="margin-top:16px">Community</div>
-                    <a href="<%= ResolveUrl("~/Trainee/Discussion.aspx") %>" id="lnkAdminDiscussion" runat="server" class="sidebar-item"><span class="dot"></span> Discussion Zone</a>
+                    <a href="~/Trainee/Discussion.aspx" id="lnkAdminDiscussion" runat="server" class="sidebar-item"><span class="dot"></span> Discussion Zone</a>
                 </div>
 
             </aside>

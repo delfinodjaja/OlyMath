@@ -1,0 +1,5 @@
+C:\Users\hadi\Downloads\r\OlyMath\bin\OlyMath.dll
+C:\Users\hadi\Downloads\r\OlyMath\bin\OlyMath.pdb
+C:\Users\hadi\Downloads\r\OlyMath\obj\Debug\OlyMath.csproj.CoreCompileInputs.cache
+C:\Users\hadi\Downloads\r\OlyMath\obj\Debug\OlyMath.dll
+C:\Users\hadi\Downloads\r\OlyMath\obj\Debug\OlyMath.pdb

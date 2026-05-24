@@ -31,10 +31,10 @@ namespace OlyMath.Trainee
             {
                 // Verify enrollment
                 string checkSql = "SELECT COUNT(*) FROM UserProgress WHERE UserId = @userId AND ModuleId = @moduleId";
-                long count = (long)DbHelper.ExecuteScalar(checkSql, 
+                long count = Convert.ToInt64(DbHelper.ExecuteScalar(checkSql, 
                     new SqlParameter("@userId", CurrentUserId),
                     new SqlParameter("@moduleId", ModuleId)
-                );
+                ));
 
                 if (count == 0)
                 {

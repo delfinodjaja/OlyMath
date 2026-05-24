@@ -7,7 +7,7 @@ namespace OlyMath
     public class BasePage : Page
     {
         // Override in specific page to restrict access (e.g., AllowedRoles = new string[] { "Trainer" })
-        public virtual string[] AllowedRoles { get; set; } = null;
+        public virtual string[] AllowedRoles { get; set; }
 
         protected override void OnInit(EventArgs e)
         {
@@ -60,9 +60,21 @@ namespace OlyMath
         }
 
         // Shortcut properties for page code-behind access
-        public int CurrentUserId => Convert.ToInt32(Session["UserId"]);
-        public string CurrentUserFullName => Session["FullName"] as string;
-        public string CurrentUserEmail => Session["UserEmail"] as string;
-        public string CurrentUserRole => Session["UserRole"] as string;
+        public int CurrentUserId
+        {
+            get { return Convert.ToInt32(Session["UserId"]); }
+        }
+        public string CurrentUserFullName
+        {
+            get { return Session["FullName"] as string; }
+        }
+        public string CurrentUserEmail
+        {
+            get { return Session["UserEmail"] as string; }
+        }
+        public string CurrentUserRole
+        {
+            get { return Session["UserRole"] as string; }
+        }
     }
 }

@@ -12,7 +12,8 @@ namespace OlyMath
     {
         private static string GetConnectionString()
         {
-            string connStr = ConfigurationManager.ConnectionStrings["OlyMathDb"]?.ConnectionString;
+            ConnectionStringSettings settings = ConfigurationManager.ConnectionStrings["OlyMathDb"];
+            string connStr = settings != null ? settings.ConnectionString : null;
             if (string.IsNullOrEmpty(connStr))
             {
                 connStr = "Server=(localdb)\\MSSQLLocalDB;Database=OlyMath;Integrated Security=True;";
@@ -250,7 +251,7 @@ namespace OlyMath
                             Content NVARCHAR(MAX) NOT NULL,
                             CreatedAt DATETIME DEFAULT GETDATE(),
                             FOREIGN KEY(DiscussionId) REFERENCES Discussions(Id) ON DELETE CASCADE,
-                            FOREIGN KEY(UserId) REFERENCES Users(Id) ON DELETE CASCADE
+                            FOREIGN KEY(UserId) REFERENCES Users(Id) ON DELETE NO ACTION
                         );
                     END
 
@@ -260,7 +261,7 @@ namespace OlyMath
                             Id INT IDENTITY(1,1) PRIMARY KEY,
                             UserId INT NOT NULL,
                             DiscussionId INT NOT NULL,
-                            FOREIGN KEY(UserId) REFERENCES Users(Id) ON DELETE CASCADE,
+                            FOREIGN KEY(UserId) REFERENCES Users(Id) ON DELETE NO ACTION,
                             FOREIGN KEY(DiscussionId) REFERENCES Discussions(Id) ON DELETE CASCADE,
                             CONSTRAINT UQ_DiscussionLikes UNIQUE(UserId, DiscussionId)
                         );

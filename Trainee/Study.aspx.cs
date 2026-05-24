@@ -32,10 +32,10 @@ namespace OlyMath.Trainee
             {
                 // Verify enrollment
                 string checkSql = "SELECT COUNT(*) FROM UserProgress WHERE UserId = @userId AND ModuleId = @moduleId";
-                long count = (long)DbHelper.ExecuteScalar(checkSql, 
+                long count = Convert.ToInt64(DbHelper.ExecuteScalar(checkSql, 
                     new SqlParameter("@userId", CurrentUserId),
                     new SqlParameter("@moduleId", ModuleId)
-                );
+                ));
 
                 if (count == 0)
                 {
@@ -106,16 +106,16 @@ namespace OlyMath.Trainee
 
                 // 3. Recalculate progress
                 string countAllSql = "SELECT COUNT(*) FROM StudyMaterials WHERE ModuleId = @moduleId";
-                long total = (long)DbHelper.ExecuteScalar(countAllSql, new SqlParameter("@moduleId", ModuleId));
+                long total = Convert.ToInt64(DbHelper.ExecuteScalar(countAllSql, new SqlParameter("@moduleId", ModuleId)));
 
                 string countDoneSql = @"
                     SELECT COUNT(*) FROM UserMaterialsStatus ums
                     INNER JOIN StudyMaterials sm ON ums.MaterialId = sm.Id
                     WHERE ums.UserId = @userId AND sm.ModuleId = @moduleId AND ums.IsDone = 1";
-                long completed = (long)DbHelper.ExecuteScalar(countDoneSql, 
+                long completed = Convert.ToInt64(DbHelper.ExecuteScalar(countDoneSql, 
                     new SqlParameter("@userId", userId),
                     new SqlParameter("@moduleId", ModuleId)
-                );
+                ));
 
                 int progress = 0;
                 if (total > 0)

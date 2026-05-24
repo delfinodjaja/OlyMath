@@ -121,7 +121,7 @@ namespace OlyMath
             {
                 // Check if email already registered
                 string checkSql = "SELECT COUNT(*) FROM Users WHERE Email = @email";
-                long count = (long)DbHelper.ExecuteScalar(checkSql, new SqlParameter("@email", email));
+                long count = Convert.ToInt64(DbHelper.ExecuteScalar(checkSql, new SqlParameter("@email", email)));
 
                 if (count > 0)
                 {

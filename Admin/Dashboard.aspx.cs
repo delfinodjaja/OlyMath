@@ -23,25 +23,25 @@ namespace OlyMath.Admin
             {
                 // 1. Total Registered Users
                 string sqlUsers = "SELECT COUNT(*) FROM Users";
-                long totalUsers = (long)DbHelper.ExecuteScalar(sqlUsers);
+                long totalUsers = Convert.ToInt64(DbHelper.ExecuteScalar(sqlUsers));
                 litTotalUsers.Text = totalUsers.ToString();
 
                 // 2. Total Modules
                 string sqlModules = "SELECT COUNT(*) FROM Modules";
-                long totalModules = (long)DbHelper.ExecuteScalar(sqlModules);
+                long totalModules = Convert.ToInt64(DbHelper.ExecuteScalar(sqlModules));
                 litTotalModules.Text = totalModules.ToString();
 
                 // 3. Total Certificates Issued
                 string sqlCerts = "SELECT COUNT(*) FROM UserAssessments WHERE CertificateId IS NOT NULL";
-                long totalCerts = (long)DbHelper.ExecuteScalar(sqlCerts);
+                long totalCerts = Convert.ToInt64(DbHelper.ExecuteScalar(sqlCerts));
                 litTotalCerts.Text = totalCerts.ToString();
 
                 // 4. Total Discussion Threads
                 string sqlPosts = "SELECT COUNT(*) FROM Discussions";
-                long totalPosts = (long)DbHelper.ExecuteScalar(sqlPosts);
+                long totalPosts = Convert.ToInt64(DbHelper.ExecuteScalar(sqlPosts));
                 litTotalPosts.Text = totalPosts.ToString();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 // Set default mock metrics if DB isn't resolving yet
                 litTotalUsers.Text = "4";

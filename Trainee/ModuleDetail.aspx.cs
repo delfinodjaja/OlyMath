@@ -51,7 +51,7 @@ namespace OlyMath.Trainee
 
             // Load counts
             string countSql = "SELECT COUNT(*) FROM StudyMaterials WHERE ModuleId = @moduleId";
-            long matCount = (long)DbHelper.ExecuteScalar(countSql, new SqlParameter("@moduleId", ModuleId));
+            long matCount = Convert.ToInt64(DbHelper.ExecuteScalar(countSql, new SqlParameter("@moduleId", ModuleId)));
             litMetaStats.Text = $"{matCount} materials &nbsp;|&nbsp; {row["EstimatedTime"]} &nbsp;|&nbsp; {row["Topic"]}";
 
             // Check enrollment
@@ -175,10 +175,10 @@ namespace OlyMath.Trainee
             
             // Check if enrolled
             string checkSql = "SELECT COUNT(*) FROM UserProgress WHERE UserId = @userId AND ModuleId = @moduleId";
-            long count = (long)DbHelper.ExecuteScalar(checkSql, 
+            long count = Convert.ToInt64(DbHelper.ExecuteScalar(checkSql, 
                 new SqlParameter("@userId", CurrentUserId), 
                 new SqlParameter("@moduleId", ModuleId)
-            );
+            ));
             
             if (count == 0) return "Pending"; // Show pending if not enrolled
             
@@ -188,17 +188,17 @@ namespace OlyMath.Trainee
             }
             return "Pending";
         }
-
+ 
         public string GetStatusBadgeClass(object isDoneVal, object isLockedVal)
         {
             if (isLockedVal != null && isLockedVal.ToString() == "1") return "grey";
             
             // Check if enrolled
             string checkSql = "SELECT COUNT(*) FROM UserProgress WHERE UserId = @userId AND ModuleId = @moduleId";
-            long count = (long)DbHelper.ExecuteScalar(checkSql, 
+            long count = Convert.ToInt64(DbHelper.ExecuteScalar(checkSql, 
                 new SqlParameter("@userId", CurrentUserId), 
                 new SqlParameter("@moduleId", ModuleId)
-            );
+            ));
             if (count == 0) return "orange";
 
             if (isDoneVal != null && isDoneVal != DBNull.Value && Convert.ToInt32(isDoneVal) == 1)
