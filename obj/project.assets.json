@@ -1,19 +1,27 @@
 {
   "version": 3,
   "targets": {
-    ".NETFramework,Version=v4.6.1": {
+    ".NETFramework,Version=v4.8": {
       "EntityFramework/6.4.4": {
         "type": "package",
         "frameworkAssemblies": [
           "System.ComponentModel.DataAnnotations"
         ],
         "compile": {
-          "lib/net45/EntityFramework.SqlServer.dll": {},
-          "lib/net45/EntityFramework.dll": {}
+          "lib/net45/EntityFramework.SqlServer.dll": {
+            "related": ".xml"
+          },
+          "lib/net45/EntityFramework.dll": {
+            "related": ".SqlServer.xml;.xml"
+          }
         },
         "runtime": {
-          "lib/net45/EntityFramework.SqlServer.dll": {},
-          "lib/net45/EntityFramework.dll": {}
+          "lib/net45/EntityFramework.SqlServer.dll": {
+            "related": ".xml"
+          },
+          "lib/net45/EntityFramework.dll": {
+            "related": ".SqlServer.xml;.xml"
+          }
         },
         "build": {
           "buildTransitive/EntityFramework.props": {},
@@ -23,10 +31,14 @@
       "Microsoft.AspNet.Identity.Core/2.2.4": {
         "type": "package",
         "compile": {
-          "lib/net45/Microsoft.AspNet.Identity.Core.dll": {}
+          "lib/net45/Microsoft.AspNet.Identity.Core.dll": {
+            "related": ".xml"
+          }
         },
         "runtime": {
-          "lib/net45/Microsoft.AspNet.Identity.Core.dll": {}
+          "lib/net45/Microsoft.AspNet.Identity.Core.dll": {
+            "related": ".xml"
+          }
         }
       },
       "Microsoft.AspNet.Identity.EntityFramework/2.2.4": {
@@ -36,10 +48,14 @@
           "Microsoft.AspNet.Identity.Core": "2.2.4"
         },
         "compile": {
-          "lib/net45/Microsoft.AspNet.Identity.EntityFramework.dll": {}
+          "lib/net45/Microsoft.AspNet.Identity.EntityFramework.dll": {
+            "related": ".xml"
+          }
         },
         "runtime": {
-          "lib/net45/Microsoft.AspNet.Identity.EntityFramework.dll": {}
+          "lib/net45/Microsoft.AspNet.Identity.EntityFramework.dll": {
+            "related": ".xml"
+          }
         }
       },
       "Microsoft.AspNet.Identity.Owin/2.2.4": {
@@ -51,22 +67,26 @@
           "Microsoft.Owin.Security.OAuth": "3.0.1"
         },
         "compile": {
-          "lib/net45/Microsoft.AspNet.Identity.Owin.dll": {}
+          "lib/net45/Microsoft.AspNet.Identity.Owin.dll": {
+            "related": ".xml"
+          }
         },
         "runtime": {
-          "lib/net45/Microsoft.AspNet.Identity.Owin.dll": {}
+          "lib/net45/Microsoft.AspNet.Identity.Owin.dll": {
+            "related": ".xml"
+          }
         }
       },
       "Microsoft.NETFramework.ReferenceAssemblies/1.0.3": {
         "type": "package",
         "dependencies": {
-          "Microsoft.NETFramework.ReferenceAssemblies.net461": "1.0.3"
+          "Microsoft.NETFramework.ReferenceAssemblies.net48": "1.0.3"
         }
       },
-      "Microsoft.NETFramework.ReferenceAssemblies.net461/1.0.3": {
+      "Microsoft.NETFramework.ReferenceAssemblies.net48/1.0.3": {
         "type": "package",
         "build": {
-          "build/Microsoft.NETFramework.ReferenceAssemblies.net461.targets": {}
+          "build/Microsoft.NETFramework.ReferenceAssemblies.net48.targets": {}
         }
       },
       "Microsoft.Owin/4.2.2": {
@@ -75,10 +95,14 @@
           "Owin": "1.0.0"
         },
         "compile": {
-          "lib/net45/Microsoft.Owin.dll": {}
+          "lib/net45/Microsoft.Owin.dll": {
+            "related": ".xml"
+          }
         },
         "runtime": {
-          "lib/net45/Microsoft.Owin.dll": {}
+          "lib/net45/Microsoft.Owin.dll": {
+            "related": ".xml"
+          }
         }
       },
       "Microsoft.Owin.Host.SystemWeb/4.2.2": {
@@ -92,61 +116,84 @@
           "System.Web"
         ],
         "compile": {
-          "lib/net45/Microsoft.Owin.Host.SystemWeb.dll": {}
+          "lib/net45/Microsoft.Owin.Host.SystemWeb.dll": {
+            "related": ".xml"
+          }
         },
         "runtime": {
-          "lib/net45/Microsoft.Owin.Host.SystemWeb.dll": {}
+          "lib/net45/Microsoft.Owin.Host.SystemWeb.dll": {
+            "related": ".xml"
+          }
         }
       },
-      "Microsoft.Owin.Security/3.0.1": {
+      "Microsoft.Owin.Security/4.2.2": {
         "type": "package",
         "dependencies": {
-          "Microsoft.Owin": "3.0.1",
+          "Microsoft.Owin": "4.2.2",
+          "Owin": "1.0.0"
+        },
+        "frameworkAssemblies": [
+          "System.Security"
+        ],
+        "compile": {
+          "lib/net45/Microsoft.Owin.Security.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net45/Microsoft.Owin.Security.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "Microsoft.Owin.Security.Cookies/4.2.2": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Owin": "4.2.2",
+          "Microsoft.Owin.Security": "4.2.2",
           "Owin": "1.0.0"
         },
         "compile": {
-          "lib/net45/Microsoft.Owin.Security.dll": {}
+          "lib/net45/Microsoft.Owin.Security.Cookies.dll": {
+            "related": ".xml"
+          }
         },
         "runtime": {
-          "lib/net45/Microsoft.Owin.Security.dll": {}
+          "lib/net45/Microsoft.Owin.Security.Cookies.dll": {
+            "related": ".xml"
+          }
         }
       },
-      "Microsoft.Owin.Security.Cookies/3.0.1": {
+      "Microsoft.Owin.Security.OAuth/4.2.2": {
         "type": "package",
         "dependencies": {
-          "Microsoft.Owin": "3.0.1",
-          "Microsoft.Owin.Security": "3.0.1",
+          "Microsoft.Owin": "4.2.2",
+          "Microsoft.Owin.Security": "4.2.2",
+          "Newtonsoft.Json": "10.0.3",
           "Owin": "1.0.0"
         },
         "compile": {
-          "lib/net45/Microsoft.Owin.Security.Cookies.dll": {}
+          "lib/net45/Microsoft.Owin.Security.OAuth.dll": {
+            "related": ".xml"
+          }
         },
         "runtime": {
-          "lib/net45/Microsoft.Owin.Security.Cookies.dll": {}
+          "lib/net45/Microsoft.Owin.Security.OAuth.dll": {
+            "related": ".xml"
+          }
         }
       },
-      "Microsoft.Owin.Security.OAuth/3.0.1": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.Owin": "3.0.1",
-          "Microsoft.Owin.Security": "3.0.1",
-          "Newtonsoft.Json": "6.0.4",
-          "Owin": "1.0.0"
-        },
-        "compile": {
-          "lib/net45/Microsoft.Owin.Security.OAuth.dll": {}
-        },
-        "runtime": {
-          "lib/net45/Microsoft.Owin.Security.OAuth.dll": {}
-        }
-      },
-      "Newtonsoft.Json/6.0.4": {
+      "Newtonsoft.Json/13.0.3": {
         "type": "package",
         "compile": {
-          "lib/net45/Newtonsoft.Json.dll": {}
+          "lib/net45/Newtonsoft.Json.dll": {
+            "related": ".xml"
+          }
         },
         "runtime": {
-          "lib/net45/Newtonsoft.Json.dll": {}
+          "lib/net45/Newtonsoft.Json.dll": {
+            "related": ".xml"
+          }
         }
       },
       "Owin/1.0.0": {
@@ -159,19 +206,27 @@
         }
       }
     },
-    ".NETFramework,Version=v4.6.1/win": {
+    ".NETFramework,Version=v4.8/win": {
       "EntityFramework/6.4.4": {
         "type": "package",
         "frameworkAssemblies": [
           "System.ComponentModel.DataAnnotations"
         ],
         "compile": {
-          "lib/net45/EntityFramework.SqlServer.dll": {},
-          "lib/net45/EntityFramework.dll": {}
+          "lib/net45/EntityFramework.SqlServer.dll": {
+            "related": ".xml"
+          },
+          "lib/net45/EntityFramework.dll": {
+            "related": ".SqlServer.xml;.xml"
+          }
         },
         "runtime": {
-          "lib/net45/EntityFramework.SqlServer.dll": {},
-          "lib/net45/EntityFramework.dll": {}
+          "lib/net45/EntityFramework.SqlServer.dll": {
+            "related": ".xml"
+          },
+          "lib/net45/EntityFramework.dll": {
+            "related": ".SqlServer.xml;.xml"
+          }
         },
         "build": {
           "buildTransitive/EntityFramework.props": {},
@@ -181,10 +236,14 @@
       "Microsoft.AspNet.Identity.Core/2.2.4": {
         "type": "package",
         "compile": {
-          "lib/net45/Microsoft.AspNet.Identity.Core.dll": {}
+          "lib/net45/Microsoft.AspNet.Identity.Core.dll": {
+            "related": ".xml"
+          }
         },
         "runtime": {
-          "lib/net45/Microsoft.AspNet.Identity.Core.dll": {}
+          "lib/net45/Microsoft.AspNet.Identity.Core.dll": {
+            "related": ".xml"
+          }
         }
       },
       "Microsoft.AspNet.Identity.EntityFramework/2.2.4": {
@@ -194,10 +253,14 @@
           "Microsoft.AspNet.Identity.Core": "2.2.4"
         },
         "compile": {
-          "lib/net45/Microsoft.AspNet.Identity.EntityFramework.dll": {}
+          "lib/net45/Microsoft.AspNet.Identity.EntityFramework.dll": {
+            "related": ".xml"
+          }
         },
         "runtime": {
-          "lib/net45/Microsoft.AspNet.Identity.EntityFramework.dll": {}
+          "lib/net45/Microsoft.AspNet.Identity.EntityFramework.dll": {
+            "related": ".xml"
+          }
         }
       },
       "Microsoft.AspNet.Identity.Owin/2.2.4": {
@@ -209,22 +272,26 @@
           "Microsoft.Owin.Security.OAuth": "3.0.1"
         },
         "compile": {
-          "lib/net45/Microsoft.AspNet.Identity.Owin.dll": {}
+          "lib/net45/Microsoft.AspNet.Identity.Owin.dll": {
+            "related": ".xml"
+          }
         },
         "runtime": {
-          "lib/net45/Microsoft.AspNet.Identity.Owin.dll": {}
+          "lib/net45/Microsoft.AspNet.Identity.Owin.dll": {
+            "related": ".xml"
+          }
         }
       },
       "Microsoft.NETFramework.ReferenceAssemblies/1.0.3": {
         "type": "package",
         "dependencies": {
-          "Microsoft.NETFramework.ReferenceAssemblies.net461": "1.0.3"
+          "Microsoft.NETFramework.ReferenceAssemblies.net48": "1.0.3"
         }
       },
-      "Microsoft.NETFramework.ReferenceAssemblies.net461/1.0.3": {
+      "Microsoft.NETFramework.ReferenceAssemblies.net48/1.0.3": {
         "type": "package",
         "build": {
-          "build/Microsoft.NETFramework.ReferenceAssemblies.net461.targets": {}
+          "build/Microsoft.NETFramework.ReferenceAssemblies.net48.targets": {}
         }
       },
       "Microsoft.Owin/4.2.2": {
@@ -233,10 +300,14 @@
           "Owin": "1.0.0"
         },
         "compile": {
-          "lib/net45/Microsoft.Owin.dll": {}
+          "lib/net45/Microsoft.Owin.dll": {
+            "related": ".xml"
+          }
         },
         "runtime": {
-          "lib/net45/Microsoft.Owin.dll": {}
+          "lib/net45/Microsoft.Owin.dll": {
+            "related": ".xml"
+          }
         }
       },
       "Microsoft.Owin.Host.SystemWeb/4.2.2": {
@@ -250,61 +321,84 @@
           "System.Web"
         ],
         "compile": {
-          "lib/net45/Microsoft.Owin.Host.SystemWeb.dll": {}
+          "lib/net45/Microsoft.Owin.Host.SystemWeb.dll": {
+            "related": ".xml"
+          }
         },
         "runtime": {
-          "lib/net45/Microsoft.Owin.Host.SystemWeb.dll": {}
+          "lib/net45/Microsoft.Owin.Host.SystemWeb.dll": {
+            "related": ".xml"
+          }
         }
       },
-      "Microsoft.Owin.Security/3.0.1": {
+      "Microsoft.Owin.Security/4.2.2": {
         "type": "package",
         "dependencies": {
-          "Microsoft.Owin": "3.0.1",
+          "Microsoft.Owin": "4.2.2",
+          "Owin": "1.0.0"
+        },
+        "frameworkAssemblies": [
+          "System.Security"
+        ],
+        "compile": {
+          "lib/net45/Microsoft.Owin.Security.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net45/Microsoft.Owin.Security.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "Microsoft.Owin.Security.Cookies/4.2.2": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Owin": "4.2.2",
+          "Microsoft.Owin.Security": "4.2.2",
           "Owin": "1.0.0"
         },
         "compile": {
-          "lib/net45/Microsoft.Owin.Security.dll": {}
+          "lib/net45/Microsoft.Owin.Security.Cookies.dll": {
+            "related": ".xml"
+          }
         },
         "runtime": {
-          "lib/net45/Microsoft.Owin.Security.dll": {}
+          "lib/net45/Microsoft.Owin.Security.Cookies.dll": {
+            "related": ".xml"
+          }
         }
       },
-      "Microsoft.Owin.Security.Cookies/3.0.1": {
+      "Microsoft.Owin.Security.OAuth/4.2.2": {
         "type": "package",
         "dependencies": {
-          "Microsoft.Owin": "3.0.1",
-          "Microsoft.Owin.Security": "3.0.1",
+          "Microsoft.Owin": "4.2.2",
+          "Microsoft.Owin.Security": "4.2.2",
+          "Newtonsoft.Json": "10.0.3",
           "Owin": "1.0.0"
         },
         "compile": {
-          "lib/net45/Microsoft.Owin.Security.Cookies.dll": {}
+          "lib/net45/Microsoft.Owin.Security.OAuth.dll": {
+            "related": ".xml"
+          }
         },
         "runtime": {
-          "lib/net45/Microsoft.Owin.Security.Cookies.dll": {}
+          "lib/net45/Microsoft.Owin.Security.OAuth.dll": {
+            "related": ".xml"
+          }
         }
       },
-      "Microsoft.Owin.Security.OAuth/3.0.1": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.Owin": "3.0.1",
-          "Microsoft.Owin.Security": "3.0.1",
-          "Newtonsoft.Json": "6.0.4",
-          "Owin": "1.0.0"
-        },
-        "compile": {
-          "lib/net45/Microsoft.Owin.Security.OAuth.dll": {}
-        },
-        "runtime": {
-          "lib/net45/Microsoft.Owin.Security.OAuth.dll": {}
-        }
-      },
-      "Newtonsoft.Json/6.0.4": {
+      "Newtonsoft.Json/13.0.3": {
         "type": "package",
         "compile": {
-          "lib/net45/Newtonsoft.Json.dll": {}
+          "lib/net45/Newtonsoft.Json.dll": {
+            "related": ".xml"
+          }
         },
         "runtime": {
-          "lib/net45/Newtonsoft.Json.dll": {}
+          "lib/net45/Newtonsoft.Json.dll": {
+            "related": ".xml"
+          }
         }
       },
       "Owin/1.0.0": {
@@ -426,332 +520,384 @@
         "microsoft.netframework.referenceassemblies.nuspec"
       ]
     },
-    "Microsoft.NETFramework.ReferenceAssemblies.net461/1.0.3": {
-      "sha512": "AmOJZwCqnOCNp6PPcf9joyogScWLtwy0M1WkqfEQ0M9nYwyDD7EX9ZjscKS5iYnyvteX7kzSKFCKt9I9dXA6mA==",
+    "Microsoft.NETFramework.ReferenceAssemblies.net48/1.0.3": {
+      "sha512": "zMk4D+9zyiEWByyQ7oPImPN/Jhpj166Ky0Nlla4eXlNL8hI/BtSJsgR8Inldd4NNpIAH3oh8yym0W2DrhXdSLQ==",
       "type": "package",
-      "path": "microsoft.netframework.referenceassemblies.net461/1.0.3",
+      "path": "microsoft.netframework.referenceassemblies.net48/1.0.3",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
-        "build/.NETFramework/v4.6.1/Accessibility.dll",
-        "build/.NETFramework/v4.6.1/Accessibility.xml",
-        "build/.NETFramework/v4.6.1/CustomMarshalers.dll",
-        "build/.NETFramework/v4.6.1/CustomMarshalers.xml",
-        "build/.NETFramework/v4.6.1/Facades/System.Collections.Concurrent.dll",
-        "build/.NETFramework/v4.6.1/Facades/System.Collections.dll",
-        "build/.NETFramework/v4.6.1/Facades/System.ComponentModel.Annotations.dll",
-        "build/.NETFramework/v4.6.1/Facades/System.ComponentModel.EventBasedAsync.dll",
-        "build/.NETFramework/v4.6.1/Facades/System.ComponentModel.dll",
-        "build/.NETFramework/v4.6.1/Facades/System.Diagnostics.Contracts.dll",
-        "build/.NETFramework/v4.6.1/Facades/System.Diagnostics.Debug.dll",
-        "build/.NETFramework/v4.6.1/Facades/System.Diagnostics.Tools.dll",
-        "build/.NETFramework/v4.6.1/Facades/System.Diagnostics.Tracing.dll",
-        "build/.NETFramework/v4.6.1/Facades/System.Dynamic.Runtime.dll",
-        "build/.NETFramework/v4.6.1/Facades/System.Globalization.dll",
-        "build/.NETFramework/v4.6.1/Facades/System.IO.dll",
-        "build/.NETFramework/v4.6.1/Facades/System.Linq.Expressions.dll",
-        "build/.NETFramework/v4.6.1/Facades/System.Linq.Parallel.dll",
-        "build/.NETFramework/v4.6.1/Facades/System.Linq.Queryable.dll",
-        "build/.NETFramework/v4.6.1/Facades/System.Linq.dll",
-        "build/.NETFramework/v4.6.1/Facades/System.Net.NetworkInformation.dll",
-        "build/.NETFramework/v4.6.1/Facades/System.Net.Primitives.dll",
-        "build/.NETFramework/v4.6.1/Facades/System.Net.Requests.dll",
-        "build/.NETFramework/v4.6.1/Facades/System.Net.WebHeaderCollection.dll",
-        "build/.NETFramework/v4.6.1/Facades/System.ObjectModel.dll",
-        "build/.NETFramework/v4.6.1/Facades/System.Reflection.Emit.ILGeneration.dll",
-        "build/.NETFramework/v4.6.1/Facades/System.Reflection.Emit.Lightweight.dll",
-        "build/.NETFramework/v4.6.1/Facades/System.Reflection.Emit.dll",
-        "build/.NETFramework/v4.6.1/Facades/System.Reflection.Extensions.dll",
-        "build/.NETFramework/v4.6.1/Facades/System.Reflection.Primitives.dll",
-        "build/.NETFramework/v4.6.1/Facades/System.Reflection.dll",
-        "build/.NETFramework/v4.6.1/Facades/System.Resources.ResourceManager.dll",
-        "build/.NETFramework/v4.6.1/Facades/System.Runtime.Extensions.dll",
-        "build/.NETFramework/v4.6.1/Facades/System.Runtime.Handles.dll",
-        "build/.NETFramework/v4.6.1/Facades/System.Runtime.InteropServices.WindowsRuntime.dll",
-        "build/.NETFramework/v4.6.1/Facades/System.Runtime.InteropServices.dll",
-        "build/.NETFramework/v4.6.1/Facades/System.Runtime.Numerics.dll",
-        "build/.NETFramework/v4.6.1/Facades/System.Runtime.Serialization.Json.dll",
-        "build/.NETFramework/v4.6.1/Facades/System.Runtime.Serialization.Primitives.dll",
-        "build/.NETFramework/v4.6.1/Facades/System.Runtime.Serialization.Xml.dll",
-        "build/.NETFramework/v4.6.1/Facades/System.Runtime.dll",
-        "build/.NETFramework/v4.6.1/Facades/System.Security.Principal.dll",
-        "build/.NETFramework/v4.6.1/Facades/System.ServiceModel.Duplex.dll",
-        "build/.NETFramework/v4.6.1/Facades/System.ServiceModel.Http.dll",
-        "build/.NETFramework/v4.6.1/Facades/System.ServiceModel.NetTcp.dll",
-        "build/.NETFramework/v4.6.1/Facades/System.ServiceModel.Primitives.dll",
-        "build/.NETFramework/v4.6.1/Facades/System.ServiceModel.Security.dll",
-        "build/.NETFramework/v4.6.1/Facades/System.Text.Encoding.Extensions.dll",
-        "build/.NETFramework/v4.6.1/Facades/System.Text.Encoding.dll",
-        "build/.NETFramework/v4.6.1/Facades/System.Text.RegularExpressions.dll",
-        "build/.NETFramework/v4.6.1/Facades/System.Threading.Tasks.Parallel.dll",
-        "build/.NETFramework/v4.6.1/Facades/System.Threading.Tasks.dll",
-        "build/.NETFramework/v4.6.1/Facades/System.Threading.Timer.dll",
-        "build/.NETFramework/v4.6.1/Facades/System.Threading.dll",
-        "build/.NETFramework/v4.6.1/Facades/System.Xml.ReaderWriter.dll",
-        "build/.NETFramework/v4.6.1/Facades/System.Xml.XDocument.dll",
-        "build/.NETFramework/v4.6.1/Facades/System.Xml.XmlSerializer.dll",
-        "build/.NETFramework/v4.6.1/ISymWrapper.dll",
-        "build/.NETFramework/v4.6.1/ISymWrapper.xml",
-        "build/.NETFramework/v4.6.1/Microsoft.Activities.Build.dll",
-        "build/.NETFramework/v4.6.1/Microsoft.Activities.Build.xml",
-        "build/.NETFramework/v4.6.1/Microsoft.Build.Conversion.v4.0.dll",
-        "build/.NETFramework/v4.6.1/Microsoft.Build.Conversion.v4.0.xml",
-        "build/.NETFramework/v4.6.1/Microsoft.Build.Engine.dll",
-        "build/.NETFramework/v4.6.1/Microsoft.Build.Engine.xml",
-        "build/.NETFramework/v4.6.1/Microsoft.Build.Framework.dll",
-        "build/.NETFramework/v4.6.1/Microsoft.Build.Framework.xml",
-        "build/.NETFramework/v4.6.1/Microsoft.Build.Tasks.v4.0.dll",
-        "build/.NETFramework/v4.6.1/Microsoft.Build.Tasks.v4.0.xml",
-        "build/.NETFramework/v4.6.1/Microsoft.Build.Utilities.v4.0.dll",
-        "build/.NETFramework/v4.6.1/Microsoft.Build.Utilities.v4.0.xml",
-        "build/.NETFramework/v4.6.1/Microsoft.Build.dll",
-        "build/.NETFramework/v4.6.1/Microsoft.Build.xml",
-        "build/.NETFramework/v4.6.1/Microsoft.CSharp.dll",
-        "build/.NETFramework/v4.6.1/Microsoft.CSharp.xml",
-        "build/.NETFramework/v4.6.1/Microsoft.JScript.dll",
-        "build/.NETFramework/v4.6.1/Microsoft.JScript.xml",
-        "build/.NETFramework/v4.6.1/Microsoft.VisualBasic.Compatibility.Data.dll",
-        "build/.NETFramework/v4.6.1/Microsoft.VisualBasic.Compatibility.Data.xml",
-        "build/.NETFramework/v4.6.1/Microsoft.VisualBasic.Compatibility.dll",
-        "build/.NETFramework/v4.6.1/Microsoft.VisualBasic.Compatibility.xml",
-        "build/.NETFramework/v4.6.1/Microsoft.VisualBasic.dll",
-        "build/.NETFramework/v4.6.1/Microsoft.VisualBasic.xml",
-        "build/.NETFramework/v4.6.1/Microsoft.VisualC.STLCLR.dll",
-        "build/.NETFramework/v4.6.1/Microsoft.VisualC.STLCLR.xml",
-        "build/.NETFramework/v4.6.1/Microsoft.VisualC.dll",
-        "build/.NETFramework/v4.6.1/Microsoft.VisualC.xml",
-        "build/.NETFramework/v4.6.1/PermissionSets/FullTrust.xml",
-        "build/.NETFramework/v4.6.1/PermissionSets/Internet.xml",
-        "build/.NETFramework/v4.6.1/PermissionSets/LocalIntranet.xml",
-        "build/.NETFramework/v4.6.1/PresentationBuildTasks.dll",
-        "build/.NETFramework/v4.6.1/PresentationBuildTasks.xml",
-        "build/.NETFramework/v4.6.1/PresentationCore.dll",
-        "build/.NETFramework/v4.6.1/PresentationCore.xml",
-        "build/.NETFramework/v4.6.1/PresentationFramework.Aero.dll",
-        "build/.NETFramework/v4.6.1/PresentationFramework.Aero.xml",
-        "build/.NETFramework/v4.6.1/PresentationFramework.Aero2.dll",
-        "build/.NETFramework/v4.6.1/PresentationFramework.Aero2.xml",
-        "build/.NETFramework/v4.6.1/PresentationFramework.AeroLite.dll",
-        "build/.NETFramework/v4.6.1/PresentationFramework.AeroLite.xml",
-        "build/.NETFramework/v4.6.1/PresentationFramework.Classic.dll",
-        "build/.NETFramework/v4.6.1/PresentationFramework.Classic.xml",
-        "build/.NETFramework/v4.6.1/PresentationFramework.Luna.dll",
-        "build/.NETFramework/v4.6.1/PresentationFramework.Luna.xml",
-        "build/.NETFramework/v4.6.1/PresentationFramework.Royale.dll",
-        "build/.NETFramework/v4.6.1/PresentationFramework.Royale.xml",
-        "build/.NETFramework/v4.6.1/PresentationFramework.dll",
-        "build/.NETFramework/v4.6.1/PresentationFramework.xml",
-        "build/.NETFramework/v4.6.1/ReachFramework.dll",
-        "build/.NETFramework/v4.6.1/ReachFramework.xml",
-        "build/.NETFramework/v4.6.1/RedistList/FrameworkList.xml",
-        "build/.NETFramework/v4.6.1/System.Activities.Core.Presentation.dll",
-        "build/.NETFramework/v4.6.1/System.Activities.Core.Presentation.xml",
-        "build/.NETFramework/v4.6.1/System.Activities.DurableInstancing.dll",
-        "build/.NETFramework/v4.6.1/System.Activities.DurableInstancing.xml",
-        "build/.NETFramework/v4.6.1/System.Activities.Presentation.dll",
-        "build/.NETFramework/v4.6.1/System.Activities.Presentation.xml",
-        "build/.NETFramework/v4.6.1/System.Activities.dll",
-        "build/.NETFramework/v4.6.1/System.Activities.xml",
-        "build/.NETFramework/v4.6.1/System.AddIn.Contract.dll",
-        "build/.NETFramework/v4.6.1/System.AddIn.Contract.xml",
-        "build/.NETFramework/v4.6.1/System.AddIn.dll",
-        "build/.NETFramework/v4.6.1/System.AddIn.xml",
-        "build/.NETFramework/v4.6.1/System.ComponentModel.Composition.Registration.dll",
-        "build/.NETFramework/v4.6.1/System.ComponentModel.Composition.Registration.xml",
-        "build/.NETFramework/v4.6.1/System.ComponentModel.Composition.dll",
-        "build/.NETFramework/v4.6.1/System.ComponentModel.Composition.xml",
-        "build/.NETFramework/v4.6.1/System.ComponentModel.DataAnnotations.dll",
-        "build/.NETFramework/v4.6.1/System.ComponentModel.DataAnnotations.xml",
-        "build/.NETFramework/v4.6.1/System.Configuration.Install.dll",
-        "build/.NETFramework/v4.6.1/System.Configuration.Install.xml",
-        "build/.NETFramework/v4.6.1/System.Configuration.dll",
-        "build/.NETFramework/v4.6.1/System.Configuration.xml",
-        "build/.NETFramework/v4.6.1/System.Core.dll",
-        "build/.NETFramework/v4.6.1/System.Core.xml",
-        "build/.NETFramework/v4.6.1/System.Data.DataSetExtensions.dll",
-        "build/.NETFramework/v4.6.1/System.Data.DataSetExtensions.xml",
-        "build/.NETFramework/v4.6.1/System.Data.Entity.Design.dll",
-        "build/.NETFramework/v4.6.1/System.Data.Entity.Design.xml",
-        "build/.NETFramework/v4.6.1/System.Data.Entity.dll",
-        "build/.NETFramework/v4.6.1/System.Data.Entity.xml",
-        "build/.NETFramework/v4.6.1/System.Data.Linq.dll",
-        "build/.NETFramework/v4.6.1/System.Data.Linq.xml",
-        "build/.NETFramework/v4.6.1/System.Data.OracleClient.dll",
-        "build/.NETFramework/v4.6.1/System.Data.OracleClient.xml",
-        "build/.NETFramework/v4.6.1/System.Data.Services.Client.dll",
-        "build/.NETFramework/v4.6.1/System.Data.Services.Client.xml",
-        "build/.NETFramework/v4.6.1/System.Data.Services.Design.dll",
-        "build/.NETFramework/v4.6.1/System.Data.Services.Design.xml",
-        "build/.NETFramework/v4.6.1/System.Data.Services.dll",
-        "build/.NETFramework/v4.6.1/System.Data.Services.xml",
-        "build/.NETFramework/v4.6.1/System.Data.SqlXml.dll",
-        "build/.NETFramework/v4.6.1/System.Data.SqlXml.xml",
-        "build/.NETFramework/v4.6.1/System.Data.dll",
-        "build/.NETFramework/v4.6.1/System.Data.xml",
-        "build/.NETFramework/v4.6.1/System.Deployment.dll",
-        "build/.NETFramework/v4.6.1/System.Deployment.xml",
-        "build/.NETFramework/v4.6.1/System.Design.dll",
-        "build/.NETFramework/v4.6.1/System.Design.xml",
-        "build/.NETFramework/v4.6.1/System.Device.dll",
-        "build/.NETFramework/v4.6.1/System.Device.xml",
-        "build/.NETFramework/v4.6.1/System.DirectoryServices.AccountManagement.dll",
-        "build/.NETFramework/v4.6.1/System.DirectoryServices.AccountManagement.xml",
-        "build/.NETFramework/v4.6.1/System.DirectoryServices.Protocols.dll",
-        "build/.NETFramework/v4.6.1/System.DirectoryServices.Protocols.xml",
-        "build/.NETFramework/v4.6.1/System.DirectoryServices.dll",
-        "build/.NETFramework/v4.6.1/System.DirectoryServices.xml",
-        "build/.NETFramework/v4.6.1/System.Drawing.Design.dll",
-        "build/.NETFramework/v4.6.1/System.Drawing.Design.xml",
-        "build/.NETFramework/v4.6.1/System.Drawing.dll",
-        "build/.NETFramework/v4.6.1/System.Drawing.xml",
-        "build/.NETFramework/v4.6.1/System.Dynamic.dll",
-        "build/.NETFramework/v4.6.1/System.EnterpriseServices.Thunk.dll",
-        "build/.NETFramework/v4.6.1/System.EnterpriseServices.Wrapper.dll",
-        "build/.NETFramework/v4.6.1/System.EnterpriseServices.dll",
-        "build/.NETFramework/v4.6.1/System.EnterpriseServices.xml",
-        "build/.NETFramework/v4.6.1/System.IO.Compression.FileSystem.dll",
-        "build/.NETFramework/v4.6.1/System.IO.Compression.FileSystem.xml",
-        "build/.NETFramework/v4.6.1/System.IO.Compression.dll",
-        "build/.NETFramework/v4.6.1/System.IO.Compression.xml",
-        "build/.NETFramework/v4.6.1/System.IO.Log.dll",
-        "build/.NETFramework/v4.6.1/System.IO.Log.xml",
-        "build/.NETFramework/v4.6.1/System.IdentityModel.Selectors.dll",
-        "build/.NETFramework/v4.6.1/System.IdentityModel.Selectors.xml",
-        "build/.NETFramework/v4.6.1/System.IdentityModel.Services.dll",
-        "build/.NETFramework/v4.6.1/System.IdentityModel.Services.xml",
-        "build/.NETFramework/v4.6.1/System.IdentityModel.dll",
-        "build/.NETFramework/v4.6.1/System.IdentityModel.xml",
-        "build/.NETFramework/v4.6.1/System.Linq.xml",
-        "build/.NETFramework/v4.6.1/System.Management.Instrumentation.dll",
-        "build/.NETFramework/v4.6.1/System.Management.Instrumentation.xml",
-        "build/.NETFramework/v4.6.1/System.Management.dll",
-        "build/.NETFramework/v4.6.1/System.Management.xml",
-        "build/.NETFramework/v4.6.1/System.Messaging.dll",
-        "build/.NETFramework/v4.6.1/System.Messaging.xml",
-        "build/.NETFramework/v4.6.1/System.Net.Http.WebRequest.dll",
-        "build/.NETFramework/v4.6.1/System.Net.Http.WebRequest.xml",
-        "build/.NETFramework/v4.6.1/System.Net.Http.dll",
-        "build/.NETFramework/v4.6.1/System.Net.Http.xml",
-        "build/.NETFramework/v4.6.1/System.Net.dll",
-        "build/.NETFramework/v4.6.1/System.Net.xml",
-        "build/.NETFramework/v4.6.1/System.Numerics.Vectors.dll",
-        "build/.NETFramework/v4.6.1/System.Numerics.dll",
-        "build/.NETFramework/v4.6.1/System.Numerics.xml",
-        "build/.NETFramework/v4.6.1/System.Printing.dll",
-        "build/.NETFramework/v4.6.1/System.Printing.xml",
-        "build/.NETFramework/v4.6.1/System.Reflection.Context.dll",
-        "build/.NETFramework/v4.6.1/System.Reflection.Context.xml",
-        "build/.NETFramework/v4.6.1/System.Runtime.Caching.dll",
-        "build/.NETFramework/v4.6.1/System.Runtime.Caching.xml",
-        "build/.NETFramework/v4.6.1/System.Runtime.DurableInstancing.dll",
-        "build/.NETFramework/v4.6.1/System.Runtime.DurableInstancing.xml",
-        "build/.NETFramework/v4.6.1/System.Runtime.Remoting.dll",
-        "build/.NETFramework/v4.6.1/System.Runtime.Remoting.xml",
-        "build/.NETFramework/v4.6.1/System.Runtime.Serialization.Formatters.Soap.dll",
-        "build/.NETFramework/v4.6.1/System.Runtime.Serialization.Formatters.Soap.xml",
-        "build/.NETFramework/v4.6.1/System.Runtime.Serialization.dll",
-        "build/.NETFramework/v4.6.1/System.Runtime.Serialization.xml",
-        "build/.NETFramework/v4.6.1/System.Security.dll",
-        "build/.NETFramework/v4.6.1/System.Security.xml",
-        "build/.NETFramework/v4.6.1/System.ServiceModel.Activation.dll",
-        "build/.NETFramework/v4.6.1/System.ServiceModel.Activation.xml",
-        "build/.NETFramework/v4.6.1/System.ServiceModel.Activities.dll",
-        "build/.NETFramework/v4.6.1/System.ServiceModel.Activities.xml",
-        "build/.NETFramework/v4.6.1/System.ServiceModel.Channels.dll",
-        "build/.NETFramework/v4.6.1/System.ServiceModel.Channels.xml",
-        "build/.NETFramework/v4.6.1/System.ServiceModel.Discovery.dll",
-        "build/.NETFramework/v4.6.1/System.ServiceModel.Discovery.xml",
-        "build/.NETFramework/v4.6.1/System.ServiceModel.Routing.dll",
-        "build/.NETFramework/v4.6.1/System.ServiceModel.Routing.xml",
-        "build/.NETFramework/v4.6.1/System.ServiceModel.Web.dll",
-        "build/.NETFramework/v4.6.1/System.ServiceModel.Web.xml",
-        "build/.NETFramework/v4.6.1/System.ServiceModel.dll",
-        "build/.NETFramework/v4.6.1/System.ServiceModel.xml",
-        "build/.NETFramework/v4.6.1/System.ServiceProcess.dll",
-        "build/.NETFramework/v4.6.1/System.ServiceProcess.xml",
-        "build/.NETFramework/v4.6.1/System.Speech.dll",
-        "build/.NETFramework/v4.6.1/System.Speech.xml",
-        "build/.NETFramework/v4.6.1/System.Threading.Tasks.Dataflow.xml",
-        "build/.NETFramework/v4.6.1/System.Transactions.dll",
-        "build/.NETFramework/v4.6.1/System.Transactions.xml",
-        "build/.NETFramework/v4.6.1/System.Web.Abstractions.dll",
-        "build/.NETFramework/v4.6.1/System.Web.ApplicationServices.dll",
-        "build/.NETFramework/v4.6.1/System.Web.ApplicationServices.xml",
-        "build/.NETFramework/v4.6.1/System.Web.DataVisualization.Design.dll",
-        "build/.NETFramework/v4.6.1/System.Web.DataVisualization.dll",
-        "build/.NETFramework/v4.6.1/System.Web.DataVisualization.xml",
-        "build/.NETFramework/v4.6.1/System.Web.DynamicData.Design.dll",
-        "build/.NETFramework/v4.6.1/System.Web.DynamicData.Design.xml",
-        "build/.NETFramework/v4.6.1/System.Web.DynamicData.dll",
-        "build/.NETFramework/v4.6.1/System.Web.DynamicData.xml",
-        "build/.NETFramework/v4.6.1/System.Web.Entity.Design.dll",
-        "build/.NETFramework/v4.6.1/System.Web.Entity.Design.xml",
-        "build/.NETFramework/v4.6.1/System.Web.Entity.dll",
-        "build/.NETFramework/v4.6.1/System.Web.Entity.xml",
-        "build/.NETFramework/v4.6.1/System.Web.Extensions.Design.dll",
-        "build/.NETFramework/v4.6.1/System.Web.Extensions.Design.xml",
-        "build/.NETFramework/v4.6.1/System.Web.Extensions.dll",
-        "build/.NETFramework/v4.6.1/System.Web.Extensions.xml",
-        "build/.NETFramework/v4.6.1/System.Web.Mobile.dll",
-        "build/.NETFramework/v4.6.1/System.Web.Mobile.xml",
-        "build/.NETFramework/v4.6.1/System.Web.RegularExpressions.dll",
-        "build/.NETFramework/v4.6.1/System.Web.RegularExpressions.xml",
-        "build/.NETFramework/v4.6.1/System.Web.Routing.dll",
-        "build/.NETFramework/v4.6.1/System.Web.Services.dll",
-        "build/.NETFramework/v4.6.1/System.Web.Services.xml",
-        "build/.NETFramework/v4.6.1/System.Web.dll",
-        "build/.NETFramework/v4.6.1/System.Web.xml",
-        "build/.NETFramework/v4.6.1/System.Windows.Controls.Ribbon.dll",
-        "build/.NETFramework/v4.6.1/System.Windows.Controls.Ribbon.xml",
-        "build/.NETFramework/v4.6.1/System.Windows.Forms.DataVisualization.Design.dll",
-        "build/.NETFramework/v4.6.1/System.Windows.Forms.DataVisualization.dll",
-        "build/.NETFramework/v4.6.1/System.Windows.Forms.DataVisualization.xml",
-        "build/.NETFramework/v4.6.1/System.Windows.Forms.dll",
-        "build/.NETFramework/v4.6.1/System.Windows.Forms.xml",
-        "build/.NETFramework/v4.6.1/System.Windows.Input.Manipulations.dll",
-        "build/.NETFramework/v4.6.1/System.Windows.Input.Manipulations.xml",
-        "build/.NETFramework/v4.6.1/System.Windows.Presentation.dll",
-        "build/.NETFramework/v4.6.1/System.Windows.Presentation.xml",
-        "build/.NETFramework/v4.6.1/System.Windows.dll",
-        "build/.NETFramework/v4.6.1/System.Workflow.Activities.dll",
-        "build/.NETFramework/v4.6.1/System.Workflow.Activities.xml",
-        "build/.NETFramework/v4.6.1/System.Workflow.ComponentModel.dll",
-        "build/.NETFramework/v4.6.1/System.Workflow.ComponentModel.xml",
-        "build/.NETFramework/v4.6.1/System.Workflow.Runtime.dll",
-        "build/.NETFramework/v4.6.1/System.Workflow.Runtime.xml",
-        "build/.NETFramework/v4.6.1/System.WorkflowServices.dll",
-        "build/.NETFramework/v4.6.1/System.WorkflowServices.xml",
-        "build/.NETFramework/v4.6.1/System.Xaml.dll",
-        "build/.NETFramework/v4.6.1/System.Xaml.xml",
-        "build/.NETFramework/v4.6.1/System.Xml.Linq.dll",
-        "build/.NETFramework/v4.6.1/System.Xml.Linq.xml",
-        "build/.NETFramework/v4.6.1/System.Xml.Serialization.dll",
-        "build/.NETFramework/v4.6.1/System.Xml.dll",
-        "build/.NETFramework/v4.6.1/System.Xml.xml",
-        "build/.NETFramework/v4.6.1/System.dll",
-        "build/.NETFramework/v4.6.1/System.xml",
-        "build/.NETFramework/v4.6.1/UIAutomationClient.dll",
-        "build/.NETFramework/v4.6.1/UIAutomationClient.xml",
-        "build/.NETFramework/v4.6.1/UIAutomationClientsideProviders.dll",
-        "build/.NETFramework/v4.6.1/UIAutomationClientsideProviders.xml",
-        "build/.NETFramework/v4.6.1/UIAutomationProvider.dll",
-        "build/.NETFramework/v4.6.1/UIAutomationProvider.xml",
-        "build/.NETFramework/v4.6.1/UIAutomationTypes.dll",
-        "build/.NETFramework/v4.6.1/UIAutomationTypes.xml",
-        "build/.NETFramework/v4.6.1/WindowsBase.dll",
-        "build/.NETFramework/v4.6.1/WindowsBase.xml",
-        "build/.NETFramework/v4.6.1/WindowsFormsIntegration.dll",
-        "build/.NETFramework/v4.6.1/WindowsFormsIntegration.xml",
-        "build/.NETFramework/v4.6.1/XamlBuildTask.dll",
-        "build/.NETFramework/v4.6.1/XamlBuildTask.xml",
-        "build/.NETFramework/v4.6.1/mscorlib.dll",
-        "build/.NETFramework/v4.6.1/mscorlib.xml",
-        "build/.NETFramework/v4.6.1/namespaces.xml",
-        "build/.NETFramework/v4.6.1/sysglobl.dll",
-        "build/.NETFramework/v4.6.1/sysglobl.xml",
-        "build/Microsoft.NETFramework.ReferenceAssemblies.net461.targets",
-        "microsoft.netframework.referenceassemblies.net461.1.0.3.nupkg.sha512",
-        "microsoft.netframework.referenceassemblies.net461.nuspec"
+        "build/.NETFramework/v4.8/Accessibility.dll",
+        "build/.NETFramework/v4.8/Accessibility.xml",
+        "build/.NETFramework/v4.8/CustomMarshalers.dll",
+        "build/.NETFramework/v4.8/CustomMarshalers.xml",
+        "build/.NETFramework/v4.8/Facades/Microsoft.Win32.Primitives.dll",
+        "build/.NETFramework/v4.8/Facades/System.AppContext.dll",
+        "build/.NETFramework/v4.8/Facades/System.Collections.Concurrent.dll",
+        "build/.NETFramework/v4.8/Facades/System.Collections.NonGeneric.dll",
+        "build/.NETFramework/v4.8/Facades/System.Collections.Specialized.dll",
+        "build/.NETFramework/v4.8/Facades/System.Collections.dll",
+        "build/.NETFramework/v4.8/Facades/System.ComponentModel.Annotations.dll",
+        "build/.NETFramework/v4.8/Facades/System.ComponentModel.EventBasedAsync.dll",
+        "build/.NETFramework/v4.8/Facades/System.ComponentModel.Primitives.dll",
+        "build/.NETFramework/v4.8/Facades/System.ComponentModel.TypeConverter.dll",
+        "build/.NETFramework/v4.8/Facades/System.ComponentModel.dll",
+        "build/.NETFramework/v4.8/Facades/System.Console.dll",
+        "build/.NETFramework/v4.8/Facades/System.Data.Common.dll",
+        "build/.NETFramework/v4.8/Facades/System.Diagnostics.Contracts.dll",
+        "build/.NETFramework/v4.8/Facades/System.Diagnostics.Debug.dll",
+        "build/.NETFramework/v4.8/Facades/System.Diagnostics.FileVersionInfo.dll",
+        "build/.NETFramework/v4.8/Facades/System.Diagnostics.Process.dll",
+        "build/.NETFramework/v4.8/Facades/System.Diagnostics.StackTrace.dll",
+        "build/.NETFramework/v4.8/Facades/System.Diagnostics.TextWriterTraceListener.dll",
+        "build/.NETFramework/v4.8/Facades/System.Diagnostics.Tools.dll",
+        "build/.NETFramework/v4.8/Facades/System.Diagnostics.TraceSource.dll",
+        "build/.NETFramework/v4.8/Facades/System.Drawing.Primitives.dll",
+        "build/.NETFramework/v4.8/Facades/System.Dynamic.Runtime.dll",
+        "build/.NETFramework/v4.8/Facades/System.Globalization.Calendars.dll",
+        "build/.NETFramework/v4.8/Facades/System.Globalization.Extensions.dll",
+        "build/.NETFramework/v4.8/Facades/System.Globalization.dll",
+        "build/.NETFramework/v4.8/Facades/System.IO.Compression.ZipFile.dll",
+        "build/.NETFramework/v4.8/Facades/System.IO.FileSystem.DriveInfo.dll",
+        "build/.NETFramework/v4.8/Facades/System.IO.FileSystem.Primitives.dll",
+        "build/.NETFramework/v4.8/Facades/System.IO.FileSystem.Watcher.dll",
+        "build/.NETFramework/v4.8/Facades/System.IO.FileSystem.dll",
+        "build/.NETFramework/v4.8/Facades/System.IO.IsolatedStorage.dll",
+        "build/.NETFramework/v4.8/Facades/System.IO.MemoryMappedFiles.dll",
+        "build/.NETFramework/v4.8/Facades/System.IO.Pipes.dll",
+        "build/.NETFramework/v4.8/Facades/System.IO.UnmanagedMemoryStream.dll",
+        "build/.NETFramework/v4.8/Facades/System.IO.dll",
+        "build/.NETFramework/v4.8/Facades/System.Linq.Expressions.dll",
+        "build/.NETFramework/v4.8/Facades/System.Linq.Parallel.dll",
+        "build/.NETFramework/v4.8/Facades/System.Linq.Queryable.dll",
+        "build/.NETFramework/v4.8/Facades/System.Linq.dll",
+        "build/.NETFramework/v4.8/Facades/System.Net.Http.Rtc.dll",
+        "build/.NETFramework/v4.8/Facades/System.Net.NameResolution.dll",
+        "build/.NETFramework/v4.8/Facades/System.Net.NetworkInformation.dll",
+        "build/.NETFramework/v4.8/Facades/System.Net.Ping.dll",
+        "build/.NETFramework/v4.8/Facades/System.Net.Primitives.dll",
+        "build/.NETFramework/v4.8/Facades/System.Net.Requests.dll",
+        "build/.NETFramework/v4.8/Facades/System.Net.Security.dll",
+        "build/.NETFramework/v4.8/Facades/System.Net.Sockets.dll",
+        "build/.NETFramework/v4.8/Facades/System.Net.WebHeaderCollection.dll",
+        "build/.NETFramework/v4.8/Facades/System.Net.WebSockets.Client.dll",
+        "build/.NETFramework/v4.8/Facades/System.Net.WebSockets.dll",
+        "build/.NETFramework/v4.8/Facades/System.ObjectModel.dll",
+        "build/.NETFramework/v4.8/Facades/System.Reflection.Emit.ILGeneration.dll",
+        "build/.NETFramework/v4.8/Facades/System.Reflection.Emit.Lightweight.dll",
+        "build/.NETFramework/v4.8/Facades/System.Reflection.Emit.dll",
+        "build/.NETFramework/v4.8/Facades/System.Reflection.Extensions.dll",
+        "build/.NETFramework/v4.8/Facades/System.Reflection.Primitives.dll",
+        "build/.NETFramework/v4.8/Facades/System.Reflection.dll",
+        "build/.NETFramework/v4.8/Facades/System.Resources.Reader.dll",
+        "build/.NETFramework/v4.8/Facades/System.Resources.ResourceManager.dll",
+        "build/.NETFramework/v4.8/Facades/System.Resources.Writer.dll",
+        "build/.NETFramework/v4.8/Facades/System.Runtime.CompilerServices.VisualC.dll",
+        "build/.NETFramework/v4.8/Facades/System.Runtime.Extensions.dll",
+        "build/.NETFramework/v4.8/Facades/System.Runtime.Handles.dll",
+        "build/.NETFramework/v4.8/Facades/System.Runtime.InteropServices.RuntimeInformation.dll",
+        "build/.NETFramework/v4.8/Facades/System.Runtime.InteropServices.WindowsRuntime.dll",
+        "build/.NETFramework/v4.8/Facades/System.Runtime.InteropServices.dll",
+        "build/.NETFramework/v4.8/Facades/System.Runtime.Numerics.dll",
+        "build/.NETFramework/v4.8/Facades/System.Runtime.Serialization.Formatters.dll",
+        "build/.NETFramework/v4.8/Facades/System.Runtime.Serialization.Json.dll",
+        "build/.NETFramework/v4.8/Facades/System.Runtime.Serialization.Primitives.dll",
+        "build/.NETFramework/v4.8/Facades/System.Runtime.Serialization.Xml.dll",
+        "build/.NETFramework/v4.8/Facades/System.Runtime.dll",
+        "build/.NETFramework/v4.8/Facades/System.Security.Claims.dll",
+        "build/.NETFramework/v4.8/Facades/System.Security.Cryptography.Algorithms.dll",
+        "build/.NETFramework/v4.8/Facades/System.Security.Cryptography.Csp.dll",
+        "build/.NETFramework/v4.8/Facades/System.Security.Cryptography.Encoding.dll",
+        "build/.NETFramework/v4.8/Facades/System.Security.Cryptography.Primitives.dll",
+        "build/.NETFramework/v4.8/Facades/System.Security.Cryptography.X509Certificates.dll",
+        "build/.NETFramework/v4.8/Facades/System.Security.Principal.dll",
+        "build/.NETFramework/v4.8/Facades/System.Security.SecureString.dll",
+        "build/.NETFramework/v4.8/Facades/System.ServiceModel.Duplex.dll",
+        "build/.NETFramework/v4.8/Facades/System.ServiceModel.Http.dll",
+        "build/.NETFramework/v4.8/Facades/System.ServiceModel.NetTcp.dll",
+        "build/.NETFramework/v4.8/Facades/System.ServiceModel.Primitives.dll",
+        "build/.NETFramework/v4.8/Facades/System.ServiceModel.Security.dll",
+        "build/.NETFramework/v4.8/Facades/System.Text.Encoding.Extensions.dll",
+        "build/.NETFramework/v4.8/Facades/System.Text.Encoding.dll",
+        "build/.NETFramework/v4.8/Facades/System.Text.RegularExpressions.dll",
+        "build/.NETFramework/v4.8/Facades/System.Threading.Overlapped.dll",
+        "build/.NETFramework/v4.8/Facades/System.Threading.Tasks.Parallel.dll",
+        "build/.NETFramework/v4.8/Facades/System.Threading.Tasks.dll",
+        "build/.NETFramework/v4.8/Facades/System.Threading.Thread.dll",
+        "build/.NETFramework/v4.8/Facades/System.Threading.ThreadPool.dll",
+        "build/.NETFramework/v4.8/Facades/System.Threading.Timer.dll",
+        "build/.NETFramework/v4.8/Facades/System.Threading.dll",
+        "build/.NETFramework/v4.8/Facades/System.ValueTuple.dll",
+        "build/.NETFramework/v4.8/Facades/System.Xml.ReaderWriter.dll",
+        "build/.NETFramework/v4.8/Facades/System.Xml.XDocument.dll",
+        "build/.NETFramework/v4.8/Facades/System.Xml.XPath.XDocument.dll",
+        "build/.NETFramework/v4.8/Facades/System.Xml.XPath.dll",
+        "build/.NETFramework/v4.8/Facades/System.Xml.XmlDocument.dll",
+        "build/.NETFramework/v4.8/Facades/System.Xml.XmlSerializer.dll",
+        "build/.NETFramework/v4.8/Facades/netstandard.dll",
+        "build/.NETFramework/v4.8/ISymWrapper.dll",
+        "build/.NETFramework/v4.8/ISymWrapper.xml",
+        "build/.NETFramework/v4.8/Microsoft.Activities.Build.dll",
+        "build/.NETFramework/v4.8/Microsoft.Activities.Build.xml",
+        "build/.NETFramework/v4.8/Microsoft.Build.Conversion.v4.0.dll",
+        "build/.NETFramework/v4.8/Microsoft.Build.Conversion.v4.0.xml",
+        "build/.NETFramework/v4.8/Microsoft.Build.Engine.dll",
+        "build/.NETFramework/v4.8/Microsoft.Build.Engine.xml",
+        "build/.NETFramework/v4.8/Microsoft.Build.Framework.dll",
+        "build/.NETFramework/v4.8/Microsoft.Build.Framework.xml",
+        "build/.NETFramework/v4.8/Microsoft.Build.Tasks.v4.0.dll",
+        "build/.NETFramework/v4.8/Microsoft.Build.Tasks.v4.0.xml",
+        "build/.NETFramework/v4.8/Microsoft.Build.Utilities.v4.0.dll",
+        "build/.NETFramework/v4.8/Microsoft.Build.Utilities.v4.0.xml",
+        "build/.NETFramework/v4.8/Microsoft.Build.dll",
+        "build/.NETFramework/v4.8/Microsoft.Build.xml",
+        "build/.NETFramework/v4.8/Microsoft.CSharp.dll",
+        "build/.NETFramework/v4.8/Microsoft.CSharp.xml",
+        "build/.NETFramework/v4.8/Microsoft.JScript.dll",
+        "build/.NETFramework/v4.8/Microsoft.JScript.xml",
+        "build/.NETFramework/v4.8/Microsoft.VisualBasic.Compatibility.Data.dll",
+        "build/.NETFramework/v4.8/Microsoft.VisualBasic.Compatibility.Data.xml",
+        "build/.NETFramework/v4.8/Microsoft.VisualBasic.Compatibility.dll",
+        "build/.NETFramework/v4.8/Microsoft.VisualBasic.Compatibility.xml",
+        "build/.NETFramework/v4.8/Microsoft.VisualBasic.dll",
+        "build/.NETFramework/v4.8/Microsoft.VisualBasic.xml",
+        "build/.NETFramework/v4.8/Microsoft.VisualC.STLCLR.dll",
+        "build/.NETFramework/v4.8/Microsoft.VisualC.STLCLR.xml",
+        "build/.NETFramework/v4.8/Microsoft.VisualC.dll",
+        "build/.NETFramework/v4.8/Microsoft.VisualC.xml",
+        "build/.NETFramework/v4.8/PermissionSets/FullTrust.xml",
+        "build/.NETFramework/v4.8/PermissionSets/Internet.xml",
+        "build/.NETFramework/v4.8/PermissionSets/LocalIntranet.xml",
+        "build/.NETFramework/v4.8/PresentationBuildTasks.dll",
+        "build/.NETFramework/v4.8/PresentationBuildTasks.xml",
+        "build/.NETFramework/v4.8/PresentationCore.dll",
+        "build/.NETFramework/v4.8/PresentationCore.xml",
+        "build/.NETFramework/v4.8/PresentationFramework.Aero.dll",
+        "build/.NETFramework/v4.8/PresentationFramework.Aero.xml",
+        "build/.NETFramework/v4.8/PresentationFramework.Aero2.dll",
+        "build/.NETFramework/v4.8/PresentationFramework.Aero2.xml",
+        "build/.NETFramework/v4.8/PresentationFramework.AeroLite.dll",
+        "build/.NETFramework/v4.8/PresentationFramework.AeroLite.xml",
+        "build/.NETFramework/v4.8/PresentationFramework.Classic.dll",
+        "build/.NETFramework/v4.8/PresentationFramework.Classic.xml",
+        "build/.NETFramework/v4.8/PresentationFramework.Luna.dll",
+        "build/.NETFramework/v4.8/PresentationFramework.Luna.xml",
+        "build/.NETFramework/v4.8/PresentationFramework.Royale.dll",
+        "build/.NETFramework/v4.8/PresentationFramework.Royale.xml",
+        "build/.NETFramework/v4.8/PresentationFramework.dll",
+        "build/.NETFramework/v4.8/PresentationFramework.xml",
+        "build/.NETFramework/v4.8/ReachFramework.dll",
+        "build/.NETFramework/v4.8/ReachFramework.xml",
+        "build/.NETFramework/v4.8/RedistList/FrameworkList.xml",
+        "build/.NETFramework/v4.8/System.Activities.Core.Presentation.dll",
+        "build/.NETFramework/v4.8/System.Activities.Core.Presentation.xml",
+        "build/.NETFramework/v4.8/System.Activities.DurableInstancing.dll",
+        "build/.NETFramework/v4.8/System.Activities.DurableInstancing.xml",
+        "build/.NETFramework/v4.8/System.Activities.Presentation.dll",
+        "build/.NETFramework/v4.8/System.Activities.Presentation.xml",
+        "build/.NETFramework/v4.8/System.Activities.dll",
+        "build/.NETFramework/v4.8/System.Activities.xml",
+        "build/.NETFramework/v4.8/System.AddIn.Contract.dll",
+        "build/.NETFramework/v4.8/System.AddIn.Contract.xml",
+        "build/.NETFramework/v4.8/System.AddIn.dll",
+        "build/.NETFramework/v4.8/System.AddIn.xml",
+        "build/.NETFramework/v4.8/System.ComponentModel.Composition.Registration.dll",
+        "build/.NETFramework/v4.8/System.ComponentModel.Composition.Registration.xml",
+        "build/.NETFramework/v4.8/System.ComponentModel.Composition.dll",
+        "build/.NETFramework/v4.8/System.ComponentModel.Composition.xml",
+        "build/.NETFramework/v4.8/System.ComponentModel.DataAnnotations.dll",
+        "build/.NETFramework/v4.8/System.ComponentModel.DataAnnotations.xml",
+        "build/.NETFramework/v4.8/System.Configuration.Install.dll",
+        "build/.NETFramework/v4.8/System.Configuration.Install.xml",
+        "build/.NETFramework/v4.8/System.Configuration.dll",
+        "build/.NETFramework/v4.8/System.Configuration.xml",
+        "build/.NETFramework/v4.8/System.Core.dll",
+        "build/.NETFramework/v4.8/System.Core.xml",
+        "build/.NETFramework/v4.8/System.Data.DataSetExtensions.dll",
+        "build/.NETFramework/v4.8/System.Data.DataSetExtensions.xml",
+        "build/.NETFramework/v4.8/System.Data.Entity.Design.dll",
+        "build/.NETFramework/v4.8/System.Data.Entity.Design.xml",
+        "build/.NETFramework/v4.8/System.Data.Entity.dll",
+        "build/.NETFramework/v4.8/System.Data.Entity.xml",
+        "build/.NETFramework/v4.8/System.Data.Linq.dll",
+        "build/.NETFramework/v4.8/System.Data.Linq.xml",
+        "build/.NETFramework/v4.8/System.Data.OracleClient.dll",
+        "build/.NETFramework/v4.8/System.Data.OracleClient.xml",
+        "build/.NETFramework/v4.8/System.Data.Services.Client.dll",
+        "build/.NETFramework/v4.8/System.Data.Services.Client.xml",
+        "build/.NETFramework/v4.8/System.Data.Services.Design.dll",
+        "build/.NETFramework/v4.8/System.Data.Services.Design.xml",
+        "build/.NETFramework/v4.8/System.Data.Services.dll",
+        "build/.NETFramework/v4.8/System.Data.Services.xml",
+        "build/.NETFramework/v4.8/System.Data.SqlXml.dll",
+        "build/.NETFramework/v4.8/System.Data.SqlXml.xml",
+        "build/.NETFramework/v4.8/System.Data.dll",
+        "build/.NETFramework/v4.8/System.Data.xml",
+        "build/.NETFramework/v4.8/System.Deployment.dll",
+        "build/.NETFramework/v4.8/System.Deployment.xml",
+        "build/.NETFramework/v4.8/System.Design.dll",
+        "build/.NETFramework/v4.8/System.Design.xml",
+        "build/.NETFramework/v4.8/System.Device.dll",
+        "build/.NETFramework/v4.8/System.Device.xml",
+        "build/.NETFramework/v4.8/System.Diagnostics.Tracing.dll",
+        "build/.NETFramework/v4.8/System.Diagnostics.Tracing.xml",
+        "build/.NETFramework/v4.8/System.DirectoryServices.AccountManagement.dll",
+        "build/.NETFramework/v4.8/System.DirectoryServices.AccountManagement.xml",
+        "build/.NETFramework/v4.8/System.DirectoryServices.Protocols.dll",
+        "build/.NETFramework/v4.8/System.DirectoryServices.Protocols.xml",
+        "build/.NETFramework/v4.8/System.DirectoryServices.dll",
+        "build/.NETFramework/v4.8/System.DirectoryServices.xml",
+        "build/.NETFramework/v4.8/System.Drawing.Design.dll",
+        "build/.NETFramework/v4.8/System.Drawing.Design.xml",
+        "build/.NETFramework/v4.8/System.Drawing.dll",
+        "build/.NETFramework/v4.8/System.Drawing.xml",
+        "build/.NETFramework/v4.8/System.Dynamic.dll",
+        "build/.NETFramework/v4.8/System.EnterpriseServices.Thunk.dll",
+        "build/.NETFramework/v4.8/System.EnterpriseServices.Wrapper.dll",
+        "build/.NETFramework/v4.8/System.EnterpriseServices.dll",
+        "build/.NETFramework/v4.8/System.EnterpriseServices.xml",
+        "build/.NETFramework/v4.8/System.IO.Compression.FileSystem.dll",
+        "build/.NETFramework/v4.8/System.IO.Compression.FileSystem.xml",
+        "build/.NETFramework/v4.8/System.IO.Compression.dll",
+        "build/.NETFramework/v4.8/System.IO.Compression.xml",
+        "build/.NETFramework/v4.8/System.IO.Log.dll",
+        "build/.NETFramework/v4.8/System.IO.Log.xml",
+        "build/.NETFramework/v4.8/System.IdentityModel.Selectors.dll",
+        "build/.NETFramework/v4.8/System.IdentityModel.Selectors.xml",
+        "build/.NETFramework/v4.8/System.IdentityModel.Services.dll",
+        "build/.NETFramework/v4.8/System.IdentityModel.Services.xml",
+        "build/.NETFramework/v4.8/System.IdentityModel.dll",
+        "build/.NETFramework/v4.8/System.IdentityModel.xml",
+        "build/.NETFramework/v4.8/System.Linq.xml",
+        "build/.NETFramework/v4.8/System.Management.Instrumentation.dll",
+        "build/.NETFramework/v4.8/System.Management.Instrumentation.xml",
+        "build/.NETFramework/v4.8/System.Management.dll",
+        "build/.NETFramework/v4.8/System.Management.xml",
+        "build/.NETFramework/v4.8/System.Messaging.dll",
+        "build/.NETFramework/v4.8/System.Messaging.xml",
+        "build/.NETFramework/v4.8/System.Net.Http.WebRequest.dll",
+        "build/.NETFramework/v4.8/System.Net.Http.WebRequest.xml",
+        "build/.NETFramework/v4.8/System.Net.Http.dll",
+        "build/.NETFramework/v4.8/System.Net.Http.xml",
+        "build/.NETFramework/v4.8/System.Net.dll",
+        "build/.NETFramework/v4.8/System.Net.xml",
+        "build/.NETFramework/v4.8/System.Numerics.dll",
+        "build/.NETFramework/v4.8/System.Numerics.xml",
+        "build/.NETFramework/v4.8/System.Printing.dll",
+        "build/.NETFramework/v4.8/System.Printing.xml",
+        "build/.NETFramework/v4.8/System.Reflection.Context.dll",
+        "build/.NETFramework/v4.8/System.Reflection.Context.xml",
+        "build/.NETFramework/v4.8/System.Runtime.Caching.dll",
+        "build/.NETFramework/v4.8/System.Runtime.Caching.xml",
+        "build/.NETFramework/v4.8/System.Runtime.DurableInstancing.dll",
+        "build/.NETFramework/v4.8/System.Runtime.DurableInstancing.xml",
+        "build/.NETFramework/v4.8/System.Runtime.Remoting.dll",
+        "build/.NETFramework/v4.8/System.Runtime.Remoting.xml",
+        "build/.NETFramework/v4.8/System.Runtime.Serialization.Formatters.Soap.dll",
+        "build/.NETFramework/v4.8/System.Runtime.Serialization.Formatters.Soap.xml",
+        "build/.NETFramework/v4.8/System.Runtime.Serialization.dll",
+        "build/.NETFramework/v4.8/System.Runtime.Serialization.xml",
+        "build/.NETFramework/v4.8/System.Security.dll",
+        "build/.NETFramework/v4.8/System.Security.xml",
+        "build/.NETFramework/v4.8/System.ServiceModel.Activation.dll",
+        "build/.NETFramework/v4.8/System.ServiceModel.Activation.xml",
+        "build/.NETFramework/v4.8/System.ServiceModel.Activities.dll",
+        "build/.NETFramework/v4.8/System.ServiceModel.Activities.xml",
+        "build/.NETFramework/v4.8/System.ServiceModel.Channels.dll",
+        "build/.NETFramework/v4.8/System.ServiceModel.Channels.xml",
+        "build/.NETFramework/v4.8/System.ServiceModel.Discovery.dll",
+        "build/.NETFramework/v4.8/System.ServiceModel.Discovery.xml",
+        "build/.NETFramework/v4.8/System.ServiceModel.Routing.dll",
+        "build/.NETFramework/v4.8/System.ServiceModel.Routing.xml",
+        "build/.NETFramework/v4.8/System.ServiceModel.Web.dll",
+        "build/.NETFramework/v4.8/System.ServiceModel.Web.xml",
+        "build/.NETFramework/v4.8/System.ServiceModel.dll",
+        "build/.NETFramework/v4.8/System.ServiceModel.xml",
+        "build/.NETFramework/v4.8/System.ServiceProcess.dll",
+        "build/.NETFramework/v4.8/System.ServiceProcess.xml",
+        "build/.NETFramework/v4.8/System.Speech.dll",
+        "build/.NETFramework/v4.8/System.Speech.xml",
+        "build/.NETFramework/v4.8/System.Threading.Tasks.Dataflow.xml",
+        "build/.NETFramework/v4.8/System.Transactions.dll",
+        "build/.NETFramework/v4.8/System.Transactions.xml",
+        "build/.NETFramework/v4.8/System.Web.Abstractions.dll",
+        "build/.NETFramework/v4.8/System.Web.ApplicationServices.dll",
+        "build/.NETFramework/v4.8/System.Web.ApplicationServices.xml",
+        "build/.NETFramework/v4.8/System.Web.DataVisualization.Design.dll",
+        "build/.NETFramework/v4.8/System.Web.DataVisualization.dll",
+        "build/.NETFramework/v4.8/System.Web.DataVisualization.xml",
+        "build/.NETFramework/v4.8/System.Web.DynamicData.Design.dll",
+        "build/.NETFramework/v4.8/System.Web.DynamicData.Design.xml",
+        "build/.NETFramework/v4.8/System.Web.DynamicData.dll",
+        "build/.NETFramework/v4.8/System.Web.DynamicData.xml",
+        "build/.NETFramework/v4.8/System.Web.Entity.Design.dll",
+        "build/.NETFramework/v4.8/System.Web.Entity.Design.xml",
+        "build/.NETFramework/v4.8/System.Web.Entity.dll",
+        "build/.NETFramework/v4.8/System.Web.Entity.xml",
+        "build/.NETFramework/v4.8/System.Web.Extensions.Design.dll",
+        "build/.NETFramework/v4.8/System.Web.Extensions.Design.xml",
+        "build/.NETFramework/v4.8/System.Web.Extensions.dll",
+        "build/.NETFramework/v4.8/System.Web.Extensions.xml",
+        "build/.NETFramework/v4.8/System.Web.Mobile.dll",
+        "build/.NETFramework/v4.8/System.Web.Mobile.xml",
+        "build/.NETFramework/v4.8/System.Web.RegularExpressions.dll",
+        "build/.NETFramework/v4.8/System.Web.RegularExpressions.xml",
+        "build/.NETFramework/v4.8/System.Web.Routing.dll",
+        "build/.NETFramework/v4.8/System.Web.Services.dll",
+        "build/.NETFramework/v4.8/System.Web.Services.xml",
+        "build/.NETFramework/v4.8/System.Web.dll",
+        "build/.NETFramework/v4.8/System.Web.xml",
+        "build/.NETFramework/v4.8/System.Windows.Controls.Ribbon.dll",
+        "build/.NETFramework/v4.8/System.Windows.Controls.Ribbon.xml",
+        "build/.NETFramework/v4.8/System.Windows.Forms.DataVisualization.Design.dll",
+        "build/.NETFramework/v4.8/System.Windows.Forms.DataVisualization.dll",
+        "build/.NETFramework/v4.8/System.Windows.Forms.DataVisualization.xml",
+        "build/.NETFramework/v4.8/System.Windows.Forms.dll",
+        "build/.NETFramework/v4.8/System.Windows.Forms.xml",
+        "build/.NETFramework/v4.8/System.Windows.Input.Manipulations.dll",
+        "build/.NETFramework/v4.8/System.Windows.Input.Manipulations.xml",
+        "build/.NETFramework/v4.8/System.Windows.Presentation.dll",
+        "build/.NETFramework/v4.8/System.Windows.Presentation.xml",
+        "build/.NETFramework/v4.8/System.Windows.dll",
+        "build/.NETFramework/v4.8/System.Workflow.Activities.dll",
+        "build/.NETFramework/v4.8/System.Workflow.Activities.xml",
+        "build/.NETFramework/v4.8/System.Workflow.ComponentModel.dll",
+        "build/.NETFramework/v4.8/System.Workflow.ComponentModel.xml",
+        "build/.NETFramework/v4.8/System.Workflow.Runtime.dll",
+        "build/.NETFramework/v4.8/System.Workflow.Runtime.xml",
+        "build/.NETFramework/v4.8/System.WorkflowServices.dll",
+        "build/.NETFramework/v4.8/System.WorkflowServices.xml",
+        "build/.NETFramework/v4.8/System.Xaml.dll",
+        "build/.NETFramework/v4.8/System.Xaml.xml",
+        "build/.NETFramework/v4.8/System.Xml.Linq.dll",
+        "build/.NETFramework/v4.8/System.Xml.Linq.xml",
+        "build/.NETFramework/v4.8/System.Xml.Serialization.dll",
+        "build/.NETFramework/v4.8/System.Xml.dll",
+        "build/.NETFramework/v4.8/System.Xml.xml",
+        "build/.NETFramework/v4.8/System.dll",
+        "build/.NETFramework/v4.8/System.xml",
+        "build/.NETFramework/v4.8/UIAutomationClient.dll",
+        "build/.NETFramework/v4.8/UIAutomationClient.xml",
+        "build/.NETFramework/v4.8/UIAutomationClientsideProviders.dll",
+        "build/.NETFramework/v4.8/UIAutomationClientsideProviders.xml",
+        "build/.NETFramework/v4.8/UIAutomationProvider.dll",
+        "build/.NETFramework/v4.8/UIAutomationProvider.xml",
+        "build/.NETFramework/v4.8/UIAutomationTypes.dll",
+        "build/.NETFramework/v4.8/UIAutomationTypes.xml",
+        "build/.NETFramework/v4.8/WindowsBase.dll",
+        "build/.NETFramework/v4.8/WindowsBase.xml",
+        "build/.NETFramework/v4.8/WindowsFormsIntegration.dll",
+        "build/.NETFramework/v4.8/WindowsFormsIntegration.xml",
+        "build/.NETFramework/v4.8/XamlBuildTask.dll",
+        "build/.NETFramework/v4.8/XamlBuildTask.xml",
+        "build/.NETFramework/v4.8/mscorlib.dll",
+        "build/.NETFramework/v4.8/mscorlib.xml",
+        "build/.NETFramework/v4.8/namespaces.xml",
+        "build/.NETFramework/v4.8/sysglobl.dll",
+        "build/.NETFramework/v4.8/sysglobl.xml",
+        "build/Microsoft.NETFramework.ReferenceAssemblies.net48.targets",
+        "microsoft.netframework.referenceassemblies.net48.1.0.3.nupkg.sha512",
+        "microsoft.netframework.referenceassemblies.net48.nuspec"
       ]
     },
     "Microsoft.Owin/4.2.2": {
@@ -782,53 +928,57 @@
         "microsoft.owin.host.systemweb.nuspec"
       ]
     },
-    "Microsoft.Owin.Security/3.0.1": {
-      "sha512": "LPoUxaTKzmjs97wDCTtBIoRwp30Jkq9UFnoj+EfMFJv+XxjcvHE/D573LRomA568WhvXoI2cUiwhZFvqfbLMVg==",
+    "Microsoft.Owin.Security/4.2.2": {
+      "sha512": "nEgJYWfSrbp/u2FnIkmiLUuWUyFX8xC/gtnwN9r1rV+iT/E10rMinGbaxQvSHlkhHBnUgzriYwCaMhMExxpyhQ==",
       "type": "package",
-      "path": "microsoft.owin.security/3.0.1",
+      "path": "microsoft.owin.security/4.2.2",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
-        "lib/net45/Microsoft.Owin.Security.XML",
+        "Icon.png",
         "lib/net45/Microsoft.Owin.Security.dll",
-        "microsoft.owin.security.3.0.1.nupkg.sha512",
+        "lib/net45/Microsoft.Owin.Security.xml",
+        "microsoft.owin.security.4.2.2.nupkg.sha512",
         "microsoft.owin.security.nuspec"
       ]
     },
-    "Microsoft.Owin.Security.Cookies/3.0.1": {
-      "sha512": "l2GRNvO4oyxfpmWtfUYvN3fA4jWduE84UCNqWTj6yhYDSE76wI+W022qTTEMr0VoCDiJ0GGYdvAjQm3xbSsB9Q==",
+    "Microsoft.Owin.Security.Cookies/4.2.2": {
+      "sha512": "/YTwRJlmJrsOXFT2KrkrQi32X54iNAae5Ev5tB5YK1069d/6U2tXxtheXkEG8UEf/1O57igfEMF7bk3fuOI6qg==",
       "type": "package",
-      "path": "microsoft.owin.security.cookies/3.0.1",
+      "path": "microsoft.owin.security.cookies/4.2.2",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
+        "Icon.png",
         "lib/net45/Microsoft.Owin.Security.Cookies.dll",
         "lib/net45/Microsoft.Owin.Security.Cookies.xml",
-        "microsoft.owin.security.cookies.3.0.1.nupkg.sha512",
+        "microsoft.owin.security.cookies.4.2.2.nupkg.sha512",
         "microsoft.owin.security.cookies.nuspec"
       ]
     },
-    "Microsoft.Owin.Security.OAuth/3.0.1": {
-      "sha512": "wttlhNSijhsrF7iwxYzxhTr8AYxXI6qoiw3b6dhVhqXOYCDp8OQ5yhHFtWlst+65l7VHduXassspZ974rtLMaw==",
+    "Microsoft.Owin.Security.OAuth/4.2.2": {
+      "sha512": "Y0F0lmDZAdpQn9LMdVwfWwq5JZpLu2OYSdToVwMdneC1AAVvaPxkFW6gnMe1Uox2ZNJwFd8Ytt1lm4eQL7itqw==",
       "type": "package",
-      "path": "microsoft.owin.security.oauth/3.0.1",
+      "path": "microsoft.owin.security.oauth/4.2.2",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
-        "lib/net45/Microsoft.Owin.Security.OAuth.XML",
+        "Icon.png",
         "lib/net45/Microsoft.Owin.Security.OAuth.dll",
-        "microsoft.owin.security.oauth.3.0.1.nupkg.sha512",
+        "lib/net45/Microsoft.Owin.Security.OAuth.xml",
+        "microsoft.owin.security.oauth.4.2.2.nupkg.sha512",
         "microsoft.owin.security.oauth.nuspec"
       ]
     },
-    "Newtonsoft.Json/6.0.4": {
-      "sha512": "FyQLmEpjsCrEP+znauLDGAi+h6i9YnaMkITlfIoiM4RYyX3nki306bTHsr/0okiIvIc7BJhQTbOAIZVocccFUw==",
+    "Newtonsoft.Json/13.0.3": {
+      "sha512": "HrC5BXdl00IP9zeV+0Z848QWPAoCr9P3bDEZguI+gkLcBKAOxix/tLEAAHC+UvDNPv4a2d18lOReHMOagPa+zQ==",
       "type": "package",
-      "path": "newtonsoft.json/6.0.4",
-      "hasTools": true,
+      "path": "newtonsoft.json/13.0.3",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
+        "LICENSE.md",
+        "README.md",
         "lib/net20/Newtonsoft.Json.dll",
         "lib/net20/Newtonsoft.Json.xml",
         "lib/net35/Newtonsoft.Json.dll",
@@ -837,15 +987,17 @@
         "lib/net40/Newtonsoft.Json.xml",
         "lib/net45/Newtonsoft.Json.dll",
         "lib/net45/Newtonsoft.Json.xml",
-        "lib/netcore45/Newtonsoft.Json.dll",
-        "lib/netcore45/Newtonsoft.Json.xml",
-        "lib/portable-net40+sl5+wp80+win8+wpa81/Newtonsoft.Json.dll",
-        "lib/portable-net40+sl5+wp80+win8+wpa81/Newtonsoft.Json.xml",
-        "lib/portable-net45+wp80+win8+wpa81/Newtonsoft.Json.dll",
-        "lib/portable-net45+wp80+win8+wpa81/Newtonsoft.Json.xml",
-        "newtonsoft.json.6.0.4.nupkg.sha512",
+        "lib/net6.0/Newtonsoft.Json.dll",
+        "lib/net6.0/Newtonsoft.Json.xml",
+        "lib/netstandard1.0/Newtonsoft.Json.dll",
+        "lib/netstandard1.0/Newtonsoft.Json.xml",
+        "lib/netstandard1.3/Newtonsoft.Json.dll",
+        "lib/netstandard1.3/Newtonsoft.Json.xml",
+        "lib/netstandard2.0/Newtonsoft.Json.dll",
+        "lib/netstandard2.0/Newtonsoft.Json.xml",
+        "newtonsoft.json.13.0.3.nupkg.sha512",
         "newtonsoft.json.nuspec",
-        "tools/install.ps1"
+        "packageIcon.png"
       ]
     },
     "Owin/1.0.0": {
@@ -862,55 +1014,64 @@
     }
   },
   "projectFileDependencyGroups": {
-    ".NETFramework,Version=v4.6.1": [
+    ".NETFramework,Version=v4.8": [
       "EntityFramework >= 6.4.4",
+      "Microsoft.AspNet.Identity.Core >= 2.2.4",
       "Microsoft.AspNet.Identity.EntityFramework >= 2.2.4",
       "Microsoft.AspNet.Identity.Owin >= 2.2.4",
       "Microsoft.NETFramework.ReferenceAssemblies >= 1.0.3",
-      "Microsoft.Owin.Host.SystemWeb >= 4.2.2"
+      "Microsoft.Owin >= 4.2.2",
+      "Microsoft.Owin.Host.SystemWeb >= 4.2.2",
+      "Microsoft.Owin.Security >= 4.2.2",
+      "Microsoft.Owin.Security.Cookies >= 4.2.2",
+      "Microsoft.Owin.Security.OAuth >= 4.2.2",
+      "Newtonsoft.Json >= 13.0.3"
     ]
   },
   "packageFolders": {
-    "C:\\Users\\cfong\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\": {}
+    "C:\\Users\\HP\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\cfong\\Desktop\\APU\\Degree 2\\Semester 2\\WAPP022026\\WAPP2026\\OlyMath\\OlyMath.csproj",
+      "projectUniqueName": "d:\\Delfino\\AiTutor\\OlyMath\\OlyMath.csproj",
       "projectName": "OlyMath",
-      "projectPath": "C:\\Users\\cfong\\Desktop\\APU\\Degree 2\\Semester 2\\WAPP022026\\WAPP2026\\OlyMath\\OlyMath.csproj",
-      "packagesPath": "C:\\Users\\cfong\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\cfong\\Desktop\\APU\\Degree 2\\Semester 2\\WAPP022026\\WAPP2026\\OlyMath\\obj\\",
+      "projectPath": "d:\\Delfino\\AiTutor\\OlyMath\\OlyMath.csproj",
+      "packagesPath": "C:\\Users\\HP\\.nuget\\packages\\",
+      "outputPath": "d:\\Delfino\\AiTutor\\OlyMath\\obj\\",
       "projectStyle": "PackageReference",
       "skipContentFileWrite": true,
-      "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
-      ],
+      "UsingMicrosoftNETSdk": false,
       "configFilePaths": [
-        "C:\\Users\\cfong\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+        "C:\\Users\\HP\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
-        "net461"
+        "net48"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
-        "net461": {
+        "net48": {
           "projectReferences": {}
         }
+      },
+      "restoreAuditProperties": {
+        "enableAudit": "true",
+        "auditLevel": "low",
+        "auditMode": "direct"
       }
     },
     "frameworks": {
-      "net461": {
+      "net48": {
         "dependencies": {
           "EntityFramework": {
             "target": "Package",
             "version": "[6.4.4, )"
+          },
+          "Microsoft.AspNet.Identity.Core": {
+            "target": "Package",
+            "version": "[2.2.4, )"
           },
           "Microsoft.AspNet.Identity.EntityFramework": {
             "target": "Package",
@@ -926,9 +1087,29 @@
             "target": "Package",
             "version": "[1.0.3, )"
           },
+          "Microsoft.Owin": {
+            "target": "Package",
+            "version": "[4.2.2, )"
+          },
           "Microsoft.Owin.Host.SystemWeb": {
             "target": "Package",
             "version": "[4.2.2, )"
+          },
+          "Microsoft.Owin.Security": {
+            "target": "Package",
+            "version": "[4.2.2, )"
+          },
+          "Microsoft.Owin.Security.Cookies": {
+            "target": "Package",
+            "version": "[4.2.2, )"
+          },
+          "Microsoft.Owin.Security.OAuth": {
+            "target": "Package",
+            "version": "[4.2.2, )"
+          },
+          "Newtonsoft.Json": {
+            "target": "Package",
+            "version": "[13.0.3, )"
           }
         }
       }

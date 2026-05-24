@@ -1,46 +1,50 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\cfong\\Desktop\\APU\\Degree 2\\Semester 2\\WAPP022026\\WAPP2026\\OlyMath\\OlyMath.csproj": {}
+    "d:\\Delfino\\AiTutor\\OlyMath\\OlyMath.csproj": {}
   },
   "projects": {
-    "C:\\Users\\cfong\\Desktop\\APU\\Degree 2\\Semester 2\\WAPP022026\\WAPP2026\\OlyMath\\OlyMath.csproj": {
+    "d:\\Delfino\\AiTutor\\OlyMath\\OlyMath.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\cfong\\Desktop\\APU\\Degree 2\\Semester 2\\WAPP022026\\WAPP2026\\OlyMath\\OlyMath.csproj",
+        "projectUniqueName": "d:\\Delfino\\AiTutor\\OlyMath\\OlyMath.csproj",
         "projectName": "OlyMath",
-        "projectPath": "C:\\Users\\cfong\\Desktop\\APU\\Degree 2\\Semester 2\\WAPP022026\\WAPP2026\\OlyMath\\OlyMath.csproj",
-        "packagesPath": "C:\\Users\\cfong\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\cfong\\Desktop\\APU\\Degree 2\\Semester 2\\WAPP022026\\WAPP2026\\OlyMath\\obj\\",
+        "projectPath": "d:\\Delfino\\AiTutor\\OlyMath\\OlyMath.csproj",
+        "packagesPath": "C:\\Users\\HP\\.nuget\\packages\\",
+        "outputPath": "d:\\Delfino\\AiTutor\\OlyMath\\obj\\",
         "projectStyle": "PackageReference",
         "skipContentFileWrite": true,
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
-        ],
+        "UsingMicrosoftNETSdk": false,
         "configFilePaths": [
-          "C:\\Users\\cfong\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+          "C:\\Users\\HP\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
-          "net461"
+          "net48"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "net461": {
+          "net48": {
             "projectReferences": {}
           }
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
         }
       },
       "frameworks": {
-        "net461": {
+        "net48": {
           "dependencies": {
             "EntityFramework": {
               "target": "Package",
               "version": "[6.4.4, )"
+            },
+            "Microsoft.AspNet.Identity.Core": {
+              "target": "Package",
+              "version": "[2.2.4, )"
             },
             "Microsoft.AspNet.Identity.EntityFramework": {
               "target": "Package",
@@ -56,9 +60,29 @@
               "target": "Package",
               "version": "[1.0.3, )"
             },
+            "Microsoft.Owin": {
+              "target": "Package",
+              "version": "[4.2.2, )"
+            },
             "Microsoft.Owin.Host.SystemWeb": {
               "target": "Package",
               "version": "[4.2.2, )"
+            },
+            "Microsoft.Owin.Security": {
+              "target": "Package",
+              "version": "[4.2.2, )"
+            },
+            "Microsoft.Owin.Security.Cookies": {
+              "target": "Package",
+              "version": "[4.2.2, )"
+            },
+            "Microsoft.Owin.Security.OAuth": {
+              "target": "Package",
+              "version": "[4.2.2, )"
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.3, )"
             }
           }
         }
