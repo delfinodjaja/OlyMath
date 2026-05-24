@@ -31,3 +31,25 @@ D:\Delfino\AiTutor\OlyMath\bin\Debug\Microsoft.Owin.Security.OAuth.dll
 D:\Delfino\AiTutor\OlyMath\bin\Debug\Newtonsoft.Json.dll
 D:\Delfino\AiTutor\OlyMath\bin\Debug\Owin.dll
 D:\Delfino\AiTutor\OlyMath\obj\Debug\OlyMath.csproj.CopyComplete
+C:\Users\cfong\Desktop\APU\Degree 2\Semester 2\WAPP022026\WAPP2026\OlyMath\obj\Debug\OlyMath.csproj.AssemblyReference.cache
+C:\Users\cfong\Desktop\APU\Degree 2\Semester 2\WAPP022026\WAPP2026\OlyMath\obj\Debug\OlyMath.Migrations.InitialBuild.resources
+C:\Users\cfong\Desktop\APU\Degree 2\Semester 2\WAPP022026\WAPP2026\OlyMath\obj\Debug\OlyMath.csproj.GenerateResource.cache
+C:\Users\cfong\Desktop\APU\Degree 2\Semester 2\WAPP022026\WAPP2026\OlyMath\obj\Debug\OlyMath.csproj.CoreCompileInputs.cache
+C:\Users\cfong\Desktop\APU\Degree 2\Semester 2\WAPP022026\WAPP2026\OlyMath\bin\OlyMath.dll.config
+C:\Users\cfong\Desktop\APU\Degree 2\Semester 2\WAPP022026\WAPP2026\OlyMath\bin\OlyMath.dll
+C:\Users\cfong\Desktop\APU\Degree 2\Semester 2\WAPP022026\WAPP2026\OlyMath\bin\OlyMath.pdb
+C:\Users\cfong\Desktop\APU\Degree 2\Semester 2\WAPP022026\WAPP2026\OlyMath\bin\EntityFramework.SqlServer.dll
+C:\Users\cfong\Desktop\APU\Degree 2\Semester 2\WAPP022026\WAPP2026\OlyMath\bin\EntityFramework.dll
+C:\Users\cfong\Desktop\APU\Degree 2\Semester 2\WAPP022026\WAPP2026\OlyMath\bin\Microsoft.AspNet.Identity.Core.dll
+C:\Users\cfong\Desktop\APU\Degree 2\Semester 2\WAPP022026\WAPP2026\OlyMath\bin\Microsoft.AspNet.Identity.EntityFramework.dll
+C:\Users\cfong\Desktop\APU\Degree 2\Semester 2\WAPP022026\WAPP2026\OlyMath\bin\Microsoft.AspNet.Identity.Owin.dll
+C:\Users\cfong\Desktop\APU\Degree 2\Semester 2\WAPP022026\WAPP2026\OlyMath\bin\Microsoft.Owin.dll
+C:\Users\cfong\Desktop\APU\Degree 2\Semester 2\WAPP022026\WAPP2026\OlyMath\bin\Microsoft.Owin.Host.SystemWeb.dll
+C:\Users\cfong\Desktop\APU\Degree 2\Semester 2\WAPP022026\WAPP2026\OlyMath\bin\Microsoft.Owin.Security.dll
+C:\Users\cfong\Desktop\APU\Degree 2\Semester 2\WAPP022026\WAPP2026\OlyMath\bin\Microsoft.Owin.Security.Cookies.dll
+C:\Users\cfong\Desktop\APU\Degree 2\Semester 2\WAPP022026\WAPP2026\OlyMath\bin\Microsoft.Owin.Security.OAuth.dll
+C:\Users\cfong\Desktop\APU\Degree 2\Semester 2\WAPP022026\WAPP2026\OlyMath\bin\Newtonsoft.Json.dll
+C:\Users\cfong\Desktop\APU\Degree 2\Semester 2\WAPP022026\WAPP2026\OlyMath\bin\Owin.dll
+C:\Users\cfong\Desktop\APU\Degree 2\Semester 2\WAPP022026\WAPP2026\OlyMath\obj\Debug\OlyMath.csproj.CopyComplete
+C:\Users\cfong\Desktop\APU\Degree 2\Semester 2\WAPP022026\WAPP2026\OlyMath\obj\Debug\OlyMath.dll
+C:\Users\cfong\Desktop\APU\Degree 2\Semester 2\WAPP022026\WAPP2026\OlyMath\obj\Debug\OlyMath.pdb

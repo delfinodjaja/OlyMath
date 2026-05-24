@@ -7,7 +7,7 @@
 <asp:Content ID="MainContent" ContentPlaceHolderID="MainContent" runat="server">
 
     <div class="landing-hero">
-        <div class="landing-tag">Mathematics Training Platform</div>
+        <div class="landing-tag">Mathematics Training Platform&nbsp;&nbsp;&nbsp; 4</div>
         <h1>Train sharper.<br />Compete <em>smarter.</em></h1>
         <p class="landing-sub">A focused platform for olympiad training — structured modules, expert trainers, real progress.</p>
         <div class="landing-cta">

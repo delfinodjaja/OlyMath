@@ -12,7 +12,7 @@ public class Module
     public string Category { get; set; }
     public DateTime CreatedAt { get; set; }
 
-    public int TrainerId { get; set; }
+    public string TrainerId { get; set; }
     public virtual ApplicationUser Trainer { get; set; }
 
     public virtual ICollection<Enrollment> Enrollments { get; set; }

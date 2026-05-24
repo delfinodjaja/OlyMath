@@ -6,6 +6,12 @@ using Microsoft.AspNet.Identity.EntityFramework;
 public class Discussion
 {
     public int DiscussionId { get; set; }
+
+    // You must add these three so Entity Framework sees them!
+    public string Title { get; set; }
+    public string Topic { get; set; }
+    public bool IsFlagged { get; set; }
+
     public string Content { get; set; }
     public DateTime CreatedAt { get; set; }
 
