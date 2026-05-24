@@ -1,6 +1,6 @@
 using System;
 using System.Data;
-using System.Data.SQLite;
+using System.Data.SqlClient;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -33,7 +33,7 @@ namespace OlyMath.Trainer
                     WHERE m.CreatedByUserId = @userId
                     ORDER BY m.CreatedAt DESC";
 
-                DataTable dt = DbHelper.ExecuteQuery(sql, new SQLiteParameter("@userId", CurrentUserId));
+                DataTable dt = DbHelper.ExecuteQuery(sql, new SqlParameter("@userId", CurrentUserId));
 
                 if (dt.Rows.Count > 0)
                 {
@@ -67,8 +67,8 @@ namespace OlyMath.Trainer
                     // SQLite handles cascade deletes automatically since we declared foreign keys with ON DELETE CASCADE
                     string deleteSql = "DELETE FROM Modules WHERE Id = @moduleId AND CreatedByUserId = @userId";
                     int rows = DbHelper.ExecuteNonQuery(deleteSql,
-                        new SQLiteParameter("@moduleId", moduleId),
-                        new SQLiteParameter("@userId", userId)
+                        new SqlParameter("@moduleId", moduleId),
+                        new SqlParameter("@userId", userId)
                     );
 
                     if (rows > 0)

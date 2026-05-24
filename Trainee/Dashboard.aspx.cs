@@ -1,6 +1,6 @@
 using System;
 using System.Data;
-using System.Data.SQLite;
+using System.Data.SqlClient;
 using System.Web.UI;
 
 namespace OlyMath.Trainee
@@ -26,12 +26,12 @@ namespace OlyMath.Trainee
 
             // 1. Active Modules Count
             string sqlActive = "SELECT COUNT(*) FROM UserProgress WHERE UserId = @userId AND ProgressPercentage < 100";
-            long activeCount = (long)DbHelper.ExecuteScalar(sqlActive, new SQLiteParameter("@userId", userId));
+            long activeCount = (long)DbHelper.ExecuteScalar(sqlActive, new SqlParameter("@userId", userId));
             litActiveModulesCount.Text = activeCount.ToString();
 
             // 2. Average Progress
             string sqlAvg = "SELECT AVG(ProgressPercentage) FROM UserProgress WHERE UserId = @userId";
-            object avgResult = DbHelper.ExecuteScalar(sqlAvg, new SQLiteParameter("@userId", userId));
+            object avgResult = DbHelper.ExecuteScalar(sqlAvg, new SqlParameter("@userId", userId));
             int avgProgress = 0;
             if (avgResult != null && avgResult != DBNull.Value)
             {
@@ -41,12 +41,12 @@ namespace OlyMath.Trainee
 
             // 3. Certificates Earned
             string sqlCerts = "SELECT COUNT(*) FROM UserAssessments WHERE UserId = @userId AND CertificateId IS NOT NULL";
-            long certsCount = (long)DbHelper.ExecuteScalar(sqlCerts, new SQLiteParameter("@userId", userId));
+            long certsCount = (long)DbHelper.ExecuteScalar(sqlCerts, new SqlParameter("@userId", userId));
             litCertsCount.Text = certsCount.ToString();
 
             // 4. Assessments Done
             string sqlAssess = "SELECT COUNT(*) FROM UserAssessments WHERE UserId = @userId";
-            long assessCount = (long)DbHelper.ExecuteScalar(sqlAssess, new SQLiteParameter("@userId", userId));
+            long assessCount = (long)DbHelper.ExecuteScalar(sqlAssess, new SqlParameter("@userId", userId));
             litAssessmentsCount.Text = assessCount.ToString();
         }
 
@@ -60,7 +60,7 @@ namespace OlyMath.Trainee
                 WHERE up.UserId = @userId
                 ORDER BY up.LastAccessed DESC";
 
-            DataTable dt = DbHelper.ExecuteQuery(sql, new SQLiteParameter("@userId", CurrentUserId));
+            DataTable dt = DbHelper.ExecuteQuery(sql, new SqlParameter("@userId", CurrentUserId));
             if (dt.Rows.Count > 0)
             {
                 rptEnrolledModules.DataSource = dt;
@@ -76,11 +76,11 @@ namespace OlyMath.Trainee
         private void LoadLatestDiscussion()
         {
             string sql = @"
-                SELECT d.Id, d.Title, d.Content, d.Topic, d.LikesCount, d.CreatedAt, u.FullName, u.CityCountry,
+                SELECT TOP 1 d.Id, d.Title, d.Content, d.Topic, d.LikesCount, d.CreatedAt, u.FullName, u.CityCountry,
                 (SELECT COUNT(*) FROM DiscussionReplies dr WHERE dr.DiscussionId = d.Id) AS ReplyCount
                 FROM Discussions d
                 INNER JOIN Users u ON d.UserId = u.Id
-                ORDER BY d.CreatedAt DESC LIMIT 1";
+                ORDER BY d.CreatedAt DESC";
 
             DataTable dt = DbHelper.ExecuteQuery(sql);
             rptLatestDiscussions.DataSource = dt;

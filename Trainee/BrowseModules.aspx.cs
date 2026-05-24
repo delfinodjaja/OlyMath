@@ -1,6 +1,6 @@
 using System;
 using System.Data;
-using System.Data.SQLite;
+using System.Data.SqlClient;
 using System.Web.UI;
 
 namespace OlyMath.Trainee
@@ -27,7 +27,7 @@ namespace OlyMath.Trainee
                 LEFT JOIN UserProgress up ON m.Id = up.ModuleId AND up.UserId = @userId
                 ORDER BY m.Topic, m.Title";
 
-            DataTable dt = DbHelper.ExecuteQuery(sql, new SQLiteParameter("@userId", CurrentUserId));
+            DataTable dt = DbHelper.ExecuteQuery(sql, new SqlParameter("@userId", CurrentUserId));
             rptAllModules.DataSource = dt;
             rptAllModules.DataBind();
         }

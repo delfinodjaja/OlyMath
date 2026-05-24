@@ -1,6 +1,6 @@
 using System;
 using System.Data;
-using System.Data.SQLite;
+using System.Data.SqlClient;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -75,14 +75,14 @@ namespace OlyMath.Trainee
             {
                 sql += " WHERE d.Topic = @topic ORDER BY d.CreatedAt DESC";
                 dt = DbHelper.ExecuteQuery(sql, 
-                    new SQLiteParameter("@userId", CurrentUserId),
-                    new SQLiteParameter("@topic", TopicFilter)
+                    new SqlParameter("@userId", CurrentUserId),
+                    new SqlParameter("@topic", TopicFilter)
                 );
             }
             else
             {
                 sql += " ORDER BY d.CreatedAt DESC";
-                dt = DbHelper.ExecuteQuery(sql, new SQLiteParameter("@userId", CurrentUserId));
+                dt = DbHelper.ExecuteQuery(sql, new SqlParameter("@userId", CurrentUserId));
             }
 
             if (dt.Rows.Count > 0)
@@ -110,8 +110,8 @@ namespace OlyMath.Trainee
                 WHERE d.Id = @postId";
 
             DataTable dt = DbHelper.ExecuteQuery(sql, 
-                new SQLiteParameter("@postId", PostId),
-                new SQLiteParameter("@userId", CurrentUserId)
+                new SqlParameter("@postId", PostId),
+                new SqlParameter("@userId", CurrentUserId)
             );
 
             if (dt.Rows.Count == 0)
@@ -150,7 +150,7 @@ namespace OlyMath.Trainee
                 WHERE dr.DiscussionId = @postId
                 ORDER BY dr.CreatedAt ASC";
 
-            DataTable dt = DbHelper.ExecuteQuery(sql, new SQLiteParameter("@postId", PostId));
+            DataTable dt = DbHelper.ExecuteQuery(sql, new SqlParameter("@postId", PostId));
             if (dt.Rows.Count > 0)
             {
                 rptReplies.DataSource = dt;
@@ -168,10 +168,10 @@ namespace OlyMath.Trainee
         private void LoadTrending()
         {
             string sql = @"
-                SELECT d.Id, d.Title, d.LikesCount,
+                SELECT TOP 3 d.Id, d.Title, d.LikesCount,
                 (SELECT COUNT(*) FROM DiscussionReplies dr WHERE dr.DiscussionId = d.Id) AS ReplyCount
                 FROM Discussions d
-                ORDER BY d.LikesCount DESC LIMIT 3";
+                ORDER BY d.LikesCount DESC";
 
             DataTable dt = DbHelper.ExecuteQuery(sql);
             rptTrending.DataSource = dt;
@@ -197,10 +197,10 @@ namespace OlyMath.Trainee
             {
                 string sql = "INSERT INTO Discussions (UserId, Title, Content, Topic, LikesCount) VALUES (@userId, @title, @content, @topic, 0)";
                 DbHelper.ExecuteNonQuery(sql,
-                    new SQLiteParameter("@userId", CurrentUserId),
-                    new SQLiteParameter("@title", title),
-                    new SQLiteParameter("@content", content),
-                    new SQLiteParameter("@topic", topic)
+                    new SqlParameter("@userId", CurrentUserId),
+                    new SqlParameter("@title", title),
+                    new SqlParameter("@content", content),
+                    new SqlParameter("@topic", topic)
                 );
 
                 // Reset inputs and reload
@@ -226,9 +226,9 @@ namespace OlyMath.Trainee
             {
                 string sql = "INSERT INTO DiscussionReplies (DiscussionId, UserId, Content) VALUES (@postId, @userId, @content)";
                 DbHelper.ExecuteNonQuery(sql,
-                    new SQLiteParameter("@postId", PostId),
-                    new SQLiteParameter("@userId", CurrentUserId),
-                    new SQLiteParameter("@content", content)
+                    new SqlParameter("@postId", PostId),
+                    new SqlParameter("@userId", CurrentUserId),
+                    new SqlParameter("@content", content)
                 );
 
                 // Reset and refresh thread
@@ -269,8 +269,8 @@ namespace OlyMath.Trainee
             // 1. Check if user already liked the post
             string checkSql = "SELECT COUNT(*) FROM DiscussionLikes WHERE UserId = @userId AND DiscussionId = @postId";
             long count = (long)DbHelper.ExecuteScalar(checkSql, 
-                new SQLiteParameter("@userId", userId),
-                new SQLiteParameter("@postId", pId)
+                new SqlParameter("@userId", userId),
+                new SqlParameter("@postId", pId)
             );
 
             if (count > 0)
@@ -278,26 +278,26 @@ namespace OlyMath.Trainee
                 // Unlike: Delete like record
                 string deleteSql = "DELETE FROM DiscussionLikes WHERE UserId = @userId AND DiscussionId = @postId";
                 DbHelper.ExecuteNonQuery(deleteSql,
-                    new SQLiteParameter("@userId", userId),
-                    new SQLiteParameter("@postId", pId)
+                    new SqlParameter("@userId", userId),
+                    new SqlParameter("@postId", pId)
                 );
 
                 // Decrement count
-                string decSql = "UPDATE Discussions SET LikesCount = MAX(0, LikesCount - 1) WHERE Id = @postId";
-                DbHelper.ExecuteNonQuery(decSql, new SQLiteParameter("@postId", pId));
+                string decSql = "UPDATE Discussions SET LikesCount = CASE WHEN LikesCount > 0 THEN LikesCount - 1 ELSE 0 END WHERE Id = @postId";
+                DbHelper.ExecuteNonQuery(decSql, new SqlParameter("@postId", pId));
             }
             else
             {
                 // Like: Insert like record
                 string insertSql = "INSERT INTO DiscussionLikes (UserId, DiscussionId) VALUES (@userId, @postId)";
                 DbHelper.ExecuteNonQuery(insertSql,
-                    new SQLiteParameter("@userId", userId),
-                    new SQLiteParameter("@postId", pId)
+                    new SqlParameter("@userId", userId),
+                    new SqlParameter("@postId", pId)
                 );
 
                 // Increment count
                 string incSql = "UPDATE Discussions SET LikesCount = LikesCount + 1 WHERE Id = @postId";
-                DbHelper.ExecuteNonQuery(incSql, new SQLiteParameter("@postId", pId));
+                DbHelper.ExecuteNonQuery(incSql, new SqlParameter("@postId", pId));
             }
         }
 

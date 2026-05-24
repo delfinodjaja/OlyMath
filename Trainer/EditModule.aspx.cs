@@ -1,6 +1,6 @@
 using System;
 using System.Data;
-using System.Data.SQLite;
+using System.Data.SqlClient;
 using System.Web.UI;
 
 namespace OlyMath.Trainer
@@ -38,8 +38,8 @@ namespace OlyMath.Trainer
             {
                 string sql = "SELECT * FROM Modules WHERE Id = @moduleId AND CreatedByUserId = @userId";
                 DataTable dt = DbHelper.ExecuteQuery(sql, 
-                    new SQLiteParameter("@moduleId", ModuleId),
-                    new SQLiteParameter("@userId", CurrentUserId)
+                    new SqlParameter("@moduleId", ModuleId),
+                    new SqlParameter("@userId", CurrentUserId)
                 );
 
                 if (dt.Rows.Count > 0)
@@ -92,12 +92,12 @@ namespace OlyMath.Trainer
                         WHERE Id = @moduleId AND CreatedByUserId = @userId";
 
                     int rows = DbHelper.ExecuteNonQuery(sql,
-                        new SQLiteParameter("@title", title),
-                        new SQLiteParameter("@topic", topic),
-                        new SQLiteParameter("@time", time),
-                        new SQLiteParameter("@desc", description),
-                        new SQLiteParameter("@moduleId", ModuleId),
-                        new SQLiteParameter("@userId", CurrentUserId)
+                        new SqlParameter("@title", title),
+                        new SqlParameter("@topic", topic),
+                        new SqlParameter("@time", time),
+                        new SqlParameter("@desc", description),
+                        new SqlParameter("@moduleId", ModuleId),
+                        new SqlParameter("@userId", CurrentUserId)
                     );
 
                     if (rows == 0)
@@ -115,11 +115,11 @@ namespace OlyMath.Trainer
                         VALUES (@title, @topic, @time, @desc, @userId)";
 
                     DbHelper.ExecuteNonQuery(sql,
-                        new SQLiteParameter("@title", title),
-                        new SQLiteParameter("@topic", topic),
-                        new SQLiteParameter("@time", time),
-                        new SQLiteParameter("@desc", description),
-                        new SQLiteParameter("@userId", CurrentUserId)
+                        new SqlParameter("@title", title),
+                        new SqlParameter("@topic", topic),
+                        new SqlParameter("@time", time),
+                        new SqlParameter("@desc", description),
+                        new SqlParameter("@userId", CurrentUserId)
                     );
                 }
 

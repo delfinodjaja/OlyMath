@@ -1,6 +1,6 @@
 using System;
 using System.Data;
-using System.Data.SQLite;
+using System.Data.SqlClient;
 using System.Web;
 using System.Web.Security;
 using System.Web.UI;
@@ -49,8 +49,8 @@ namespace OlyMath
             {
                 string sql = "SELECT * FROM Users WHERE Email = @email AND Role = @role";
                 DataTable dt = DbHelper.ExecuteQuery(sql, 
-                    new SQLiteParameter("@email", email),
-                    new SQLiteParameter("@role", role)
+                    new SqlParameter("@email", email),
+                    new SqlParameter("@role", role)
                 );
 
                 if (dt.Rows.Count > 0)
@@ -121,7 +121,7 @@ namespace OlyMath
             {
                 // Check if email already registered
                 string checkSql = "SELECT COUNT(*) FROM Users WHERE Email = @email";
-                long count = (long)DbHelper.ExecuteScalar(checkSql, new SQLiteParameter("@email", email));
+                long count = (long)DbHelper.ExecuteScalar(checkSql, new SqlParameter("@email", email));
 
                 if (count > 0)
                 {
@@ -133,10 +133,10 @@ namespace OlyMath
                 // Insert new user
                 string insertSql = "INSERT INTO Users (FullName, Email, PasswordHash, Role) VALUES (@name, @email, @hash, @role)";
                 DbHelper.ExecuteNonQuery(insertSql,
-                    new SQLiteParameter("@name", name),
-                    new SQLiteParameter("@email", email),
-                    new SQLiteParameter("@hash", DbHelper.HashPassword(password)),
-                    new SQLiteParameter("@role", role)
+                    new SqlParameter("@name", name),
+                    new SqlParameter("@email", email),
+                    new SqlParameter("@hash", DbHelper.HashPassword(password)),
+                    new SqlParameter("@role", role)
                 );
 
                 lblSuccess.Text = "Registration successful! You can now sign in using the Login tab.";

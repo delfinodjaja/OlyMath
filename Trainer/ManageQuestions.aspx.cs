@@ -1,6 +1,6 @@
 using System;
 using System.Data;
-using System.Data.SQLite;
+using System.Data.SqlClient;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -41,8 +41,8 @@ namespace OlyMath.Trainer
             {
                 string sql = "SELECT Title FROM Modules WHERE Id = @moduleId AND CreatedByUserId = @userId";
                 object title = DbHelper.ExecuteScalar(sql, 
-                    new SQLiteParameter("@moduleId", ModuleId),
-                    new SQLiteParameter("@userId", CurrentUserId)
+                    new SqlParameter("@moduleId", ModuleId),
+                    new SqlParameter("@userId", CurrentUserId)
                 );
 
                 if (title == null)
@@ -66,7 +66,7 @@ namespace OlyMath.Trainer
             try
             {
                 string sql = "SELECT * FROM Questions WHERE ModuleId = @moduleId ORDER BY Id ASC";
-                DataTable dt = DbHelper.ExecuteQuery(sql, new SQLiteParameter("@moduleId", ModuleId));
+                DataTable dt = DbHelper.ExecuteQuery(sql, new SqlParameter("@moduleId", ModuleId));
 
                 if (dt.Rows.Count > 0)
                 {
@@ -115,13 +115,13 @@ namespace OlyMath.Trainer
                     VALUES (@moduleId, @qText, @optA, @optB, @optC, @optD, @correct)";
 
                 DbHelper.ExecuteNonQuery(sql,
-                    new SQLiteParameter("@moduleId", ModuleId),
-                    new SQLiteParameter("@qText", qText),
-                    new SQLiteParameter("@optA", optA),
-                    new SQLiteParameter("@optB", optB),
-                    new SQLiteParameter("@optC", optC),
-                    new SQLiteParameter("@optD", optD),
-                    new SQLiteParameter("@correct", correct)
+                    new SqlParameter("@moduleId", ModuleId),
+                    new SqlParameter("@qText", qText),
+                    new SqlParameter("@optA", optA),
+                    new SqlParameter("@optB", optB),
+                    new SqlParameter("@optC", optC),
+                    new SqlParameter("@optD", optD),
+                    new SqlParameter("@correct", correct)
                 );
 
                 lblMessage.Text = "Quiz question added successfully!";
@@ -163,8 +163,8 @@ namespace OlyMath.Trainer
                         AND ModuleId IN (SELECT Id FROM Modules WHERE CreatedByUserId = @userId)";
 
                     int rows = DbHelper.ExecuteNonQuery(deleteSql,
-                        new SQLiteParameter("@questionId", questionId),
-                        new SQLiteParameter("@userId", userId)
+                        new SqlParameter("@questionId", questionId),
+                        new SqlParameter("@userId", userId)
                     );
 
                     if (rows > 0)

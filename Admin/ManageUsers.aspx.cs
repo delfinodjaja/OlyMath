@@ -1,6 +1,6 @@
 using System;
 using System.Data;
-using System.Data.SQLite;
+using System.Data.SqlClient;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -68,7 +68,7 @@ namespace OlyMath.Admin
                 try
                 {
                     string sql = "SELECT * FROM Users WHERE Id = @userId";
-                    DataTable dt = DbHelper.ExecuteQuery(sql, new SQLiteParameter("@userId", userId));
+                    DataTable dt = DbHelper.ExecuteQuery(sql, new SqlParameter("@userId", userId));
 
                     if (dt.Rows.Count > 0)
                     {
@@ -105,7 +105,7 @@ namespace OlyMath.Admin
                 try
                 {
                     string deleteSql = "DELETE FROM Users WHERE Id = @userId";
-                    int rows = DbHelper.ExecuteNonQuery(deleteSql, new SQLiteParameter("@userId", userId));
+                    int rows = DbHelper.ExecuteNonQuery(deleteSql, new SqlParameter("@userId", userId));
 
                     if (rows > 0)
                     {
@@ -158,11 +158,11 @@ namespace OlyMath.Admin
                             SET FullName = @name, Email = @email, Role = @role, CityCountry = @loc 
                             WHERE Id = @id";
                         DbHelper.ExecuteNonQuery(sql,
-                            new SQLiteParameter("@name", name),
-                            new SQLiteParameter("@email", email),
-                            new SQLiteParameter("@role", role),
-                            new SQLiteParameter("@loc", location),
-                            new SQLiteParameter("@id", editId)
+                            new SqlParameter("@name", name),
+                            new SqlParameter("@email", email),
+                            new SqlParameter("@role", role),
+                            new SqlParameter("@loc", location),
+                            new SqlParameter("@id", editId)
                         );
                     }
                     else
@@ -180,12 +180,12 @@ namespace OlyMath.Admin
                             SET FullName = @name, Email = @email, Role = @role, CityCountry = @loc, PasswordHash = @hash 
                             WHERE Id = @id";
                         DbHelper.ExecuteNonQuery(sql,
-                            new SQLiteParameter("@name", name),
-                            new SQLiteParameter("@email", email),
-                            new SQLiteParameter("@role", role),
-                            new SQLiteParameter("@loc", location),
-                            new SQLiteParameter("@hash", DbHelper.HashPassword(password)),
-                            new SQLiteParameter("@id", editId)
+                            new SqlParameter("@name", name),
+                            new SqlParameter("@email", email),
+                            new SqlParameter("@role", role),
+                            new SqlParameter("@loc", location),
+                            new SqlParameter("@hash", DbHelper.HashPassword(password)),
+                            new SqlParameter("@id", editId)
                         );
                     }
 
@@ -211,7 +211,7 @@ namespace OlyMath.Admin
 
                     // Check duplicate email
                     string checkSql = "SELECT COUNT(*) FROM Users WHERE Email = @email";
-                    long count = (long)DbHelper.ExecuteScalar(checkSql, new SQLiteParameter("@email", email));
+                    long count = (long)DbHelper.ExecuteScalar(checkSql, new SqlParameter("@email", email));
                     if (count > 0)
                     {
                         lblError.Text = "This email address is already in use.";
@@ -223,11 +223,11 @@ namespace OlyMath.Admin
                         INSERT INTO Users (FullName, Email, PasswordHash, Role, CityCountry)
                         VALUES (@name, @email, @hash, @role, @loc)";
                     DbHelper.ExecuteNonQuery(insertSql,
-                        new SQLiteParameter("@name", name),
-                        new SQLiteParameter("@email", email),
-                        new SQLiteParameter("@hash", DbHelper.HashPassword(password)),
-                        new SQLiteParameter("@role", role),
-                        new SQLiteParameter("@loc", location)
+                        new SqlParameter("@name", name),
+                        new SqlParameter("@email", email),
+                        new SqlParameter("@hash", DbHelper.HashPassword(password)),
+                        new SqlParameter("@role", role),
+                        new SqlParameter("@loc", location)
                     );
 
                     lblMessage.Text = $"New {role} account '{name}' created successfully.";

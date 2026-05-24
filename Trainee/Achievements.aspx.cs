@@ -1,6 +1,6 @@
 using System;
 using System.Data;
-using System.Data.SQLite;
+using System.Data.SqlClient;
 using System.Web.UI;
 
 namespace OlyMath.Trainee
@@ -29,7 +29,7 @@ namespace OlyMath.Trainee
                 INNER JOIN Modules m ON ua.ModuleId = m.Id
                 WHERE ua.UserId = @userId
                 ORDER BY ua.CompletedAt DESC";
-            DataTable dtHistory = DbHelper.ExecuteQuery(sqlHistory, new SQLiteParameter("@userId", userId));
+            DataTable dtHistory = DbHelper.ExecuteQuery(sqlHistory, new SqlParameter("@userId", userId));
             rptAssessmentHistory.DataSource = dtHistory;
             rptAssessmentHistory.DataBind();
 
@@ -40,7 +40,7 @@ namespace OlyMath.Trainee
                 INNER JOIN Modules m ON up.ModuleId = m.Id
                 WHERE up.UserId = @userId AND up.ProgressPercentage < 100
                 AND m.Id NOT IN (SELECT ModuleId FROM UserAssessments WHERE UserId = @userId)";
-            DataTable dtInProgress = DbHelper.ExecuteQuery(sqlInProgress, new SQLiteParameter("@userId", userId));
+            DataTable dtInProgress = DbHelper.ExecuteQuery(sqlInProgress, new SqlParameter("@userId", userId));
             rptInProgressModules.DataSource = dtInProgress;
             rptInProgressModules.DataBind();
 
@@ -64,7 +64,7 @@ namespace OlyMath.Trainee
                 WHERE ua.UserId = @userId AND ua.CertificateId IS NOT NULL
                 ORDER BY ua.CompletedAt DESC";
 
-            DataTable dtCerts = DbHelper.ExecuteQuery(sqlCerts, new SQLiteParameter("@userId", CurrentUserId));
+            DataTable dtCerts = DbHelper.ExecuteQuery(sqlCerts, new SqlParameter("@userId", CurrentUserId));
             if (dtCerts.Rows.Count > 0)
             {
                 rptCertificates.DataSource = dtCerts;

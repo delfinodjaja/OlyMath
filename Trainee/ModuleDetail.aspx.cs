@@ -1,6 +1,6 @@
 using System;
 using System.Data;
-using System.Data.SQLite;
+using System.Data.SqlClient;
 using System.Web.UI;
 
 namespace OlyMath.Trainee
@@ -37,7 +37,7 @@ namespace OlyMath.Trainee
         private void LoadModuleDetails()
         {
             string sql = "SELECT * FROM Modules WHERE Id = @moduleId";
-            DataTable dt = DbHelper.ExecuteQuery(sql, new SQLiteParameter("@moduleId", ModuleId));
+            DataTable dt = DbHelper.ExecuteQuery(sql, new SqlParameter("@moduleId", ModuleId));
 
             if (dt.Rows.Count == 0)
             {
@@ -51,14 +51,14 @@ namespace OlyMath.Trainee
 
             // Load counts
             string countSql = "SELECT COUNT(*) FROM StudyMaterials WHERE ModuleId = @moduleId";
-            long matCount = (long)DbHelper.ExecuteScalar(countSql, new SQLiteParameter("@moduleId", ModuleId));
+            long matCount = (long)DbHelper.ExecuteScalar(countSql, new SqlParameter("@moduleId", ModuleId));
             litMetaStats.Text = $"{matCount} materials &nbsp;|&nbsp; {row["EstimatedTime"]} &nbsp;|&nbsp; {row["Topic"]}";
 
             // Check enrollment
             string enrollSql = "SELECT * FROM UserProgress WHERE UserId = @userId AND ModuleId = @moduleId";
             DataTable dtEnroll = DbHelper.ExecuteQuery(enrollSql, 
-                new SQLiteParameter("@userId", CurrentUserId),
-                new SQLiteParameter("@moduleId", ModuleId)
+                new SqlParameter("@userId", CurrentUserId),
+                new SqlParameter("@moduleId", ModuleId)
             );
 
             if (dtEnroll.Rows.Count > 0)
@@ -99,8 +99,8 @@ namespace OlyMath.Trainee
                 ORDER BY sm.OrderIndex ASC";
 
             DataTable dt = DbHelper.ExecuteQuery(sql, 
-                new SQLiteParameter("@userId", CurrentUserId),
-                new SQLiteParameter("@moduleId", ModuleId)
+                new SqlParameter("@userId", CurrentUserId),
+                new SqlParameter("@moduleId", ModuleId)
             );
 
             if (dt.Rows.Count > 0)
@@ -119,10 +119,14 @@ namespace OlyMath.Trainee
         {
             try
             {
-                string sql = "INSERT OR IGNORE INTO UserProgress (UserId, ModuleId, ProgressPercentage) VALUES (@userId, @moduleId, 0)";
+                string sql = @"
+                    IF NOT EXISTS (SELECT 1 FROM UserProgress WHERE UserId = @userId AND ModuleId = @moduleId)
+                    BEGIN
+                        INSERT INTO UserProgress (UserId, ModuleId, ProgressPercentage) VALUES (@userId, @moduleId, 0);
+                    END";
                 DbHelper.ExecuteNonQuery(sql, 
-                    new SQLiteParameter("@userId", CurrentUserId),
-                    new SQLiteParameter("@moduleId", ModuleId)
+                    new SqlParameter("@userId", CurrentUserId),
+                    new SqlParameter("@moduleId", ModuleId)
                 );
                 
                 // Refresh
@@ -172,8 +176,8 @@ namespace OlyMath.Trainee
             // Check if enrolled
             string checkSql = "SELECT COUNT(*) FROM UserProgress WHERE UserId = @userId AND ModuleId = @moduleId";
             long count = (long)DbHelper.ExecuteScalar(checkSql, 
-                new SQLiteParameter("@userId", CurrentUserId), 
-                new SQLiteParameter("@moduleId", ModuleId)
+                new SqlParameter("@userId", CurrentUserId), 
+                new SqlParameter("@moduleId", ModuleId)
             );
             
             if (count == 0) return "Pending"; // Show pending if not enrolled
@@ -192,8 +196,8 @@ namespace OlyMath.Trainee
             // Check if enrolled
             string checkSql = "SELECT COUNT(*) FROM UserProgress WHERE UserId = @userId AND ModuleId = @moduleId";
             long count = (long)DbHelper.ExecuteScalar(checkSql, 
-                new SQLiteParameter("@userId", CurrentUserId), 
-                new SQLiteParameter("@moduleId", ModuleId)
+                new SqlParameter("@userId", CurrentUserId), 
+                new SqlParameter("@moduleId", ModuleId)
             );
             if (count == 0) return "orange";
 

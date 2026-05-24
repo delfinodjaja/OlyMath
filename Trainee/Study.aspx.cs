@@ -1,6 +1,6 @@
 using System;
 using System.Data;
-using System.Data.SQLite;
+using System.Data.SqlClient;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -33,8 +33,8 @@ namespace OlyMath.Trainee
                 // Verify enrollment
                 string checkSql = "SELECT COUNT(*) FROM UserProgress WHERE UserId = @userId AND ModuleId = @moduleId";
                 long count = (long)DbHelper.ExecuteScalar(checkSql, 
-                    new SQLiteParameter("@userId", CurrentUserId),
-                    new SQLiteParameter("@moduleId", ModuleId)
+                    new SqlParameter("@userId", CurrentUserId),
+                    new SqlParameter("@moduleId", ModuleId)
                 );
 
                 if (count == 0)
@@ -51,7 +51,7 @@ namespace OlyMath.Trainee
         private void LoadModuleInfo()
         {
             string sql = "SELECT Title FROM Modules WHERE Id = @moduleId";
-            object title = DbHelper.ExecuteScalar(sql, new SQLiteParameter("@moduleId", ModuleId));
+            object title = DbHelper.ExecuteScalar(sql, new SqlParameter("@moduleId", ModuleId));
             litModuleTitle.Text = title?.ToString() ?? "";
         }
 
@@ -65,8 +65,8 @@ namespace OlyMath.Trainee
                 ORDER BY sm.OrderIndex ASC";
 
             DataTable dt = DbHelper.ExecuteQuery(sql, 
-                new SQLiteParameter("@userId", CurrentUserId),
-                new SQLiteParameter("@moduleId", ModuleId)
+                new SqlParameter("@userId", CurrentUserId),
+                new SqlParameter("@moduleId", ModuleId)
             );
 
             rptStudyMaterials.DataSource = dt;
@@ -82,7 +82,7 @@ namespace OlyMath.Trainee
 
                 // 1. Fetch material info
                 string fetchSql = "SELECT * FROM StudyMaterials WHERE Id = @materialId";
-                DataTable dtMat = DbHelper.ExecuteQuery(fetchSql, new SQLiteParameter("@materialId", materialId));
+                DataTable dtMat = DbHelper.ExecuteQuery(fetchSql, new SqlParameter("@materialId", materialId));
                 if (dtMat.Rows.Count == 0) return;
 
                 DataRow row = dtMat.Rows[0];
@@ -90,23 +90,31 @@ namespace OlyMath.Trainee
                 string url = row["ContentUrl"]?.ToString() ?? "";
 
                 // 2. Mark material as Done
-                string markSql = "INSERT OR REPLACE INTO UserMaterialsStatus (UserId, MaterialId, IsDone) VALUES (@userId, @materialId, 1)";
+                string markSql = @"
+                    IF NOT EXISTS (SELECT 1 FROM UserMaterialsStatus WHERE UserId = @userId AND MaterialId = @materialId)
+                    BEGIN
+                        INSERT INTO UserMaterialsStatus (UserId, MaterialId, IsDone) VALUES (@userId, @materialId, 1);
+                    END
+                    ELSE
+                    BEGIN
+                        UPDATE UserMaterialsStatus SET IsDone = 1 WHERE UserId = @userId AND MaterialId = @materialId;
+                    END";
                 DbHelper.ExecuteNonQuery(markSql, 
-                    new SQLiteParameter("@userId", userId),
-                    new SQLiteParameter("@materialId", materialId)
+                    new SqlParameter("@userId", userId),
+                    new SqlParameter("@materialId", materialId)
                 );
 
                 // 3. Recalculate progress
                 string countAllSql = "SELECT COUNT(*) FROM StudyMaterials WHERE ModuleId = @moduleId";
-                long total = (long)DbHelper.ExecuteScalar(countAllSql, new SQLiteParameter("@moduleId", ModuleId));
+                long total = (long)DbHelper.ExecuteScalar(countAllSql, new SqlParameter("@moduleId", ModuleId));
 
                 string countDoneSql = @"
                     SELECT COUNT(*) FROM UserMaterialsStatus ums
                     INNER JOIN StudyMaterials sm ON ums.MaterialId = sm.Id
                     WHERE ums.UserId = @userId AND sm.ModuleId = @moduleId AND ums.IsDone = 1";
                 long completed = (long)DbHelper.ExecuteScalar(countDoneSql, 
-                    new SQLiteParameter("@userId", userId),
-                    new SQLiteParameter("@moduleId", ModuleId)
+                    new SqlParameter("@userId", userId),
+                    new SqlParameter("@moduleId", ModuleId)
                 );
 
                 int progress = 0;
@@ -118,16 +126,16 @@ namespace OlyMath.Trainee
                 // Update progress table
                 string updateSql = "UPDATE UserProgress SET ProgressPercentage = @progress, LastAccessed = CURRENT_TIMESTAMP WHERE UserId = @userId AND ModuleId = @moduleId";
                 DbHelper.ExecuteNonQuery(updateSql, 
-                    new SQLiteParameter("@progress", progress),
-                    new SQLiteParameter("@userId", userId),
-                    new SQLiteParameter("@moduleId", ModuleId)
+                    new SqlParameter("@progress", progress),
+                    new SqlParameter("@userId", userId),
+                    new SqlParameter("@moduleId", ModuleId)
                 );
 
                 // Unlock next materials if progress is high (e.g. >= 75%)
                 if (progress >= 75)
                 {
                     string unlockSql = "UPDATE StudyMaterials SET IsLocked = 0 WHERE ModuleId = @moduleId AND IsLocked = 1";
-                    DbHelper.ExecuteNonQuery(unlockSql, new SQLiteParameter("@moduleId", ModuleId));
+                    DbHelper.ExecuteNonQuery(unlockSql, new SqlParameter("@moduleId", ModuleId));
                 }
 
                 // 4. Action behavior

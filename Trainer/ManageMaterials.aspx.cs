@@ -1,6 +1,6 @@
 using System;
 using System.Data;
-using System.Data.SQLite;
+using System.Data.SqlClient;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -41,8 +41,8 @@ namespace OlyMath.Trainer
             {
                 string sql = "SELECT Title FROM Modules WHERE Id = @moduleId AND CreatedByUserId = @userId";
                 object title = DbHelper.ExecuteScalar(sql, 
-                    new SQLiteParameter("@moduleId", ModuleId),
-                    new SQLiteParameter("@userId", CurrentUserId)
+                    new SqlParameter("@moduleId", ModuleId),
+                    new SqlParameter("@userId", CurrentUserId)
                 );
 
                 if (title == null)
@@ -67,7 +67,7 @@ namespace OlyMath.Trainer
             try
             {
                 string sql = "SELECT * FROM StudyMaterials WHERE ModuleId = @moduleId ORDER BY OrderIndex ASC";
-                DataTable dt = DbHelper.ExecuteQuery(sql, new SQLiteParameter("@moduleId", ModuleId));
+                DataTable dt = DbHelper.ExecuteQuery(sql, new SqlParameter("@moduleId", ModuleId));
 
                 if (dt.Rows.Count > 0)
                 {
@@ -118,13 +118,13 @@ namespace OlyMath.Trainer
                     VALUES (@moduleId, @title, @type, @size, @url, @order, @isLocked)";
 
                 DbHelper.ExecuteNonQuery(sql,
-                    new SQLiteParameter("@moduleId", ModuleId),
-                    new SQLiteParameter("@title", title),
-                    new SQLiteParameter("@type", type),
-                    new SQLiteParameter("@size", size),
-                    new SQLiteParameter("@url", url),
-                    new SQLiteParameter("@order", order),
-                    new SQLiteParameter("@isLocked", isLocked ? 1 : 0)
+                    new SqlParameter("@moduleId", ModuleId),
+                    new SqlParameter("@title", title),
+                    new SqlParameter("@type", type),
+                    new SqlParameter("@size", size),
+                    new SqlParameter("@url", url),
+                    new SqlParameter("@order", order),
+                    new SqlParameter("@isLocked", isLocked ? 1 : 0)
                 );
 
                 lblMessage.Text = $"Material '{title}' added successfully!";
@@ -165,8 +165,8 @@ namespace OlyMath.Trainer
                         AND ModuleId IN (SELECT Id FROM Modules WHERE CreatedByUserId = @userId)";
 
                     int rows = DbHelper.ExecuteNonQuery(deleteSql,
-                        new SQLiteParameter("@materialId", materialId),
-                        new SQLiteParameter("@userId", userId)
+                        new SqlParameter("@materialId", materialId),
+                        new SqlParameter("@userId", userId)
                     );
 
                     if (rows > 0)

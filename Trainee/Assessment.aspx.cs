@@ -1,6 +1,6 @@
 using System;
 using System.Data;
-using System.Data.SQLite;
+using System.Data.SqlClient;
 using System.Web.UI;
 
 namespace OlyMath.Trainee
@@ -32,8 +32,8 @@ namespace OlyMath.Trainee
                 // Verify enrollment
                 string checkSql = "SELECT COUNT(*) FROM UserProgress WHERE UserId = @userId AND ModuleId = @moduleId";
                 long count = (long)DbHelper.ExecuteScalar(checkSql, 
-                    new SQLiteParameter("@userId", CurrentUserId),
-                    new SQLiteParameter("@moduleId", ModuleId)
+                    new SqlParameter("@userId", CurrentUserId),
+                    new SqlParameter("@moduleId", ModuleId)
                 );
 
                 if (count == 0)
@@ -50,14 +50,14 @@ namespace OlyMath.Trainee
         private void LoadModuleInfo()
         {
             string sql = "SELECT Title FROM Modules WHERE Id = @moduleId";
-            object title = DbHelper.ExecuteScalar(sql, new SQLiteParameter("@moduleId", ModuleId));
+            object title = DbHelper.ExecuteScalar(sql, new SqlParameter("@moduleId", ModuleId));
             litModuleTitle.Text = title?.ToString() ?? "";
         }
 
         private void LoadQuestions()
         {
             string sql = "SELECT * FROM Questions WHERE ModuleId = @moduleId";
-            DataTable dt = DbHelper.ExecuteQuery(sql, new SQLiteParameter("@moduleId", ModuleId));
+            DataTable dt = DbHelper.ExecuteQuery(sql, new SqlParameter("@moduleId", ModuleId));
 
             if (dt.Rows.Count > 0)
             {
@@ -79,7 +79,7 @@ namespace OlyMath.Trainee
 
             // Load correct options
             string sql = "SELECT Id, CorrectOption FROM Questions WHERE ModuleId = @moduleId";
-            DataTable dt = DbHelper.ExecuteQuery(sql, new SQLiteParameter("@moduleId", ModuleId));
+            DataTable dt = DbHelper.ExecuteQuery(sql, new SqlParameter("@moduleId", ModuleId));
 
             if (dt.Rows.Count == 0)
             {
@@ -125,10 +125,10 @@ namespace OlyMath.Trainee
                     VALUES (@userId, @moduleId, @score, 100, @certId)";
                 
                 DbHelper.ExecuteNonQuery(insertSql,
-                    new SQLiteParameter("@userId", userId),
-                    new SQLiteParameter("@moduleId", ModuleId),
-                    new SQLiteParameter("@score", scorePercent),
-                    new SQLiteParameter("@certId", certId)
+                    new SqlParameter("@userId", userId),
+                    new SqlParameter("@moduleId", ModuleId),
+                    new SqlParameter("@score", scorePercent),
+                    new SqlParameter("@certId", certId)
                 );
 
                 // Set course progress to 100% since assessment is passed
@@ -138,18 +138,19 @@ namespace OlyMath.Trainee
                     WHERE UserId = @userId AND ModuleId = @moduleId";
                 
                 DbHelper.ExecuteNonQuery(updateProgressSql,
-                    new SQLiteParameter("@userId", userId),
-                    new SQLiteParameter("@moduleId", ModuleId)
+                    new SqlParameter("@userId", userId),
+                    new SqlParameter("@moduleId", ModuleId)
                 );
 
                 // Mark all study materials for this module as done for completion integrity
                 string markAllDoneSql = @"
-                    INSERT OR REPLACE INTO UserMaterialsStatus (UserId, MaterialId, IsDone)
-                    SELECT @userId, Id, 1 FROM StudyMaterials WHERE ModuleId = @moduleId";
+                    DELETE FROM UserMaterialsStatus WHERE UserId = @userId AND MaterialId IN (SELECT Id FROM StudyMaterials WHERE ModuleId = @moduleId);
+                    INSERT INTO UserMaterialsStatus (UserId, MaterialId, IsDone)
+                    SELECT @userId, Id, 1 FROM StudyMaterials WHERE ModuleId = @moduleId;";
                 
                 DbHelper.ExecuteNonQuery(markAllDoneSql,
-                    new SQLiteParameter("@userId", userId),
-                    new SQLiteParameter("@moduleId", ModuleId)
+                    new SqlParameter("@userId", userId),
+                    new SqlParameter("@moduleId", ModuleId)
                 );
 
                 // Redirect to certificate display page
@@ -163,9 +164,9 @@ namespace OlyMath.Trainee
                     VALUES (@userId, @moduleId, @score, 100, NULL)";
                 
                 DbHelper.ExecuteNonQuery(insertSql,
-                    new SQLiteParameter("@userId", userId),
-                    new SQLiteParameter("@moduleId", ModuleId),
-                    new SQLiteParameter("@score", scorePercent)
+                    new SqlParameter("@userId", userId),
+                    new SqlParameter("@moduleId", ModuleId),
+                    new SqlParameter("@score", scorePercent)
                 );
 
                 // Update UI error warning

@@ -1,6 +1,6 @@
 using System;
 using System.Data;
-using System.Data.SQLite;
+using System.Data.SqlClient;
 using System.Web.UI;
 
 namespace OlyMath.Trainee
@@ -45,8 +45,8 @@ namespace OlyMath.Trainee
                 WHERE ua.CertificateId = @certId AND ua.UserId = @userId";
 
             DataTable dt = DbHelper.ExecuteQuery(sql, 
-                new SQLiteParameter("@certId", CertId),
-                new SQLiteParameter("@userId", CurrentUserId)
+                new SqlParameter("@certId", CertId),
+                new SqlParameter("@userId", CurrentUserId)
             );
 
             if (dt.Rows.Count > 0)
