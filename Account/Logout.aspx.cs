@@ -13,7 +13,7 @@ namespace OlyMath.Account
         {
             var authManager = Context.GetOwinContext().Authentication;
             authManager.SignOut();
-            Response.Redirect("/Default.aspx");
+            Response.Redirect("/Default.aspx", true);
         }
     }
 }

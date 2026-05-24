@@ -47,9 +47,9 @@ namespace OlyMath.Account
                 signInManager.SignIn(user, isPersistent: false, rememberBrowser: false);
 
                 if (role == "Trainer")
-                    Response.Redirect("/Trainer/Index.aspx");
+                    Response.Redirect("/TrainerDashboard.aspx");
                 else
-                    Response.Redirect("/Trainee/Index.aspx");
+                    Response.Redirect("/AssessmentList.aspx");
             }
             else
             {
@@ -63,3 +63,4 @@ namespace OlyMath.Account
         }
     }
 }
+

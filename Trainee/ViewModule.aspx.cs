@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Linq;
 using System.Web.UI.WebControls;
 using Microsoft.AspNet.Identity;
@@ -22,7 +22,7 @@ namespace OlyMath.Trainee
                 }
                 else
                 {
-                    Response.Redirect("~/Default.aspx");
+                    Response.Redirect("~/AssessmentList.aspx");
                 }
             }
         }
