@@ -1,0 +1,312 @@
+<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Dashboard.Master.cs" Inherits="OlyMath.Dashboard" %>
+<!DOCTYPE html>
+<html lang="en">
+<head runat="server">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><asp:ContentPlaceHolder ID="TitleContent" runat="server" /> - OlyMath</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+    <style>
+        /* ===================== CSS VARIABLES ===================== */
+        :root {
+            --bg: #F7F5F0;
+            --white: #FFFFFF;
+            --navy: #0D1B2A;
+            --orange: #FF5733;
+            --teal: #00C9A7;
+            --slate: #8892A0;
+            --border: #E2DDD6;
+            --card-shadow: 0 2px 16px rgba(13,27,42,0.07);
+            --radius: 14px;
+        }
+
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--bg);
+            color: var(--navy);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0.4;
+        }
+
+        /* ===================== NAVBAR ===================== */
+        .topnav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 40px;
+            height: 64px;
+            background: rgba(247,245,240,0.92);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+        }
+        .topnav .logo {
+            font-family: 'Syne', sans-serif;
+            font-weight: 800;
+            font-size: 1.4rem;
+            letter-spacing: -0.5px;
+            color: var(--navy);
+            text-decoration: none;
+        }
+        .topnav .logo span { color: var(--orange); }
+        .topnav .nav-right { display: flex; align-items: center; gap: 10px; }
+
+        .nav-badge {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.75rem;
+            font-weight: 500;
+            padding: 4px 12px;
+            border-radius: 100px;
+            background: var(--navy);
+            color: var(--white);
+            letter-spacing: 0.02em;
+        }
+        .nav-badge.trainer { background: var(--teal); color: var(--navy); }
+        .nav-badge.admin   { background: var(--orange); color: var(--white); }
+
+        .btn-logout {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.8rem;
+            font-weight: 500;
+            padding: 6px 16px;
+            border-radius: 100px;
+            border: 1.5px solid var(--border);
+            background: transparent;
+            color: var(--slate);
+            cursor: pointer;
+            transition: all 0.18s;
+        }
+        .btn-logout:hover { border-color: var(--navy); color: var(--navy); }
+
+        /* ===================== BUTTONS ===================== */
+        .btn-primary {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.92rem;
+            font-weight: 500;
+            padding: 14px 32px;
+            border-radius: 100px;
+            border: none;
+            background: var(--navy);
+            color: var(--white);
+            cursor: pointer;
+            transition: all 0.2s;
+            letter-spacing: 0.01em;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .btn-primary:hover { background: #1a2f45; transform: translateY(-1px); box-shadow: 0 8px 24px rgba(13,27,42,0.18); }
+
+        .btn-secondary {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.92rem;
+            font-weight: 500;
+            padding: 14px 32px;
+            border-radius: 100px;
+            border: 1.5px solid var(--border);
+            background: transparent;
+            color: var(--navy);
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .btn-secondary:hover { border-color: var(--navy); transform: translateY(-1px); }
+        .btn-full { width: 100%; padding: 14px; border-radius: 12px; font-size: 0.95rem; text-align: center; }
+
+        /* ===================== DASHBOARD ===================== */
+        .dashboard-layout { display: grid; grid-template-columns: 220px 1fr; padding-top: 64px; min-height: calc(100vh - 64px); }
+        .sidebar {
+            background: var(--white);
+            border-right: 1px solid var(--border);
+            padding: 28px 0;
+            position: sticky;
+            top: 64px;
+            height: calc(100vh - 64px);
+            overflow-y: auto;
+        }
+        .sidebar-section { padding: 0 16px; margin-bottom: 4px; }
+        .sidebar-label { font-size: 0.67rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--slate); padding: 8px 12px 6px; }
+        .sidebar-item {
+            display: flex; align-items: center; gap: 10px; padding: 10px 12px; border-radius: 10px;
+            font-size: 0.85rem; font-weight: 500; color: var(--slate); cursor: pointer; transition: all 0.15s; white-space: nowrap;
+            text-decoration: none;
+        }
+        .sidebar-item:hover { background: var(--bg); color: var(--navy); }
+        .sidebar-item.active { background: var(--navy); color: var(--white); }
+        .sidebar-item .dot { width: 7px; height: 7px; border-radius: 50%; background: currentColor; opacity: 0.5; flex-shrink: 0; }
+        .sidebar-item.active .dot { background: var(--orange); opacity: 1; }
+
+        .main-content { padding: 40px 48px; }
+        .page-title { font-family: 'Syne', sans-serif; font-size: 1.9rem; font-weight: 800; letter-spacing: -0.5px; color: var(--navy); margin-bottom: 6px; }
+        .page-subtitle { font-size: 0.88rem; color: var(--slate); margin-bottom: 36px; font-weight: 300; }
+        .content-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 28px 32px; margin-bottom: 20px; }
+        .content-card h3 { font-family: 'Syne', sans-serif; font-size: 1rem; font-weight: 700; color: var(--navy); margin-bottom: 16px; }
+        .table-wrap { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; margin-bottom: 32px; }
+        .table-wrap table { width: 100%; border-collapse: collapse; }
+        .table-wrap thead { background: var(--bg); }
+        .table-wrap thead th { padding: 12px 18px; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--slate); text-align: left; }
+        .table-wrap tbody tr { border-top: 1px solid var(--border); transition: background 0.15s; }
+        .table-wrap tbody tr:hover { background: var(--bg); }
+        .table-wrap tbody td { padding: 13px 18px; font-size: 0.84rem; color: var(--navy); vertical-align: top; }
+        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+        .form-grid.single { grid-template-columns: 1fr; }
+        .form-actions { display: flex; gap: 12px; margin-top: 28px; justify-content: flex-end; }
+        .cert-wrap { display: flex; align-items: center; justify-content: center; padding: 40px; }
+        .cert-card {
+            background: var(--white); border: 2px solid var(--navy); border-radius: 24px;
+            padding: 60px 70px; text-align: center; max-width: 640px; width: 100%; position: relative; overflow: hidden;
+        }
+        .cert-card::before { content: ''; position: absolute; top: -60px; right: -60px; width: 180px; height: 180px; border-radius: 50%; background: var(--orange); opacity: 0.06; }
+        .cert-card::after { content: ''; position: absolute; bottom: -40px; left: -40px; width: 140px; height: 140px; border-radius: 50%; background: var(--teal); opacity: 0.08; }
+        .cert-tag { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--orange); margin-bottom: 22px; }
+        .cert-title { font-family: 'Syne', sans-serif; font-size: 2rem; font-weight: 800; color: var(--navy); letter-spacing: -0.5px; margin-bottom: 10px; }
+        .cert-name { font-family: 'Syne', sans-serif; font-size: 1.4rem; font-weight: 700; color: var(--navy); margin: 20px 0 12px; }
+        .cert-module { font-size: 0.88rem; color: var(--slate); margin-bottom: 28px; }
+        .cert-divider { width: 60px; height: 2px; background: var(--orange); margin: 0 auto 28px; }
+        .cert-footer { display: flex; justify-content: space-between; font-size: 0.75rem; color: var(--slate); border-top: 1px solid var(--border); padding-top: 18px; margin-top: 10px; }
+
+        /* ===================== FORMS ===================== */
+        .form-group { margin-bottom: 18px; }
+        .form-group label { display: block; font-size: 0.8rem; font-weight: 500; color: var(--navy); margin-bottom: 7px; letter-spacing: 0.02em; }
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%; padding: 12px 16px; border: 1.5px solid var(--border); border-radius: 10px;
+            font-family: 'DM Sans', sans-serif; font-size: 0.9rem; background: var(--bg); color: var(--navy);
+            outline: none; transition: border-color 0.18s, background 0.18s; appearance: none;
+        }
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus { border-color: var(--navy); background: var(--white); }
+        .field-validation-error { font-size: 0.75rem; color: var(--orange); display: block; margin-top: 4px; }
+        .validation-summary-errors ul { list-style: none; font-size: 0.82rem; color: var(--orange); margin-bottom: 14px; }
+
+        /* ===================== RESPONSIVE ===================== */
+        @media (max-width: 900px) {
+            .topnav { padding: 0 20px; }
+        }
+    </style>
+    <asp:ContentPlaceHolder ID="HeadContent" runat="server" />
+</head>
+<body>
+
+<form id="MainForm" runat="server">
+
+    <nav class="topnav">
+        <a class="logo" href="/Default.aspx">Oly<span>Math</span></a>
+        <div class="nav-right">
+            <% if (Request.IsAuthenticated) { %>
+                <% if (Context.User.IsInRole("Trainer")) { %>
+                    <span class="nav-badge trainer">Trainer</span>
+                <% } else if (Context.User.IsInRole("Admin")) { %>
+                    <span class="nav-badge admin">Admin</span>
+                <% } else { %>
+                    <span class="nav-badge">Trainee</span>
+                <% } %>
+                <asp:Button ID="LogoutButton" runat="server"
+                    Text="Sign Out"
+                    CssClass="btn-logout"
+                    OnClick="LogoutButton_Click"
+                    UseSubmitBehavior="true" />
+            <% } %>
+        </div>
+    </nav>
+
+    <div class="dashboard-layout">
+        <aside class="sidebar">
+            <div class="sidebar-section">
+                <div class="sidebar-label">Main</div>
+                <a href="/TrainerDashboard.aspx" class="sidebar-item">
+                    <span class="dot"></span>
+                    Dashboard
+                </a>
+                <a href="/AssessmentList.aspx" class="sidebar-item">
+                    <span class="dot"></span>
+                    Assessments
+                </a>
+                <a href="/CreateAssessment.aspx" class="sidebar-item">
+                    <span class="dot"></span>
+                    Create Assessment
+                </a>
+            </div>
+            <div class="sidebar-section">
+                <div class="sidebar-label">Learning</div>
+                <a href="/QuestionList.aspx" class="sidebar-item">
+                    <span class="dot"></span>
+                    Questions
+                </a>
+                <a href="/Certificate.aspx" class="sidebar-item">
+                    <span class="dot"></span>
+                    Certificates
+                </a>
+            </div>
+            <div class="sidebar-section">
+                <div class="sidebar-label">Account</div>
+                <a href="/Account/Logout.aspx" class="sidebar-item">
+                    <span class="dot"></span>
+                    Logout
+                </a>
+            </div>
+            <asp:ContentPlaceHolder ID="SidebarContent" runat="server" />
+        </aside>
+
+        <main class="main-content">
+            <asp:ContentPlaceHolder ID="MainContent" runat="server" />
+        </main>
+    </div>
+
+    <script type="text/javascript">
+        (function () {
+            var path = window.location.pathname.toLowerCase().replace(/\/+$/, '');
+            if (!path) {
+                path = '/default.aspx';
+            }
+
+            if (path === '/default.aspx') {
+                document.body.classList.add('landing-page');
+            }
+
+            var links = document.querySelectorAll('.sidebar .sidebar-item[href]');
+            for (var i = 0; i < links.length; i++) {
+                var link = links[i];
+                var href = link.getAttribute('href');
+                if (!href || href === '#') {
+                    continue;
+                }
+
+                var resolved = document.createElement('a');
+                resolved.href = href;
+                var linkPath = (resolved.pathname || '').toLowerCase().replace(/\/+$/, '');
+
+                if (linkPath === path || (path === '/trainerdashboard.aspx' && linkPath === '/trainerdashboard.aspx')) {
+                    link.classList.add('active');
+                } else {
+                    link.classList.remove('active');
+                }
+            }
+        })();
+    </script>
+
+</form>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.20.0/jquery.validate.min.js"></script>
+<asp:ContentPlaceHolder ID="ScriptsContent" runat="server" />
+
+</body>
+</html>

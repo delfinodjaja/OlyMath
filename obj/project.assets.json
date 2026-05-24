@@ -1011,30 +1011,38 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\HP\\.nuget\\packages\\": {}
+    "C:\\Users\\hadi\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Delfino\\AiTutor\\OlyMath\\OlyMath.csproj",
+      "projectUniqueName": "C:\\Users\\hadi\\Desktop\\OlyMath_WebForms\\OlyMath.csproj",
       "projectName": "OlyMath",
-      "projectPath": "D:\\Delfino\\AiTutor\\OlyMath\\OlyMath.csproj",
-      "packagesPath": "C:\\Users\\HP\\.nuget\\packages\\",
-      "outputPath": "D:\\Delfino\\AiTutor\\OlyMath\\obj\\",
+      "projectPath": "C:\\Users\\hadi\\Desktop\\OlyMath_WebForms\\OlyMath.csproj",
+      "packagesPath": "C:\\Users\\hadi\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\hadi\\Desktop\\OlyMath_WebForms\\obj\\",
       "projectStyle": "PackageReference",
       "skipContentFileWrite": true,
       "UsingMicrosoftNETSdk": false,
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
       "configFilePaths": [
-        "C:\\Users\\HP\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\hadi\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net48"
       ],
       "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net48": {
+          "framework": "net48",
           "projectReferences": {}
         }
       },
@@ -1046,6 +1054,7 @@
     },
     "frameworks": {
       "net48": {
+        "framework": "net48",
         "dependencies": {
           "EntityFramework": {
             "target": "Package",

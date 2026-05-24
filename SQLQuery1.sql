@@ -1,0 +1,11 @@
+﻿ALTER TABLE dbo.Assessments
+ADD IsActive BIT NOT NULL DEFAULT 1;
+GO
+
+ALTER TABLE dbo.Assessments
+ADD CreatedBy NVARCHAR(255) NULL;
+GO
+
+ALTER TABLE dbo.Assessments
+ADD CreatedDate DATETIME NOT NULL DEFAULT GETDATE();
+GO
