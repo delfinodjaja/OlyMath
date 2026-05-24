@@ -1,0 +1,57 @@
+﻿@model IEnumerable<WAPP_Assignment_Module.Models.Chapter>
+
+@{
+    ViewBag.Title = "Learn - " + ViewBag.ModuleTitle;
+    var lockMap = ViewBag.LockMap as System.Collections.Generic.Dictionary<int, bool>;
+    var completedMap = ViewBag.CompletedMap as System.Collections.Generic.Dictionary<int, bool>;
+}
+
+<h2>@ViewBag.ModuleTitle</h2>
+<hr />
+
+<table class="table">
+    <tr>
+        <th>Order</th>
+        <th>Chapter</th>
+        <th>Status</th>
+        <th></th>
+    </tr>
+    @foreach (var chapter in Model)
+    {
+        bool isUnlocked = lockMap != null && lockMap.ContainsKey(chapter.ChapterId) && lockMap[chapter.ChapterId];
+        bool isCompleted = completedMap != null && completedMap.ContainsKey(chapter.ChapterId) && completedMap[chapter.ChapterId];
+        <tr>
+            <td>@chapter.SequenceOrder</td>
+            <td>@chapter.Title</td>
+            <td>
+                @if (isCompleted)
+                {
+                    <span class="label label-success">Completed ✓</span>
+                }
+                else if (isUnlocked)
+                {
+                    <span class="label label-info">Unlocked</span>
+                }
+                else
+                {
+                    <span class="label label-default">🔒 Locked</span>
+                }
+            </td>
+            <td>
+                @if (isUnlocked)
+                {
+                    @Html.ActionLink(isCompleted ? "Read Again" : "Read", "ViewChapter", "Chapter",
+                        new { id = chapter.ChapterId },
+                        new { @class = "btn btn-primary btn-sm" })
+                }
+                else
+                {
+                    <span class="text-muted">Complete previous chapter first</span>
+                }
+            </td>
+        </tr>
+    }
+</table>
+
+@Html.ActionLink("Back to Catalog", "Catalog", "Module", null,
+    new { @class = "btn btn-default" })

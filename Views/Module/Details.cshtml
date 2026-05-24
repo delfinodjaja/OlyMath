@@ -1,0 +1,18 @@
+﻿@model WAPP_Assignment_Module.Models.OlyModule
+
+@{
+    ViewBag.Title = "Module Details";
+}
+
+<h2>@Model.Title</h2>
+
+<table class="table">
+    <tr><th>Description</th><td>@Model.Description</td></tr>
+    <tr><th>Difficulty</th><td>@Model.Difficulty</td></tr>
+    <tr><th>Topic</th><td>@Model.TopicTag</td></tr>
+    <tr><th>Status</th><td>@Model.Status</td></tr>
+    <tr><th>Created</th><td>@Model.CreatedAt.ToShortDateString()</td></tr>
+</table>
+
+@Html.ActionLink("Edit", "Edit", new { id = Model.ModuleId }, new { @class = "btn btn-primary" })
+@Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-default" })

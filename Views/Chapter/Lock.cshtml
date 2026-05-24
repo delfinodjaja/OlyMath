@@ -1,0 +1,11 @@
+﻿@{
+    ViewBag.Title = "Chapter Locked";
+}
+
+<div class="alert alert-warning">
+    <h3><i class="glyphicon glyphicon-lock"></i> Chapter Locked</h3>
+    <p>@ViewBag.Message</p>
+</div>
+
+@Html.ActionLink("Back to Module", "Learn", "Module",
+    new { id = ViewBag.ModuleId }, new { @class = "btn btn-primary" })

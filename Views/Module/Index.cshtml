@@ -1,0 +1,35 @@
+﻿@model IEnumerable<WAPP_Assignment_Module.Models.OlyModule>
+
+@{
+    ViewBag.Title = "Modules";
+}
+
+<h2>Modules</h2>
+<p>@Html.ActionLink("Create New Module", "Create", null, new { @class = "btn btn-primary" })</p>
+
+<table class="table">
+    <tr>
+        <th>Title</th>
+        <th>Topic</th>
+        <th>Difficulty</th>
+        <th>Status</th>
+        <th>Created</th>
+        <th>Actions</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.Title</td>
+            <td>@item.TopicTag</td>
+            <td>@item.Difficulty</td>
+            <td>@item.Status</td>
+            <td>@item.CreatedAt.ToShortDateString()</td>
+            <td>
+                @Html.ActionLink("Chapters", "Index", "Chapter", new { moduleId = item.ModuleId }, null) |
+                @Html.ActionLink("Edit", "Edit", new { id = item.ModuleId }) |
+                @Html.ActionLink("Details", "Details", new { id = item.ModuleId }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.ModuleId })
+            </td>
+        </tr>
+    }
+</table>

@@ -1,0 +1,35 @@
+﻿@model WAPP_Assignment_Module.Models.Chapter
+
+@{
+    ViewBag.Title = @Model.Title;
+}
+
+<h2>@Model.Title</h2>
+<p><small>Chapter @Model.SequenceOrder</small></p>
+<hr />
+
+<div class="chapter-content">
+    @Html.Raw(Model.ContentHtml)
+</div>
+
+<hr />
+
+@if (Model.HasAssessment)
+{
+    <div class="alert alert-info">
+        <strong>Quiz Required!</strong>
+        Complete the quiz for this chapter to unlock the next one.
+    </div>
+}
+
+@using (Html.BeginForm("MarkComplete", "Chapter", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <input type="hidden" name="chapterId" value="@Model.ChapterId" />
+    <input type="submit" value="Mark as Complete" class="btn btn-success" />
+}
+
+<div style="margin-top: 10px;">
+    @Html.ActionLink("Back to Module", "Learn", "Module",
+        new { id = Model.ModuleId }, new { @class = "btn btn-default" })
+</div>

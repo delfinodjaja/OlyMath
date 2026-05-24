@@ -1,0 +1,57 @@
+﻿@{
+    ViewBag.Title = "Admin Dashboard";
+    var allModules = ViewBag.AllModules as List<WAPP_Assignment_Module.Models.OlyModule>;
+}
+
+<h2>Admin Dashboard 🛡️</h2>
+<hr />
+
+<div class="row">
+    <div class="col-md-4">
+        <div class="panel panel-primary">
+            <div class="panel-heading">Total Modules</div>
+            <div class="panel-body"><h1>@ViewBag.TotalModules</h1></div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="panel panel-success">
+            <div class="panel-heading">Published</div>
+            <div class="panel-body"><h1>@ViewBag.PublishedModules</h1></div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="panel panel-warning">
+            <div class="panel-heading">Draft</div>
+            <div class="panel-body"><h1>@ViewBag.DraftModules</h1></div>
+        </div>
+    </div>
+</div>
+
+<h3>All Modules</h3>
+@if (allModules != null && allModules.Count > 0)
+{
+    <table class="table">
+        <tr>
+            <th>Title</th>
+            <th>Topic</th>
+            <th>Difficulty</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+        @foreach (var m in allModules)
+        {
+            <tr>
+                <td>@m.Title</td>
+                <td>@m.TopicTag</td>
+                <td>@m.Difficulty</td>
+                <td>@m.Status</td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", "Module", new { id = m.ModuleId }, null) |
+                    @Html.ActionLink("Delete", "Delete", "Module", new { id = m.ModuleId }, null)
+                </td>
+            </tr>
+        }
+    </table>
+}
+
+<p>@Html.ActionLink("Manage All Modules", "Index", "Module", null, new { @class = "btn btn-primary" })</p>

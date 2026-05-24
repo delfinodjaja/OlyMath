@@ -1,0 +1,37 @@
+﻿@model IEnumerable<WAPP_Assignment_Module.Models.OlyModule>
+
+@{
+    ViewBag.Title = "Browse Modules - OlyMath";
+}
+
+<h2>Browse Modules</h2>
+<p>Explore our Mathematical Olympiad learning modules.</p>
+
+@if (!Model.Any())
+{
+    <p>No modules available yet. Check back soon!</p>
+}
+else
+{
+    <table class="table">
+        <tr>
+            <th>Title</th>
+            <th>Topic</th>
+            <th>Difficulty</th>
+            <th>Trainer</th>
+            <th></th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Title</td>
+                <td>@item.TopicTag</td>
+                <td>@item.Difficulty</td>
+                <td>@(item.Trainer != null ? item.Trainer.Email : "OlyMath")</td>
+                <td>
+                    @Html.ActionLink("View Details", "Details", new { id = item.ModuleId }, new { @class = "btn btn-primary btn-sm" })
+                </td>
+            </tr>
+        }
+    </table>
+}
