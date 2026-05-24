@@ -1,6 +1,5 @@
 using System;
 using System.Web.UI;
-using System.Web.Security;
 
 namespace OlyMath
 {
@@ -8,13 +7,17 @@ namespace OlyMath
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            // Redirect unauthenticated users to login
+            if (!Request.IsAuthenticated)
+                Response.Redirect("/Account/Login.aspx");
         }
 
-        protected void LogoutButton_Click(object sender, EventArgs e)
+        // Returns " active" CSS class if the current page matches the given path
+        protected string IsActive(string path)
         {
-            FormsAuthentication.SignOut();
-            Session.Abandon();
-            Response.Redirect("/Account/Login.aspx");
+            string currentPath = Request.AppRelativeCurrentExecutionFilePath
+                                        .TrimStart('~').ToLower();
+            return currentPath == path.ToLower() ? " active" : string.Empty;
         }
     }
 }

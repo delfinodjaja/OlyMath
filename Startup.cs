@@ -1,8 +1,8 @@
 ﻿using Microsoft.Owin;
 using Owin;
 
-[assembly: OwinStartupAttribute(typeof(WAPP_Assignment_Module.Startup))]
-namespace WAPP_Assignment_Module
+[assembly: OwinStartup(typeof(OlyMath.Startup))]
+namespace OlyMath
 {
     public partial class Startup
     {

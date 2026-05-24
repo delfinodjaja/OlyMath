@@ -21,8 +21,9 @@ namespace OlyMath.Models
         public DbSet<Material>         Materials         { get; set; }
         public DbSet<Assessment>       Assessments       { get; set; }
         public DbSet<AssessmentResult> AssessmentResults { get; set; }
-        public DbSet<Certificate>      Certificates      { get; set; }
+        public DbSet<UserCertificate>      Certificates { get; set; }
         public DbSet<Discussion>       Discussions       { get; set; }
         public DbSet<SystemLog>        SystemLogs        { get; set; }
     }
 }
+

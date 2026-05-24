@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" />
   <PropertyGroup>
@@ -22,6 +22,9 @@
     <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
+    <OutputPath>bin\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)' == 'Release'">
     <OutputPath>bin\</OutputPath>
   </PropertyGroup>
 
@@ -51,6 +54,18 @@
   </ItemGroup>
 
   <ItemGroup>
+    <!-- Master Pages -->
+    <Compile Include="Dashboard.Master.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Dashboard.master.designer.cs">
+      <DependentUpon>Dashboard.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Site.Master.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+
+    <!-- Account -->
     <Compile Include="Account\Login.aspx.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
@@ -60,18 +75,44 @@
     <Compile Include="Account\Register.aspx.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+
+    <!-- App_Start (Web Forms only) -->
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RegisterRoutes.cs" />
-    <Compile Include="App_Start\Startup.cs" />
+    <Compile Include="App_Start\RoleConfig.cs" />
+
+    <!-- Controls -->
+    <Compile Include="AssessmentDashboardWidget.ascx.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controls\EnrollmentWidget.ascx.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controls\EnrollmentWidget.ascx.designer.cs">
+      <DependentUpon>EnrollmentWidget.ascx</DependentUpon>
+    </Compile>
+
+    <!-- Root Pages -->
+    <Compile Include="AddQuestion.aspx.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AssessmentList.aspx.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AssessmentResult.aspx.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AttemptAssessment.aspx.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Certificate.aspx.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CreateAssessment.aspx.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Default.aspx.cs">
       <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Discussions.aspx.cs">
-      <DependentUpon>Discussions.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Discussions.aspx.designer.cs">
-      <DependentUpon>Discussions.aspx</DependentUpon>
     </Compile>
     <Compile Include="DiscussionDetail.aspx.cs">
       <DependentUpon>DiscussionDetail.aspx</DependentUpon>
@@ -80,19 +121,93 @@
     <Compile Include="DiscussionDetail.aspx.designer.cs">
       <DependentUpon>DiscussionDetail.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Discussions.aspx.cs">
+      <DependentUpon>Discussions.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Discussions.aspx.designer.cs">
+      <DependentUpon>Discussions.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EditAssessment.aspx.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EditQuestion.aspx.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Error.aspx.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="Privacy.aspx.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="QuestionList.aspx.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TrainerDashboard.aspx.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebForm1.aspx.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebForm1.aspx.designer.cs">
+      <DependentUpon>WebForm1.aspx</DependentUpon>
+    </Compile>
+
+    <!-- Trainee -->
+    <Compile Include="Trainee\ViewModule.aspx.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Trainee\ViewModule.aspx.designer.cs">
+      <DependentUpon>ViewModule.aspx</DependentUpon>
+    </Compile>
+
+    <!-- Services -->
+    <Compile Include="Services\EnrollmentService.cs" />
+    <Compile Include="Services\ProgressTrackingService.cs" />
+
+    <!-- Global -->
     <Compile Include="Global.asax.cs" />
+    <Compile Include="Startup.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+
+    <!-- Migrations -->
     <Compile Include="Migrations\202605081006230_InitialBuild.cs" />
-    <Compile Include="Migrations\202605081006230_InitialBuild.designer.cs">
+    <Compile Include="Migrations\202605081006230_InitialBuild.Designer.cs">
       <DependentUpon>202605081006230_InitialBuild.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202605200835327_AddModuleChapter.cs" />
+    <Compile Include="Migrations\202605200835327_AddModuleChapter.Designer.cs">
+      <DependentUpon>202605200835327_AddModuleChapter.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202605200901212_RenameModuleToOlyModule.cs" />
+    <Compile Include="Migrations\202605200901212_RenameModuleToOlyModule.Designer.cs">
+      <DependentUpon>202605200901212_RenameModuleToOlyModule.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202605202216323_InitialCreate.cs" />
+    <Compile Include="Migrations\202605202216323_InitialCreate.Designer.cs">
+      <DependentUpon>202605202216323_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202605211124324_AddChapterProgress.cs" />
+    <Compile Include="Migrations\202605211124324_AddChapterProgress.Designer.cs">
+      <DependentUpon>202605211124324_AddChapterProgress.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202605211336330_AddChapterProgressTable.cs" />
+    <Compile Include="Migrations\202605211336330_AddChapterProgressTable.Designer.cs">
+      <DependentUpon>202605211336330_AddChapterProgressTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202605220419255_InitialDB.cs" />
+    <Compile Include="Migrations\202605220419255_InitialDB.Designer.cs">
+      <DependentUpon>202605220419255_InitialDB.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+
+    <!-- Models (no duplicates, no MVC view models) -->
     <Compile Include="Models\ApplicationUser.cs" />
-    <Compile Include="Models\Assesment.cs" />
-    <Compile Include="Models\AssesmentResult.cs" />
+    <Compile Include="Models\Assessment.cs" />
+    <Compile Include="Models\AssessmentResult.cs" />
     <Compile Include="Models\Certificate.cs" />
+    <Compile Include="Models\Chapter.cs" />
+    <Compile Include="Models\ChapterProgress.cs" />
     <Compile Include="Models\Discussion.cs" />
     <Compile Include="Models\Enrollment.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -100,17 +215,13 @@
     <Compile Include="Models\Module.cs" />
     <Compile Include="Models\SeedData.cs" />
     <Compile Include="Models\SystemLog.cs" />
-    <Compile Include="Privacy.aspx.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Site.Master.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
+    <Compile Include="App_Start\Startup.Auth.cs" />
   </ItemGroup>
 
   <ItemGroup>
     <Content Include="*.aspx" />
     <Content Include="discussion.css" />
+    <Content Include="Dashboard.Master" />
     <Content Include="Site.Master" />
     <Content Include="Web.config" />
     <Content Include="Global.asax" />

@@ -1,132 +1,250 @@
 -- =============================================
--- OlyMath Database Schema
+-- OlyMath Database - Full Schema
 -- Run this in SSMS against your OlyMathDB
+-- Safe to re-run: all tables use IF NOT EXISTS
 -- =============================================
 
 USE OlyMathDB;
 GO
 
 -- =============================================
--- 1. USER
+-- 1. Modules
 -- =============================================
-CREATE TABLE [User] (
-    user_id     INT IDENTITY(1,1) PRIMARY KEY,
-    name        NVARCHAR(100)   NOT NULL,
-    email       NVARCHAR(255)   NOT NULL UNIQUE,
-    password    NVARCHAR(255)   NOT NULL,
-    role        NVARCHAR(50)    NOT NULL,   -- 'Admin', 'Trainer', 'Trainee'
-    created_at  DATETIME        NOT NULL DEFAULT GETDATE()
-);
+IF NOT EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'Modules')
+BEGIN
+    CREATE TABLE Modules (
+        ModuleId    INT            NOT NULL IDENTITY(1,1) PRIMARY KEY,
+        Title       NVARCHAR(200)  NOT NULL,
+        Description NVARCHAR(MAX)  NULL,
+        Category    NVARCHAR(100)  NULL,
+        CreatedAt   DATETIME       NOT NULL DEFAULT GETDATE(),
+        TrainerId   NVARCHAR(450)  NULL
+    );
+    PRINT 'Modules table created.';
+END ELSE PRINT 'Modules table already exists.';
 GO
 
 -- =============================================
--- 2. MODULE
+-- 2. Enrollments
 -- =============================================
-CREATE TABLE Module (
-    module_id   INT IDENTITY(1,1) PRIMARY KEY,
-    title       NVARCHAR(200)   NOT NULL,
-    description NVARCHAR(MAX),
-    category    NVARCHAR(100),
-    created_at  DATETIME        NOT NULL DEFAULT GETDATE(),
-    trainer_id  INT             NOT NULL,
-    CONSTRAINT FK_Module_Trainer FOREIGN KEY (trainer_id) REFERENCES [User](user_id)
-);
+IF NOT EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'Enrollments')
+BEGIN
+    CREATE TABLE Enrollments (
+        EnrollmentId    INT            NOT NULL IDENTITY(1,1) PRIMARY KEY,
+        EnrolledAt      DATETIME       NOT NULL DEFAULT GETDATE(),
+        ProgressStatus  NVARCHAR(50)   NOT NULL DEFAULT 'Not Started',
+        UserId          NVARCHAR(450)  NOT NULL,
+        ModuleId        INT            NULL,
+        CONSTRAINT FK_Enrollments_Module FOREIGN KEY (ModuleId) REFERENCES Modules(ModuleId)
+    );
+    PRINT 'Enrollments table created.';
+END ELSE PRINT 'Enrollments table already exists.';
 GO
 
 -- =============================================
--- 3. ENROLLMENT
+-- 3. Materials
 -- =============================================
-CREATE TABLE Enrollment (
-    enrollment_id       INT IDENTITY(1,1) PRIMARY KEY,
-    enrolled_at         DATETIME        NOT NULL DEFAULT GETDATE(),
-    progress_status     NVARCHAR(50)    NOT NULL DEFAULT 'Not Started',  -- 'Not Started', 'In Progress', 'Completed'
-    user_id             INT             NOT NULL,
-    module_id           INT             NOT NULL,
-    CONSTRAINT FK_Enrollment_User   FOREIGN KEY (user_id)   REFERENCES [User](user_id),
-    CONSTRAINT FK_Enrollment_Module FOREIGN KEY (module_id) REFERENCES Module(module_id)
-);
+IF NOT EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'Materials')
+BEGIN
+    CREATE TABLE Materials (
+        MaterialId  INT            NOT NULL IDENTITY(1,1) PRIMARY KEY,
+        Title       NVARCHAR(200)  NOT NULL,
+        Type        NVARCHAR(50)   NULL,
+        ContentUrl  NVARCHAR(500)  NULL,
+        ModuleId    INT            NULL,
+        CONSTRAINT FK_Materials_Module FOREIGN KEY (ModuleId) REFERENCES Modules(ModuleId)
+    );
+    PRINT 'Materials table created.';
+END ELSE PRINT 'Materials table already exists.';
 GO
 
 -- =============================================
--- 4. MATERIAL
+-- 4. Assessments
 -- =============================================
-CREATE TABLE Material (
-    material_id INT IDENTITY(1,1) PRIMARY KEY,
-    title       NVARCHAR(200)   NOT NULL,
-    type        NVARCHAR(50),               -- 'Video', 'PDF', 'Article', etc.
-    content_url NVARCHAR(500),
-    module_id   INT             NOT NULL,
-    CONSTRAINT FK_Material_Module FOREIGN KEY (module_id) REFERENCES Module(module_id)
-);
+IF NOT EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'Assessments')
+BEGIN
+    CREATE TABLE Assessments (
+        AssessmentID   INT            NOT NULL IDENTITY(1,1) PRIMARY KEY,
+        Title          NVARCHAR(200)  NOT NULL,
+        Description    NVARCHAR(1000) NULL,
+        PassingScore   INT            NOT NULL DEFAULT 60,
+        CreatedBy      NVARCHAR(256)  NOT NULL,
+        CreatedDate    DATETIME       NOT NULL DEFAULT GETDATE(),
+        IsActive       BIT            NOT NULL DEFAULT 1
+    );
+    PRINT 'Assessments table created.';
+END ELSE PRINT 'Assessments table already exists.';
 GO
 
 -- =============================================
--- 5. ASSESSMENT
+-- 5. AssessmentQuestions
 -- =============================================
-CREATE TABLE Assessment (
-    assessment_id   INT IDENTITY(1,1) PRIMARY KEY,
-    title           NVARCHAR(200)   NOT NULL,
-    total_marks     INT             NOT NULL DEFAULT 100,
-    module_id       INT             NOT NULL,
-    CONSTRAINT FK_Assessment_Module FOREIGN KEY (module_id) REFERENCES Module(module_id)
-);
+IF NOT EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'AssessmentQuestions')
+BEGIN
+    CREATE TABLE AssessmentQuestions (
+        QuestionID     INT            NOT NULL IDENTITY(1,1) PRIMARY KEY,
+        AssessmentID   INT            NOT NULL,
+        QuestionText   NVARCHAR(2000) NOT NULL,
+        OptionA        NVARCHAR(500)  NOT NULL,
+        OptionB        NVARCHAR(500)  NOT NULL,
+        OptionC        NVARCHAR(500)  NOT NULL,
+        OptionD        NVARCHAR(500)  NOT NULL,
+        CorrectAnswer  CHAR(1)        NOT NULL,
+        DisplayOrder   INT            NOT NULL DEFAULT 0,
+        CONSTRAINT FK_Questions_Assessment
+            FOREIGN KEY (AssessmentID) REFERENCES Assessments(AssessmentID) ON DELETE CASCADE
+    );
+    PRINT 'AssessmentQuestions table created.';
+END ELSE PRINT 'AssessmentQuestions table already exists.';
 GO
 
 -- =============================================
--- 6. ASSESSMENT_RESULT
+-- 6. AssessmentAttempts
 -- =============================================
-CREATE TABLE Assessment_Result (
-    result_id       INT IDENTITY(1,1) PRIMARY KEY,
-    score           DECIMAL(5,2)    NOT NULL,
-    attempt_date    DATETIME        NOT NULL DEFAULT GETDATE(),
-    user_id         INT             NOT NULL,
-    assessment_id   INT             NOT NULL,
-    CONSTRAINT FK_Result_User       FOREIGN KEY (user_id)       REFERENCES [User](user_id),
-    CONSTRAINT FK_Result_Assessment FOREIGN KEY (assessment_id) REFERENCES Assessment(assessment_id)
-);
+IF NOT EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'AssessmentAttempts')
+BEGIN
+    CREATE TABLE AssessmentAttempts (
+        AttemptID       INT            NOT NULL IDENTITY(1,1) PRIMARY KEY,
+        AssessmentID    INT            NOT NULL,
+        TraineeUsername NVARCHAR(256)  NOT NULL,
+        Score           INT            NOT NULL DEFAULT 0,
+        IsPassed        BIT            NOT NULL DEFAULT 0,
+        AttemptDate     DATETIME       NOT NULL DEFAULT GETDATE(),
+        CONSTRAINT FK_Attempts_Assessment
+            FOREIGN KEY (AssessmentID) REFERENCES Assessments(AssessmentID)
+    );
+    PRINT 'AssessmentAttempts table created.';
+END ELSE PRINT 'AssessmentAttempts table already exists.';
 GO
 
 -- =============================================
--- 7. CERTIFICATE
+-- 7. Certificates
 -- =============================================
-CREATE TABLE Certificate (
-    certificate_id  INT IDENTITY(1,1) PRIMARY KEY,
-    issued_date     DATETIME        NOT NULL DEFAULT GETDATE(),
-    user_id         INT             NOT NULL,
-    module_id       INT             NOT NULL,
-    CONSTRAINT FK_Certificate_User   FOREIGN KEY (user_id)   REFERENCES [User](user_id),
-    CONSTRAINT FK_Certificate_Module FOREIGN KEY (module_id) REFERENCES Module(module_id)
-);
+IF NOT EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'Certificates')
+BEGIN
+    CREATE TABLE Certificates (
+        CertificateID   INT            NOT NULL IDENTITY(1,1) PRIMARY KEY,
+        AttemptID       INT            NOT NULL,
+        AssessmentID    INT            NOT NULL,
+        TraineeName     NVARCHAR(256)  NOT NULL,
+        AssessmentTitle NVARCHAR(200)  NOT NULL,
+        Score           INT            NOT NULL,
+        IssueDate       DATETIME       NOT NULL DEFAULT GETDATE(),
+        CONSTRAINT FK_Certificates_Attempt
+            FOREIGN KEY (AttemptID) REFERENCES AssessmentAttempts(AttemptID),
+        CONSTRAINT FK_Certificates_Assessment
+            FOREIGN KEY (AssessmentID) REFERENCES Assessments(AssessmentID)
+    );
+    PRINT 'Certificates table created.';
+END ELSE PRINT 'Certificates table already exists.';
 GO
 
 -- =============================================
--- 8. DISCUSSION
+-- 8. Discussions
 -- =============================================
-CREATE TABLE Discussion (
-    discussion_id   INT IDENTITY(1,1) PRIMARY KEY,
-    content         NVARCHAR(MAX)   NOT NULL,
-    created_at      DATETIME        NOT NULL DEFAULT GETDATE(),
-    user_id         INT             NOT NULL,
-    module_id       INT             NOT NULL,
-    CONSTRAINT FK_Discussion_User   FOREIGN KEY (user_id)   REFERENCES [User](user_id),
-    CONSTRAINT FK_Discussion_Module FOREIGN KEY (module_id) REFERENCES Module(module_id)
-);
+IF NOT EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'Discussions')
+BEGIN
+    CREATE TABLE Discussions (
+        DiscussionId  INT            NOT NULL IDENTITY(1,1) PRIMARY KEY,
+        Title         NVARCHAR(300)  NOT NULL,
+        Content       NVARCHAR(MAX)  NOT NULL,
+        CreatedAt     DATETIME       NOT NULL DEFAULT GETDATE(),
+        UserId        NVARCHAR(450)  NOT NULL,
+        [Like]        INT            NOT NULL DEFAULT 0,
+        IsFlagged     BIT            NOT NULL DEFAULT 0,
+        ModuleId      INT            NULL,
+        CONSTRAINT FK_Discussions_Module
+            FOREIGN KEY (ModuleId) REFERENCES Modules(ModuleId)
+    );
+    PRINT 'Discussions table created.';
+END ELSE PRINT 'Discussions table already exists.';
 GO
 
 -- =============================================
--- 9. SYSTEM_LOG
+-- 9. DiscussionPosts
 -- =============================================
-CREATE TABLE System_Log (
-    log_id      INT IDENTITY(1,1) PRIMARY KEY,
-    action      NVARCHAR(255)   NOT NULL,
-    timestamp   DATETIME        NOT NULL DEFAULT GETDATE(),
-    user_id     INT             NOT NULL,
-    CONSTRAINT FK_SystemLog_User FOREIGN KEY (user_id) REFERENCES [User](user_id)
-);
+IF NOT EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'DiscussionPosts')
+BEGIN
+    CREATE TABLE DiscussionPosts (
+        PostId        INT            NOT NULL IDENTITY(1,1) PRIMARY KEY,
+        DiscussionId  INT            NOT NULL,
+        Content       NVARCHAR(MAX)  NOT NULL,
+        CreatedAt     DATETIME       NOT NULL DEFAULT GETDATE(),
+        UserId        NVARCHAR(450)  NOT NULL,
+        CONSTRAINT FK_Posts_Discussion
+            FOREIGN KEY (DiscussionId) REFERENCES Discussions(DiscussionId) ON DELETE CASCADE
+    );
+    PRINT 'DiscussionPosts table created.';
+END ELSE PRINT 'DiscussionPosts table already exists.';
 GO
 
 -- =============================================
--- DONE
+-- 10. SystemLogs
 -- =============================================
-PRINT 'OlyMathDB schema created successfully.';
+IF NOT EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'SystemLogs')
+BEGIN
+    CREATE TABLE SystemLogs (
+        Id          INT            NOT NULL IDENTITY(1,1) PRIMARY KEY,
+        Action      NVARCHAR(255)  NOT NULL,
+        Timestamp   DATETIME       NOT NULL DEFAULT GETDATE(),
+        UserId      NVARCHAR(450)  NULL
+    );
+    PRINT 'SystemLogs table created.';
+END ELSE PRINT 'SystemLogs table already exists.';
+GO
+
+-- =============================================
+-- 11. AssessmentResults (EF model)
+-- =============================================
+IF NOT EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'AssessmentResults')
+BEGIN
+    CREATE TABLE AssessmentResults (
+        ResultId        INT            NOT NULL IDENTITY(1,1) PRIMARY KEY,
+        Score           DECIMAL(5,2)   NOT NULL,
+        AttemptDate     DATETIME       NOT NULL DEFAULT GETDATE(),
+        UserId          NVARCHAR(450)  NOT NULL,
+        AssessmentId    INT            NOT NULL,
+        CONSTRAINT FK_AssessmentResults_Assessment
+            FOREIGN KEY (AssessmentId) REFERENCES Assessments(AssessmentID)
+    );
+    PRINT 'AssessmentResults table created.';
+END ELSE PRINT 'AssessmentResults table already exists.';
+GO
+
+-- =============================================
+-- 12. Chapters
+-- =============================================
+IF NOT EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'Chapters')
+BEGIN
+    CREATE TABLE Chapters (
+        ChapterId       INT            NOT NULL IDENTITY(1,1) PRIMARY KEY,
+        Title           NVARCHAR(200)  NOT NULL,
+        Description     NVARCHAR(MAX)  NULL,
+        DisplayOrder    INT            NOT NULL DEFAULT 0,
+        HasAssessment   BIT            NOT NULL DEFAULT 0,
+        ModuleId        INT            NOT NULL,
+        CONSTRAINT FK_Chapters_Module FOREIGN KEY (ModuleId) REFERENCES Modules(ModuleId)
+    );
+    PRINT 'Chapters table created.';
+END ELSE PRINT 'Chapters table already exists.';
+GO
+
+-- =============================================
+-- 13. ChapterProgress
+-- =============================================
+IF NOT EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'ChapterProgresses')
+BEGIN
+    CREATE TABLE ChapterProgresses (
+        Id              INT            NOT NULL IDENTITY(1,1) PRIMARY KEY,
+        UserId          NVARCHAR(450)  NOT NULL,
+        ChapterId       INT            NOT NULL,
+        IsCompleted     BIT            NOT NULL DEFAULT 0,
+        CompletedAt     DATETIME       NULL,
+        CONSTRAINT FK_ChapterProgress_Chapter FOREIGN KEY (ChapterId) REFERENCES Chapters(ChapterId)
+    );
+    PRINT 'ChapterProgresses table created.';
+END ELSE PRINT 'ChapterProgresses table already exists.';
+GO
+
+PRINT '=== OlyMathDB full schema is ready. ===';
 GO

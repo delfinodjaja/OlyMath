@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace WAPP_Assignment_Module.Models
+namespace OlyMath.Models
 {
     public class ChapterProgress
     {
@@ -11,7 +11,6 @@ namespace WAPP_Assignment_Module.Models
 
         public int ChapterId { get; set; }
 
-        [ForeignKey("ChapterId")]
         public virtual Chapter Chapter { get; set; }
 
         public string TraineeId { get; set; }

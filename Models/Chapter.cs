@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace WAPP_Assignment_Module.Models
+namespace OlyMath.Models
 {
     public class Chapter
     {
@@ -13,7 +13,7 @@ namespace WAPP_Assignment_Module.Models
         public int ModuleId { get; set; }
 
         [ForeignKey("ModuleId")]
-        public virtual OlyModule Module { get; set; }
+        public virtual Module Module { get; set; }
 
         [Required]
         [StringLength(150)]
