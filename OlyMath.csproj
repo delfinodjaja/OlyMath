@@ -66,8 +66,8 @@
     <Content Include="Trainer\EditModule.aspx" />
     <Content Include="Trainer\ManageMaterials.aspx" />
     <Content Include="Trainer\ManageQuestions.aspx" />
-    <Content Include="Admin/Dashboard.aspx" />
-    <Content Include="Admin/ManageUsers.aspx" />
+    <Content Include="Admin\Dashboard.aspx" />
+    <Content Include="Admin\ManageUsers.aspx" />
     <Content Include="css\site.css" />
     <Content Include="Global.asax" />
     <Content Include="packages.config" />
@@ -133,11 +133,11 @@
       <DependentUpon>ManageQuestions.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Admin/Dashboard.aspx.cs">
+    <Compile Include="Admin\Dashboard.aspx.cs">
       <DependentUpon>Dashboard.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Admin/ManageUsers.aspx.cs">
+    <Compile Include="Admin\ManageUsers.aspx.cs">
       <DependentUpon>ManageUsers.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
