@@ -1,0 +1,84 @@
+<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.Master.cs" Inherits="OlyMath.SiteMaster" %>
+
+<!DOCTYPE html>
+<html lang="en">
+<head runat="server">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>OlyMath</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" />
+    <link href="<%= ResolveUrl("~/css/site.css") %>" rel="stylesheet" />
+    <asp:ContentPlaceHolder ID="HeadContent" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <!-- TOP NAVIGATION -->
+        <nav class="topnav">
+            <a href="<%= ResolveUrl("~/Default.aspx") %>" class="logo">Oly<span>Math</span></a>
+            
+            <div class="nav-right">
+                <!-- Anonymous User View -->
+                <asp:PlaceHolder ID="phAnonymousNav" runat="server">
+                    <a href="<%= ResolveUrl("~/Login.aspx?mode=register") %>" class="btn-primary" style="padding: 8px 20px; font-size: 0.82rem;">Get Started</a>
+                    <a href="<%= ResolveUrl("~/Login.aspx") %>" class="btn-secondary" style="padding: 8px 20px; font-size: 0.82rem;">Sign In</a>
+                </asp:PlaceHolder>
+
+                <!-- Authenticated User View -->
+                <asp:PlaceHolder ID="phAuthenticatedNav" runat="server" Visible="false">
+                    <span style="font-size:0.85rem; font-weight:500; color:var(--navy); margin-right:8px;">
+                        Hello, <asp:Literal ID="litUserName" runat="server" />
+                    </span>
+                    <asp:Label ID="lblUserBadge" runat="server" CssClass="nav-badge" />
+                    <asp:Button ID="btnLogout" runat="server" Text="Logout" CssClass="btn-logout" OnClick="btnLogout_Click" UseSubmitBehavior="false" CausesValidation="false" />
+                </asp:PlaceHolder>
+            </div>
+        </nav>
+
+        <!-- CONTENT LAYOUT WRAPPER (CSS toggled in code-behind) -->
+        <div id="divMainLayout" runat="server">
+            
+            <!-- SIDEBAR (Shown only when logged in) -->
+            <aside id="asideSidebar" runat="server" class="sidebar" visible="false">
+                
+                <!-- Trainee Sidebar -->
+                <div id="pnlTraineeSidebar" runat="server" visible="false" class="sidebar-section">
+                    <div class="sidebar-label">Trainee</div>
+                    <a href="<%= ResolveUrl("~/Trainee/Dashboard.aspx") %>" id="lnkTraineeDash" runat="server" class="sidebar-item"><span class="dot"></span> Dashboard</a>
+                    <a href="<%= ResolveUrl("~/Trainee/BrowseModules.aspx") %>" id="lnkTraineeBrowse" runat="server" class="sidebar-item"><span class="dot"></span> Browse Modules</a>
+                    <a href="<%= ResolveUrl("~/Trainee/Achievements.aspx") %>" id="lnkTraineeAchievements" runat="server" class="sidebar-item"><span class="dot"></span> Achievements</a>
+                    <div class="sidebar-label" style="margin-top:16px">Community</div>
+                    <a href="<%= ResolveUrl("~/Trainee/Discussion.aspx") %>" id="lnkTraineeDiscussion" runat="server" class="sidebar-item"><span class="dot"></span> Discussion Zone</a>
+                </div>
+
+                <!-- Trainer Sidebar -->
+                <div id="pnlTrainerSidebar" runat="server" visible="false" class="sidebar-section">
+                    <div class="sidebar-label">Trainer</div>
+                    <a href="<%= ResolveUrl("~/Trainer/Dashboard.aspx") %>" id="lnkTrainerDash" runat="server" class="sidebar-item"><span class="dot"></span> Modules Dashboard</a>
+                    <a href="<%= ResolveUrl("~/Trainer/EditModule.aspx") %>" id="lnkTrainerCreate" runat="server" class="sidebar-item"><span class="dot"></span> Create New Module</a>
+                    <div class="sidebar-label" style="margin-top:16px">Community</div>
+                    <a href="<%= ResolveUrl("~/Trainee/Discussion.aspx") %>" id="lnkTrainerDiscussion" runat="server" class="sidebar-item"><span class="dot"></span> Discussion Zone</a>
+                </div>
+
+                <!-- Admin Sidebar -->
+                <div id="pnlAdminSidebar" runat="server" visible="false" class="sidebar-section">
+                    <div class="sidebar-label">Admin</div>
+                    <a href="<%= ResolveUrl("~/Admin/Dashboard.aspx") %>" id="lnkAdminDash" runat="server" class="sidebar-item"><span class="dot"></span> System Metrics</a>
+                    <a href="<%= ResolveUrl("~/Admin/ManageUsers.aspx") %>" id="lnkAdminUsers" runat="server" class="sidebar-item"><span class="dot"></span> Manage Users</a>
+                    <div class="sidebar-label" style="margin-top:16px">Community</div>
+                    <a href="<%= ResolveUrl("~/Trainee/Discussion.aspx") %>" id="lnkAdminDiscussion" runat="server" class="sidebar-item"><span class="dot"></span> Discussion Zone</a>
+                </div>
+
+            </aside>
+
+            <!-- MAIN CONTENT AREA -->
+            <div id="divContentWrapper" runat="server">
+                <asp:ContentPlaceHolder ID="MainContent" runat="server">
+                </asp:ContentPlaceHolder>
+            </div>
+
+        </div>
+    </form>
+</body>
+</html>
