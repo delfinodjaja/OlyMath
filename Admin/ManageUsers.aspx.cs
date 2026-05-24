@@ -10,20 +10,6 @@ namespace OlyMath.Admin
     {
         public override string[] AllowedRoles { get; set; } = new string[] { "Admin" };
 
-        protected global::System.Web.UI.WebControls.Label lblError;
-        protected global::System.Web.UI.WebControls.Label lblMessage;
-        protected global::System.Web.UI.WebControls.HiddenField hfEditUserId;
-        protected global::System.Web.UI.WebControls.Repeater rptUsers;
-        protected global::System.Web.UI.WebControls.Literal litFormTitle;
-        protected global::System.Web.UI.WebControls.TextBox txtName;
-        protected global::System.Web.UI.WebControls.TextBox txtEmail;
-        protected global::System.Web.UI.WebControls.TextBox txtPassword;
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl spanPasswordHint;
-        protected global::System.Web.UI.WebControls.DropDownList ddlRole;
-        protected global::System.Web.UI.WebControls.TextBox txtLocation;
-        protected global::System.Web.UI.WebControls.Button btnCancel;
-        protected global::System.Web.UI.WebControls.Button btnSave;
-
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)

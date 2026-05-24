@@ -81,65 +81,113 @@
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Login.aspx.designer.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
     </Compile>
     <Compile Include="Trainee\Dashboard.aspx.cs">
       <DependentUpon>Dashboard.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="Trainee\Dashboard.aspx.designer.cs">
+      <DependentUpon>Trainee\Dashboard.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Trainee\BrowseModules.aspx.cs">
       <DependentUpon>BrowseModules.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Trainee\BrowseModules.aspx.designer.cs">
+      <DependentUpon>Trainee\BrowseModules.aspx</DependentUpon>
     </Compile>
     <Compile Include="Trainee\Achievements.aspx.cs">
       <DependentUpon>Achievements.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="Trainee\Achievements.aspx.designer.cs">
+      <DependentUpon>Trainee\Achievements.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Trainee\ModuleDetail.aspx.cs">
       <DependentUpon>ModuleDetail.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Trainee\ModuleDetail.aspx.designer.cs">
+      <DependentUpon>Trainee\ModuleDetail.aspx</DependentUpon>
     </Compile>
     <Compile Include="Trainee\Study.aspx.cs">
       <DependentUpon>Study.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="Trainee\Study.aspx.designer.cs">
+      <DependentUpon>Trainee\Study.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Trainee\Assessment.aspx.cs">
       <DependentUpon>Assessment.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Trainee\Assessment.aspx.designer.cs">
+      <DependentUpon>Trainee\Assessment.aspx</DependentUpon>
     </Compile>
     <Compile Include="Trainee\Certificate.aspx.cs">
       <DependentUpon>Certificate.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="Trainee\Certificate.aspx.designer.cs">
+      <DependentUpon>Trainee\Certificate.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Trainee\Discussion.aspx.cs">
       <DependentUpon>Discussion.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Trainee\Discussion.aspx.designer.cs">
+      <DependentUpon>Trainee\Discussion.aspx</DependentUpon>
     </Compile>
     <Compile Include="Trainer\Dashboard.aspx.cs">
       <DependentUpon>Dashboard.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="Trainer\Dashboard.aspx.designer.cs">
+      <DependentUpon>Trainer\Dashboard.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Trainer\EditModule.aspx.cs">
       <DependentUpon>EditModule.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Trainer\EditModule.aspx.designer.cs">
+      <DependentUpon>Trainer\EditModule.aspx</DependentUpon>
     </Compile>
     <Compile Include="Trainer\ManageMaterials.aspx.cs">
       <DependentUpon>ManageMaterials.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="Trainer\ManageMaterials.aspx.designer.cs">
+      <DependentUpon>Trainer\ManageMaterials.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Trainer\ManageQuestions.aspx.cs">
       <DependentUpon>ManageQuestions.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Trainer\ManageQuestions.aspx.designer.cs">
+      <DependentUpon>Trainer\ManageQuestions.aspx</DependentUpon>
     </Compile>
     <Compile Include="Admin\Dashboard.aspx.cs">
       <DependentUpon>Dashboard.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="Admin\Dashboard.aspx.designer.cs">
+      <DependentUpon>Admin\Dashboard.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Admin\ManageUsers.aspx.cs">
       <DependentUpon>ManageUsers.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\ManageUsers.aspx.designer.cs">
+      <DependentUpon>Admin\ManageUsers.aspx</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -147,6 +195,9 @@
     <Compile Include="Site.Master.cs">
       <DependentUpon>Site.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Site.Master.designer.cs">
+      <DependentUpon>Site.Master</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

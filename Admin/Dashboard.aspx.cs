@@ -9,11 +9,6 @@ namespace OlyMath.Admin
     {
         public override string[] AllowedRoles { get; set; } = new string[] { "Admin" };
 
-        protected global::System.Web.UI.WebControls.Literal litTotalUsers;
-        protected global::System.Web.UI.WebControls.Literal litTotalModules;
-        protected global::System.Web.UI.WebControls.Literal litTotalCerts;
-        protected global::System.Web.UI.WebControls.Literal litTotalPosts;
-
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
