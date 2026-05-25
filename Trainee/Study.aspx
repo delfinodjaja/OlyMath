@@ -23,6 +23,7 @@
                             <div class="list-item-sub">
                                 <%# Eval("Type").ToString() == "QZ" ? "Quiz" : Eval("Type").ToString() == "VID" ? "Video" : "Reading" %> 
                                 · <%# Eval("FileSizeText") %>
+                                · Uploaded <%# Eval("UploadDate", "{0:MMM dd, yyyy}") %>
                                 · <%# Eval("IsDone").ToString() == "1" ? "Completed" : "Not read yet" %>
                             </div>
                         </div>

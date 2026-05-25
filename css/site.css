@@ -233,14 +233,14 @@ body::before {
 .form-success { color: var(--teal); font-size: 0.8rem; margin-top: 5px; font-weight: 500; display: block; }
 
 /* DASHBOARD LAYOUT */
-.dashboard-layout { min-height: calc(100vh - 64px); padding-top: 64px; }
+.dashboard-layout { display: grid; grid-template-columns: 220px 1fr; min-height: calc(100vh - 64px); padding-top: 64px; }
 .sidebar {
   background: var(--white);
   border-right: 1px solid var(--border);
   padding: 28px 0;
-  position: fixed;
-  top: 64px; left: 0; bottom: 0;
-  width: 220px;
+  position: sticky;
+  top: 64px;
+  height: calc(100vh - 64px);
   overflow-y: auto;
   z-index: 10;
 }
@@ -256,7 +256,7 @@ body::before {
 .sidebar-item .dot { width: 7px; height: 7px; border-radius: 50%; background: currentColor; opacity: 0.5; flex-shrink: 0; }
 .sidebar-item.active .dot { background: var(--orange); opacity: 1; }
 
-.main-content { margin-left: 220px; padding: 40px 48px; min-height: 100%; overflow-y: auto; }
+.main-content { padding: 40px 48px; min-height: 100%; overflow-y: auto; }
 .page-title { font-family: 'Syne', sans-serif; font-size: 1.9rem; font-weight: 800; letter-spacing: -0.5px; color: var(--navy); margin-bottom: 6px; }
 .page-subtitle { font-size: 0.88rem; color: var(--slate); margin-bottom: 36px; font-weight: 300; }
 
@@ -607,6 +607,7 @@ tbody td { padding: 13px 18px; font-size: 0.84rem; color: var(--navy); border-bo
 
 /* RESPONSIVE LAYOUT */
 @media (max-width: 900px) {
+  .dashboard-layout { grid-template-columns: 1fr; }
   .sidebar { display: none; }
   .main-content { margin-left: 0; padding: 28px 24px; }
   .landing-features { grid-template-columns: 1fr; }

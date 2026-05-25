@@ -60,6 +60,15 @@ namespace OlyMath
 
                     if (string.Equals(dbHash, inputHash, StringComparison.OrdinalIgnoreCase))
                     {
+                        // Check if account is pending approval
+                        string status = dt.Rows[0]["Status"]?.ToString() ?? "Approved";
+                        if (string.Equals(status, "Pending", StringComparison.OrdinalIgnoreCase))
+                        {
+                            lblError.Text = "Your account is pending approval by an administrator.";
+                            lblError.Visible = true;
+                            return;
+                        }
+
                         // Set Session variables
                         Session["UserId"] = dt.Rows[0]["Id"];
                         Session["FullName"] = dt.Rows[0]["FullName"];
@@ -130,8 +139,8 @@ namespace OlyMath
                     return;
                 }
 
-                // Insert new user
-                string insertSql = "INSERT INTO Users (FullName, Email, PasswordHash, Role) VALUES (@name, @email, @hash, @role)";
+                // Insert new user with 'Pending' status
+                string insertSql = "INSERT INTO Users (FullName, Email, PasswordHash, Role, Status) VALUES (@name, @email, @hash, @role, 'Pending')";
                 DbHelper.ExecuteNonQuery(insertSql,
                     new SqlParameter("@name", name),
                     new SqlParameter("@email", email),
@@ -139,7 +148,7 @@ namespace OlyMath
                     new SqlParameter("@role", role)
                 );
 
-                lblSuccess.Text = "Registration successful! You can now sign in using the Login tab.";
+                lblSuccess.Text = "Registration successful! Your account is pending approval by an administrator before you can sign in.";
                 lblSuccess.Visible = true;
 
                 // Reset forms

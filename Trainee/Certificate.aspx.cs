@@ -21,8 +21,18 @@ namespace OlyMath.Trainee
         {
             if (string.IsNullOrEmpty(CertId))
             {
-                Response.Redirect("Achievements.aspx");
-                return;
+                string sql = "SELECT TOP 1 CertificateId FROM UserAssessments WHERE UserId = @userId AND CertificateId IS NOT NULL ORDER BY CompletedAt DESC";
+                object res = DbHelper.ExecuteScalar(sql, new SqlParameter("@userId", CurrentUserId));
+                if (res != null && res != DBNull.Value)
+                {
+                    Response.Redirect("Certificate.aspx?certId=" + res.ToString());
+                    return;
+                }
+                else
+                {
+                    Response.Redirect("Achievements.aspx");
+                    return;
+                }
             }
 
             if (!IsPostBack)

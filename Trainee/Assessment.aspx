@@ -39,7 +39,7 @@
             <asp:Repeater ID="rptQuestions" runat="server">
                 <ItemTemplate>
                     <div class="content-card">
-                        <h3>Question <%# Container.ItemIndex + 1 %></h3>
+                        <h3>Question <%# Container.ItemIndex + 1 %> of <%# GetTotalQuestionsCount() %></h3>
                         
                         <p style="margin:12px 0 20px; font-size:0.9rem; line-height:1.7; color:var(--navy)">
                             <%# Eval("QuestionText") %>

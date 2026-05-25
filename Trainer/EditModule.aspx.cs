@@ -49,13 +49,17 @@ namespace OlyMath.Trainer
                     ddlTopic.SelectedValue = row["Topic"].ToString();
                     txtTime.Text = row["EstimatedTime"].ToString();
                     txtDescription.Text = row["Description"].ToString();
+                    if (row["Difficulty"] != DBNull.Value)
+                    {
+                        ddlDifficulty.SelectedValue = row["Difficulty"].ToString();
+                    }
                     
                     litPageTitle.Text = "Edit Module";
                 }
                 else
                 {
                     // Unauthorized or missing module
-                    Response.Redirect("Dashboard.aspx");
+                    Response.Redirect("MyModules.aspx");
                 }
             }
             catch (Exception ex)
@@ -65,7 +69,17 @@ namespace OlyMath.Trainer
             }
         }
 
-        protected void btnSave_Click(object sender, EventArgs e)
+        protected void btnSaveDraft_Click(object sender, EventArgs e)
+        {
+            SaveModule("Draft", false);
+        }
+
+        protected void btnSaveAddMaterials_Click(object sender, EventArgs e)
+        {
+            SaveModule("Approved", true);
+        }
+
+        private void SaveModule(string status, bool goToAddMaterials)
         {
             lblError.Visible = false;
 
@@ -73,6 +87,7 @@ namespace OlyMath.Trainer
             string topic = ddlTopic.SelectedValue;
             string time = txtTime.Text.Trim();
             string description = txtDescription.Text.Trim();
+            string difficulty = ddlDifficulty.SelectedValue;
 
             if (string.IsNullOrEmpty(title) || string.IsNullOrEmpty(time) || string.IsNullOrEmpty(description))
             {
@@ -83,12 +98,13 @@ namespace OlyMath.Trainer
 
             try
             {
+                int savedId = ModuleId;
                 if (ModuleId > 0)
                 {
                     // Edit Module
                     string sql = @"
                         UPDATE Modules 
-                        SET Title = @title, Topic = @topic, EstimatedTime = @time, Description = @desc 
+                        SET Title = @title, Topic = @topic, EstimatedTime = @time, Description = @desc, Status = @status, Difficulty = @difficulty 
                         WHERE Id = @moduleId AND CreatedByUserId = @userId";
 
                     int rows = DbHelper.ExecuteNonQuery(sql,
@@ -96,6 +112,8 @@ namespace OlyMath.Trainer
                         new SqlParameter("@topic", topic),
                         new SqlParameter("@time", time),
                         new SqlParameter("@desc", description),
+                        new SqlParameter("@status", status),
+                        new SqlParameter("@difficulty", difficulty),
                         new SqlParameter("@moduleId", ModuleId),
                         new SqlParameter("@userId", CurrentUserId)
                     );
@@ -111,19 +129,29 @@ namespace OlyMath.Trainer
                 {
                     // Create Module
                     string sql = @"
-                        INSERT INTO Modules (Title, Topic, EstimatedTime, Description, CreatedByUserId)
-                        VALUES (@title, @topic, @time, @desc, @userId)";
+                        INSERT INTO Modules (Title, Topic, EstimatedTime, Description, CreatedByUserId, Status, Difficulty)
+                        OUTPUT INSERTED.Id
+                        VALUES (@title, @topic, @time, @desc, @userId, @status, @difficulty)";
 
-                    DbHelper.ExecuteNonQuery(sql,
+                    savedId = Convert.ToInt32(DbHelper.ExecuteScalar(sql,
                         new SqlParameter("@title", title),
                         new SqlParameter("@topic", topic),
                         new SqlParameter("@time", time),
                         new SqlParameter("@desc", description),
-                        new SqlParameter("@userId", CurrentUserId)
-                    );
+                        new SqlParameter("@userId", CurrentUserId),
+                        new SqlParameter("@status", status),
+                        new SqlParameter("@difficulty", difficulty)
+                    ));
                 }
 
-                Response.Redirect("Dashboard.aspx");
+                if (goToAddMaterials)
+                {
+                    Response.Redirect($"ManageMaterials.aspx?id={savedId}");
+                }
+                else
+                {
+                    Response.Redirect("MyModules.aspx");
+                }
             }
             catch (Exception ex)
             {

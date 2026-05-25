@@ -62,7 +62,7 @@
             </div>
             
             <div style="display:flex;justify-content:center;gap:12px;margin-top:4px" class="cert-actions">
-                <button type="button" class="btn-primary" onclick="window.print(); return false;">Print Certificate</button>
+                <button type="button" class="btn-primary" onclick="window.print(); return false;">Download PDF</button>
                 <a href="Achievements.aspx" class="btn-secondary">View All Certificates</a>
             </div>
         </asp:PlaceHolder>

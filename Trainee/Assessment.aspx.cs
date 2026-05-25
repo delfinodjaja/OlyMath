@@ -19,12 +19,33 @@ namespace OlyMath.Trainee
             }
         }
 
+        private int _totalQuestions = -1;
+        public int GetTotalQuestionsCount()
+        {
+            if (_totalQuestions == -1)
+            {
+                string sql = "SELECT COUNT(*) FROM Questions WHERE ModuleId = @moduleId";
+                _totalQuestions = Convert.ToInt32(DbHelper.ExecuteScalar(sql, new SqlParameter("@moduleId", ModuleId)));
+            }
+            return _totalQuestions;
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (ModuleId <= 0)
             {
-                Response.Redirect("BrowseModules.aspx");
-                return;
+                string sql = "SELECT TOP 1 ModuleId FROM UserProgress WHERE UserId = @userId ORDER BY LastAccessed DESC";
+                object res = DbHelper.ExecuteScalar(sql, new SqlParameter("@userId", CurrentUserId));
+                if (res != null && res != DBNull.Value)
+                {
+                    Response.Redirect("Assessment.aspx?id=" + res.ToString());
+                    return;
+                }
+                else
+                {
+                    Response.Redirect("BrowseModules.aspx");
+                    return;
+                }
             }
 
             if (!IsPostBack)

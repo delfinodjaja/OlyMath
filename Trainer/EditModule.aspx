@@ -33,11 +33,17 @@
 
             <div class="form-grid">
                 <div class="form-group">
-                    <label>Estimated Study Time</label>
+                    <label>Estimated Duration (e.g., 4h 20m)</label>
                     <asp:TextBox ID="txtTime" runat="server" placeholder="e.g., 4h 20m" />
                 </div>
-                <!-- Empty spacer in grid -->
-                <div></div>
+                <div class="form-group">
+                    <label>Difficulty Level</label>
+                    <asp:DropDownList ID="ddlDifficulty" runat="server">
+                        <asp:ListItem Value="Easy">Easy</asp:ListItem>
+                        <asp:ListItem Value="Medium">Medium</asp:ListItem>
+                        <asp:ListItem Value="Hard">Hard</asp:ListItem>
+                    </asp:DropDownList>
+                </div>
             </div>
 
             <div class="form-group" style="margin-top: 10px;">
@@ -45,9 +51,10 @@
                 <asp:TextBox ID="txtDescription" runat="server" TextMode="MultiLine" Rows="4" placeholder="Brief outline covering residues, congruences, Fermat's little theorem, and CRT..." />
             </div>
 
-            <div class="form-actions">
-                <a href="Dashboard.aspx" class="btn-secondary" style="padding: 10px 24px; font-size:0.88rem;">Cancel</a>
-                <asp:Button ID="btnSave" runat="server" Text="Save Module" CssClass="btn-primary" OnClick="btnSave_Click" style="padding: 10px 28px; font-size:0.88rem;" />
+            <div class="form-actions" style="display: flex; gap: 12px;">
+                <a href="MyModules.aspx" class="btn-secondary" style="padding: 10px 24px; font-size:0.88rem;">Cancel</a>
+                <asp:Button ID="btnSaveDraft" runat="server" Text="Save Draft" CssClass="btn-secondary" OnClick="btnSaveDraft_Click" style="padding: 10px 24px; font-size:0.88rem;" />
+                <asp:Button ID="btnSaveAddMaterials" runat="server" Text="Save + Add Materials" CssClass="btn-primary" OnClick="btnSaveAddMaterials_Click" style="padding: 10px 28px; font-size:0.88rem;" />
             </div>
         </div>
     </div>

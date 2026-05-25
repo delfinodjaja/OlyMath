@@ -130,6 +130,26 @@ namespace OlyMath {
         protected global::System.Web.UI.HtmlControls.HtmlAnchor lnkTraineeAchievements;
         
         /// <summary>
+        /// lnkTraineeModuleDetail control.
+        /// </summary>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor lnkTraineeModuleDetail;
+        
+        /// <summary>
+        /// lnkTraineeStudy control.
+        /// </summary>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor lnkTraineeStudy;
+        
+        /// <summary>
+        /// lnkTraineeAssessment control.
+        /// </summary>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor lnkTraineeAssessment;
+        
+        /// <summary>
+        /// lnkTraineeCertificate control.
+        /// </summary>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor lnkTraineeCertificate;
+        
+        /// <summary>
         /// lnkTraineeDiscussion control.
         /// </summary>
         /// <remarks>
@@ -157,6 +177,11 @@ namespace OlyMath {
         protected global::System.Web.UI.HtmlControls.HtmlAnchor lnkTrainerDash;
         
         /// <summary>
+        /// lnkTrainerMyModules control.
+        /// </summary>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor lnkTrainerMyModules;
+        
+        /// <summary>
         /// lnkTrainerCreate control.
         /// </summary>
         /// <remarks>
@@ -164,6 +189,20 @@ namespace OlyMath {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlAnchor lnkTrainerCreate;
+        
+        /// <summary>
+        /// lnkTrainerManageMaterials control.
+        /// </summary>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor lnkTrainerManageMaterials;
+
+        /// <summary>
+        /// lnkTrainerProgress control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor lnkTrainerProgress;
         
         /// <summary>
         /// lnkTrainerDiscussion control.
@@ -200,6 +239,24 @@ namespace OlyMath {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlAnchor lnkAdminUsers;
+
+        /// <summary>
+        /// lnkAdminModules control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor lnkAdminModules;
+
+        /// <summary>
+        /// lnkAdminEnrollments control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor lnkAdminEnrollments;
         
         /// <summary>
         /// lnkAdminDiscussion control.

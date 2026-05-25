@@ -23,8 +23,18 @@ namespace OlyMath.Trainee
         {
             if (ModuleId <= 0)
             {
-                Response.Redirect("BrowseModules.aspx");
-                return;
+                string sql = "SELECT TOP 1 ModuleId FROM UserProgress WHERE UserId = @userId ORDER BY LastAccessed DESC";
+                object res = DbHelper.ExecuteScalar(sql, new SqlParameter("@userId", CurrentUserId));
+                if (res != null && res != DBNull.Value)
+                {
+                    Response.Redirect("ModuleDetail.aspx?id=" + res.ToString());
+                    return;
+                }
+                else
+                {
+                    Response.Redirect("BrowseModules.aspx");
+                    return;
+                }
             }
 
             if (!IsPostBack)

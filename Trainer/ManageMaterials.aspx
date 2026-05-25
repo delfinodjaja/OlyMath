@@ -80,6 +80,7 @@
                         <asp:ListItem Value="PDF">PDF Reading</asp:ListItem>
                         <asp:ListItem Value="VID">Video Lecture</asp:ListItem>
                         <asp:ListItem Value="QZ">Self-Assessment Link</asp:ListItem>
+                        <asp:ListItem Value="PS">Problem Set</asp:ListItem>
                     </asp:DropDownList>
                 </div>
             </div>

@@ -70,18 +70,27 @@ namespace OlyMath
             lnkTraineeDash.Attributes["class"] = baseClass;
             lnkTraineeBrowse.Attributes["class"] = baseClass;
             lnkTraineeAchievements.Attributes["class"] = baseClass;
+            lnkTraineeModuleDetail.Attributes["class"] = baseClass;
+            lnkTraineeStudy.Attributes["class"] = baseClass;
+            lnkTraineeAssessment.Attributes["class"] = baseClass;
+            lnkTraineeCertificate.Attributes["class"] = baseClass;
             lnkTraineeDiscussion.Attributes["class"] = baseClass;
 
             lnkTrainerDash.Attributes["class"] = baseClass;
+            lnkTrainerMyModules.Attributes["class"] = baseClass;
             lnkTrainerCreate.Attributes["class"] = baseClass;
+            lnkTrainerManageMaterials.Attributes["class"] = baseClass;
+            lnkTrainerProgress.Attributes["class"] = baseClass;
             lnkTrainerDiscussion.Attributes["class"] = baseClass;
 
             lnkAdminDash.Attributes["class"] = baseClass;
             lnkAdminUsers.Attributes["class"] = baseClass;
+            lnkAdminModules.Attributes["class"] = baseClass;
+            lnkAdminEnrollments.Attributes["class"] = baseClass;
             lnkAdminDiscussion.Attributes["class"] = baseClass;
 
             // Apply active class
-            if (absolutePath.Contains("/trainee/dashboard.aspx") || absolutePath.Contains("/trainee/moduledetail.aspx") || absolutePath.Contains("/trainee/study.aspx") || absolutePath.Contains("/trainee/assessment.aspx") || absolutePath.Contains("/trainee/certificate.aspx"))
+            if (absolutePath.Contains("/trainee/dashboard.aspx"))
             {
                 lnkTraineeDash.Attributes["class"] = baseClass + " active";
             }
@@ -93,19 +102,47 @@ namespace OlyMath
             {
                 lnkTraineeAchievements.Attributes["class"] = baseClass + " active";
             }
+            else if (absolutePath.Contains("/trainee/moduledetail.aspx"))
+            {
+                lnkTraineeModuleDetail.Attributes["class"] = baseClass + " active";
+            }
+            else if (absolutePath.Contains("/trainee/study.aspx"))
+            {
+                lnkTraineeStudy.Attributes["class"] = baseClass + " active";
+            }
+            else if (absolutePath.Contains("/trainee/assessment.aspx"))
+            {
+                lnkTraineeAssessment.Attributes["class"] = baseClass + " active";
+            }
+            else if (absolutePath.Contains("/trainee/certificate.aspx"))
+            {
+                lnkTraineeCertificate.Attributes["class"] = baseClass + " active";
+            }
             else if (absolutePath.Contains("/trainee/discussion.aspx"))
             {
                 lnkTraineeDiscussion.Attributes["class"] = baseClass + " active";
                 lnkTrainerDiscussion.Attributes["class"] = baseClass + " active";
                 lnkAdminDiscussion.Attributes["class"] = baseClass + " active";
             }
-            else if (absolutePath.Contains("/trainer/dashboard.aspx") || absolutePath.Contains("/trainer/managematerials.aspx") || absolutePath.Contains("/trainer/managequestions.aspx"))
+            else if (absolutePath.Contains("/trainer/dashboard.aspx"))
             {
                 lnkTrainerDash.Attributes["class"] = baseClass + " active";
+            }
+            else if (absolutePath.Contains("/trainer/mymodules.aspx"))
+            {
+                lnkTrainerMyModules.Attributes["class"] = baseClass + " active";
             }
             else if (absolutePath.Contains("/trainer/editmodule.aspx"))
             {
                 lnkTrainerCreate.Attributes["class"] = baseClass + " active";
+            }
+            else if (absolutePath.Contains("/trainer/managematerials.aspx") || absolutePath.Contains("/trainer/managequestions.aspx"))
+            {
+                lnkTrainerManageMaterials.Attributes["class"] = baseClass + " active";
+            }
+            else if (absolutePath.Contains("/trainer/traineeprogress.aspx"))
+            {
+                lnkTrainerProgress.Attributes["class"] = baseClass + " active";
             }
             else if (absolutePath.Contains("/admin/dashboard.aspx"))
             {
@@ -114,6 +151,14 @@ namespace OlyMath
             else if (absolutePath.Contains("/admin/manageusers.aspx"))
             {
                 lnkAdminUsers.Attributes["class"] = baseClass + " active";
+            }
+            else if (absolutePath.Contains("/admin/moduleoversight.aspx"))
+            {
+                lnkAdminModules.Attributes["class"] = baseClass + " active";
+            }
+            else if (absolutePath.Contains("/admin/enrollmentmanagement.aspx"))
+            {
+                lnkAdminEnrollments.Attributes["class"] = baseClass + " active";
             }
         }
 

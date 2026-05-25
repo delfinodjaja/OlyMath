@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -66,11 +66,15 @@
     <Content Include="Trainee\Certificate.aspx" />
     <Content Include="Trainee\Discussion.aspx" />
     <Content Include="Trainer\Dashboard.aspx" />
+    <Content Include="Trainer\MyModules.aspx" />
     <Content Include="Trainer\EditModule.aspx" />
     <Content Include="Trainer\ManageMaterials.aspx" />
     <Content Include="Trainer\ManageQuestions.aspx" />
     <Content Include="Admin\Dashboard.aspx" />
     <Content Include="Admin\ManageUsers.aspx" />
+    <Content Include="Trainer\TraineeProgress.aspx" />
+    <Content Include="Admin\ModuleOversight.aspx" />
+    <Content Include="Admin\EnrollmentManagement.aspx" />
     <Content Include="css\site.css" />
     <Content Include="Global.asax" />
     <Content Include="packages.config" />
@@ -159,6 +163,13 @@
     <Compile Include="Trainer\Dashboard.aspx.designer.cs">
       <DependentUpon>Trainer\Dashboard.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Trainer\MyModules.aspx.cs">
+      <DependentUpon>MyModules.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Trainer\MyModules.aspx.designer.cs">
+      <DependentUpon>Trainer\MyModules.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Trainer\EditModule.aspx.cs">
       <DependentUpon>EditModule.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -193,6 +204,27 @@
     </Compile>
     <Compile Include="Admin\ManageUsers.aspx.designer.cs">
       <DependentUpon>Admin\ManageUsers.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Trainer\TraineeProgress.aspx.cs">
+      <DependentUpon>TraineeProgress.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Trainer\TraineeProgress.aspx.designer.cs">
+      <DependentUpon>Trainer\TraineeProgress.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\ModuleOversight.aspx.cs">
+      <DependentUpon>ModuleOversight.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\ModuleOversight.aspx.designer.cs">
+      <DependentUpon>Admin\ModuleOversight.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\EnrollmentManagement.aspx.cs">
+      <DependentUpon>EnrollmentManagement.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\EnrollmentManagement.aspx.designer.cs">
+      <DependentUpon>Admin\EnrollmentManagement.aspx</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

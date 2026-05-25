@@ -25,6 +25,7 @@ namespace OlyMath.Trainee
                 up.ProgressPercentage
                 FROM Modules m
                 LEFT JOIN UserProgress up ON m.Id = up.ModuleId AND up.UserId = @userId
+                WHERE m.Status = 'Approved'
                 ORDER BY m.Topic, m.Title";
 
             DataTable dt = DbHelper.ExecuteQuery(sql, new SqlParameter("@userId", CurrentUserId));

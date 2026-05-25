@@ -128,6 +128,44 @@ namespace OlyMath.Admin
                     lblError.Visible = true;
                 }
             }
+            else if (e.CommandName == "ApproveUser")
+            {
+                try
+                {
+                    string sql = "UPDATE Users SET Status = 'Approved' WHERE Id = @userId";
+                    int rows = DbHelper.ExecuteNonQuery(sql, new SqlParameter("@userId", userId));
+                    if (rows > 0)
+                    {
+                        lblMessage.Text = "User approved successfully.";
+                        lblMessage.Visible = true;
+                        LoadUsers();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    lblError.Text = "Failed to approve user: " + ex.Message;
+                    lblError.Visible = true;
+                }
+            }
+            else if (e.CommandName == "WarnUser")
+            {
+                try
+                {
+                    string sql = "UPDATE Users SET WarningsCount = WarningsCount + 1 WHERE Id = @userId";
+                    int rows = DbHelper.ExecuteNonQuery(sql, new SqlParameter("@userId", userId));
+                    if (rows > 0)
+                    {
+                        lblMessage.Text = "Warning issued to the user successfully.";
+                        lblMessage.Visible = true;
+                        LoadUsers();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    lblError.Text = "Failed to warn user: " + ex.Message;
+                    lblError.Visible = true;
+                }
+            }
         }
 
         protected void btnSave_Click(object sender, EventArgs e)

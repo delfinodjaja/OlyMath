@@ -138,6 +138,8 @@ namespace OlyMath
                             PasswordHash NVARCHAR(255) NOT NULL,
                             Role NVARCHAR(50) NOT NULL, -- Admin, Trainer, Trainee
                             CityCountry NVARCHAR(255) NULL,
+                            Status NVARCHAR(50) NOT NULL DEFAULT 'Approved',
+                            WarningsCount INT NOT NULL DEFAULT 0,
                             CreatedAt DATETIME DEFAULT GETDATE()
                         );
                     END
@@ -151,6 +153,7 @@ namespace OlyMath
                             Topic NVARCHAR(100) NOT NULL,
                             EstimatedTime NVARCHAR(50) NOT NULL,
                             CreatedByUserId INT NOT NULL,
+                            Status NVARCHAR(50) NOT NULL DEFAULT 'Approved',
                             CreatedAt DATETIME DEFAULT GETDATE(),
                             FOREIGN KEY(CreatedByUserId) REFERENCES Users(Id)
                         );
@@ -167,6 +170,7 @@ namespace OlyMath
                             ContentUrl NVARCHAR(MAX) NULL,
                             OrderIndex INT NOT NULL,
                             IsLocked INT DEFAULT 0,
+                            UploadDate DATETIME DEFAULT GETDATE(),
                             FOREIGN KEY(ModuleId) REFERENCES Modules(Id) ON DELETE CASCADE
                         );
                     END
@@ -237,6 +241,9 @@ namespace OlyMath
                             Content NVARCHAR(MAX) NOT NULL,
                             Topic NVARCHAR(50) NOT NULL,
                             LikesCount INT DEFAULT 0,
+                            IsFlagged INT NOT NULL DEFAULT 0,
+                            IsPinned INT NOT NULL DEFAULT 0,
+                            IsAnnouncement INT NOT NULL DEFAULT 0,
                             CreatedAt DATETIME DEFAULT GETDATE(),
                             FOREIGN KEY(UserId) REFERENCES Users(Id) ON DELETE CASCADE
                         );
@@ -268,6 +275,61 @@ namespace OlyMath
                     END";
 
                     using (SqlCommand cmd = new SqlCommand(sqlCreateTables, conn))
+                    {
+                        cmd.ExecuteNonQuery();
+                    }
+
+                    // Migration Step: dynamically append missing columns if tables already existed
+                    string sqlMigrateColumns = @"
+                    IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Users]') AND type in (N'U'))
+                    BEGIN
+                        IF NOT EXISTS (SELECT * FROM sys.columns WHERE object_id = OBJECT_ID(N'[dbo].[Users]') AND name = 'Status')
+                        BEGIN
+                            ALTER TABLE Users ADD Status NVARCHAR(50) NOT NULL DEFAULT 'Approved';
+                        END
+                        IF NOT EXISTS (SELECT * FROM sys.columns WHERE object_id = OBJECT_ID(N'[dbo].[Users]') AND name = 'WarningsCount')
+                        BEGIN
+                            ALTER TABLE Users ADD WarningsCount INT NOT NULL DEFAULT 0;
+                        END
+                    END
+
+                    IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Modules]') AND type in (N'U'))
+                    BEGIN
+                        IF NOT EXISTS (SELECT * FROM sys.columns WHERE object_id = OBJECT_ID(N'[dbo].[Modules]') AND name = 'Status')
+                        BEGIN
+                            ALTER TABLE Modules ADD Status NVARCHAR(50) NOT NULL DEFAULT 'Approved';
+                        END
+                        IF NOT EXISTS (SELECT * FROM sys.columns WHERE object_id = OBJECT_ID(N'[dbo].[Modules]') AND name = 'Difficulty')
+                        BEGIN
+                            ALTER TABLE Modules ADD Difficulty NVARCHAR(50) NULL;
+                        END
+                    END
+
+                    IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Discussions]') AND type in (N'U'))
+                    BEGIN
+                        IF NOT EXISTS (SELECT * FROM sys.columns WHERE object_id = OBJECT_ID(N'[dbo].[Discussions]') AND name = 'IsFlagged')
+                        BEGIN
+                            ALTER TABLE Discussions ADD IsFlagged INT NOT NULL DEFAULT 0;
+                        END
+                        IF NOT EXISTS (SELECT * FROM sys.columns WHERE object_id = OBJECT_ID(N'[dbo].[Discussions]') AND name = 'IsPinned')
+                        BEGIN
+                            ALTER TABLE Discussions ADD IsPinned INT NOT NULL DEFAULT 0;
+                        END
+                        IF NOT EXISTS (SELECT * FROM sys.columns WHERE object_id = OBJECT_ID(N'[dbo].[Discussions]') AND name = 'IsAnnouncement')
+                        BEGIN
+                            ALTER TABLE Discussions ADD IsAnnouncement INT NOT NULL DEFAULT 0;
+                        END
+                    END
+
+                    IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[StudyMaterials]') AND type in (N'U'))
+                    BEGIN
+                        IF NOT EXISTS (SELECT * FROM sys.columns WHERE object_id = OBJECT_ID(N'[dbo].[StudyMaterials]') AND name = 'UploadDate')
+                        BEGIN
+                            ALTER TABLE StudyMaterials ADD UploadDate DATETIME DEFAULT GETDATE();
+                        END
+                    END";
+
+                    using (SqlCommand cmd = new SqlCommand(sqlMigrateColumns, conn))
                     {
                         cmd.ExecuteNonQuery();
                     }

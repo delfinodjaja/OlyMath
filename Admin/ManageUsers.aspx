@@ -27,6 +27,8 @@
                             <th>Role</th>
                             <th>Location</th>
                             <th>Joined</th>
+                            <th>Warnings</th>
+                            <th>Status</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -44,12 +46,39 @@
                                     </td>
                                     <td><%# HttpUtility.HtmlEncode(Eval("CityCountry")) %></td>
                                     <td><%# Eval("CreatedAt", "{0:MMM dd, yyyy}") %></td>
+                                    <td style="text-align: center;">
+                                        <span class='badge <%# Convert.ToInt32(Eval("WarningsCount")) > 0 ? "orange" : "grey" %>'>
+                                            <%# Eval("WarningsCount") %>
+                                        </span>
+                                    </td>
                                     <td>
+                                        <span class='badge <%# string.Equals(Eval("Status").ToString(), "Approved", StringComparison.OrdinalIgnoreCase) ? "green" : "orange" %>'>
+                                            <%# Eval("Status") %>
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <asp:LinkButton ID="btnApprove" runat="server" 
+                                            CommandName="ApproveUser" 
+                                            CommandArgument='<%# Eval("Id") %>' 
+                                            CssClass="badge green" 
+                                            Visible='<%# string.Equals(Eval("Status").ToString(), "Pending", StringComparison.OrdinalIgnoreCase) %>'
+                                            style="border:none; cursor:pointer; background:#E6FBF7; color:#00A383; margin-right: 4px;">
+                                            Approve
+                                        </asp:LinkButton>
+
+                                        <asp:LinkButton ID="btnWarn" runat="server" 
+                                            CommandName="WarnUser" 
+                                            CommandArgument='<%# Eval("Id") %>' 
+                                            CssClass="badge orange" 
+                                            style="border:none; cursor:pointer; margin-right: 4px;">
+                                            Warn
+                                        </asp:LinkButton>
+
                                         <asp:LinkButton ID="btnEdit" runat="server" 
                                             CommandName="EditUser" 
                                             CommandArgument='<%# Eval("Id") %>' 
                                             CssClass="badge green" 
-                                            style="border:none; cursor:pointer; background:#EEF0FF; color:#5B60F0;">
+                                            style="border:none; cursor:pointer; background:#EEF0FF; color:#5B60F0; margin-right: 4px;">
                                             Edit
                                         </asp:LinkButton>
                                         

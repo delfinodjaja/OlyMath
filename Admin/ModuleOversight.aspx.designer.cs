@@ -10,60 +10,42 @@
 namespace OlyMath.Admin {
     
     
-    public partial class Dashboard {
+    public partial class ModuleOversight {
         
         /// <summary>
-        /// litTotalUsers control.
+        /// lblError control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal litTotalUsers;
+        protected global::System.Web.UI.WebControls.Label lblError;
         
         /// <summary>
-        /// litTotalTrainers control.
+        /// lblMessage control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal litTotalTrainers;
+        protected global::System.Web.UI.WebControls.Label lblMessage;
         
         /// <summary>
-        /// litActiveModules control.
+        /// rptModules control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal litActiveModules;
+        protected global::System.Web.UI.WebControls.Repeater rptModules;
         
         /// <summary>
-        /// litTotalEnrollments control.
+        /// phNoModules control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal litTotalEnrollments;
-        
-        /// <summary>
-        /// rptRecentUsers control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater rptRecentUsers;
-        
-        /// <summary>
-        /// phNoRecent control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.PlaceHolder phNoRecent;
+        protected global::System.Web.UI.WebControls.PlaceHolder phNoModules;
     }
 }

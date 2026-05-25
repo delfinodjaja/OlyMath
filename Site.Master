@@ -44,28 +44,43 @@
                 
                 <!-- Trainee Sidebar -->
                 <div id="pnlTraineeSidebar" runat="server" visible="false" class="sidebar-section">
-                    <div class="sidebar-label">Trainee</div>
+                    <div class="sidebar-label">TRAINEE</div>
                     <a href="~/Trainee/Dashboard.aspx" id="lnkTraineeDash" runat="server" class="sidebar-item"><span class="dot"></span> Dashboard</a>
                     <a href="~/Trainee/BrowseModules.aspx" id="lnkTraineeBrowse" runat="server" class="sidebar-item"><span class="dot"></span> Browse Modules</a>
                     <a href="~/Trainee/Achievements.aspx" id="lnkTraineeAchievements" runat="server" class="sidebar-item"><span class="dot"></span> Achievements</a>
-                    <div class="sidebar-label" style="margin-top:16px">Community</div>
+                    
+                    <div class="sidebar-label" style="margin-top:16px">LEARNING</div>
+                    <a href="~/Trainee/ModuleDetail.aspx" id="lnkTraineeModuleDetail" runat="server" class="sidebar-item"><span class="dot"></span> Module Detail</a>
+                    <a href="~/Trainee/Study.aspx" id="lnkTraineeStudy" runat="server" class="sidebar-item"><span class="dot"></span> Study Materials</a>
+                    <a href="~/Trainee/Assessment.aspx" id="lnkTraineeAssessment" runat="server" class="sidebar-item"><span class="dot"></span> Assessment</a>
+                    <a href="~/Trainee/Certificate.aspx" id="lnkTraineeCertificate" runat="server" class="sidebar-item"><span class="dot"></span> Certificate</a>
+                    
+                    <div class="sidebar-label" style="margin-top:16px">COMMUNITY</div>
                     <a href="~/Trainee/Discussion.aspx" id="lnkTraineeDiscussion" runat="server" class="sidebar-item"><span class="dot"></span> Discussion Zone</a>
                 </div>
 
                 <!-- Trainer Sidebar -->
                 <div id="pnlTrainerSidebar" runat="server" visible="false" class="sidebar-section">
-                    <div class="sidebar-label">Trainer</div>
-                    <a href="~/Trainer/Dashboard.aspx" id="lnkTrainerDash" runat="server" class="sidebar-item"><span class="dot"></span> Modules Dashboard</a>
-                    <a href="~/Trainer/EditModule.aspx" id="lnkTrainerCreate" runat="server" class="sidebar-item"><span class="dot"></span> Create New Module</a>
-                    <div class="sidebar-label" style="margin-top:16px">Community</div>
+                    <div class="sidebar-label">TRAINER</div>
+                    <a href="~/Trainer/Dashboard.aspx" id="lnkTrainerDash" runat="server" class="sidebar-item"><span class="dot"></span> Dashboard</a>
+                    <a href="~/Trainer/MyModules.aspx" id="lnkTrainerMyModules" runat="server" class="sidebar-item"><span class="dot"></span> My Modules</a>
+                    <a href="~/Trainer/EditModule.aspx" id="lnkTrainerCreate" runat="server" class="sidebar-item"><span class="dot"></span> Create Module</a>
+                    
+                    <div class="sidebar-label" style="margin-top:16px">MANAGE</div>
+                    <a href="~/Trainer/ManageMaterials.aspx" id="lnkTrainerManageMaterials" runat="server" class="sidebar-item"><span class="dot"></span> Manage Materials</a>
+                    <a href="~/Trainer/TraineeProgress.aspx" id="lnkTrainerProgress" runat="server" class="sidebar-item"><span class="dot"></span> Trainee Progress</a>
+                    
+                    <div class="sidebar-label" style="margin-top:16px">COMMUNITY</div>
                     <a href="~/Trainee/Discussion.aspx" id="lnkTrainerDiscussion" runat="server" class="sidebar-item"><span class="dot"></span> Discussion Zone</a>
                 </div>
 
                 <!-- Admin Sidebar -->
                 <div id="pnlAdminSidebar" runat="server" visible="false" class="sidebar-section">
                     <div class="sidebar-label">Admin</div>
-                    <a href="~/Admin/Dashboard.aspx" id="lnkAdminDash" runat="server" class="sidebar-item"><span class="dot"></span> System Metrics</a>
-                    <a href="~/Admin/ManageUsers.aspx" id="lnkAdminUsers" runat="server" class="sidebar-item"><span class="dot"></span> Manage Users</a>
+                    <a href="~/Admin/Dashboard.aspx" id="lnkAdminDash" runat="server" class="sidebar-item"><span class="dot"></span> Dashboard</a>
+                    <a href="~/Admin/ManageUsers.aspx" id="lnkAdminUsers" runat="server" class="sidebar-item"><span class="dot"></span> User Management</a>
+                    <a href="~/Admin/ModuleOversight.aspx" id="lnkAdminModules" runat="server" class="sidebar-item"><span class="dot"></span> Module Oversight</a>
+                    <a href="~/Admin/EnrollmentManagement.aspx" id="lnkAdminEnrollments" runat="server" class="sidebar-item"><span class="dot"></span> Enrollment Management</a>
                     <div class="sidebar-label" style="margin-top:16px">Community</div>
                     <a href="~/Trainee/Discussion.aspx" id="lnkAdminDiscussion" runat="server" class="sidebar-item"><span class="dot"></span> Discussion Zone</a>
                 </div>

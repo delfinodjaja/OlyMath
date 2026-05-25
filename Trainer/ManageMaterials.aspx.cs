@@ -24,8 +24,18 @@ namespace OlyMath.Trainer
         {
             if (ModuleId <= 0)
             {
-                Response.Redirect("Dashboard.aspx");
-                return;
+                string sql = "SELECT TOP 1 Id FROM Modules WHERE CreatedByUserId = @userId ORDER BY CreatedAt DESC";
+                object res = DbHelper.ExecuteScalar(sql, new SqlParameter("@userId", CurrentUserId));
+                if (res != null && res != DBNull.Value)
+                {
+                    Response.Redirect("ManageMaterials.aspx?id=" + res.ToString());
+                    return;
+                }
+                else
+                {
+                    Response.Redirect("MyModules.aspx");
+                    return;
+                }
             }
 
             if (!IsPostBack)
